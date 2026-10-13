@@ -42,7 +42,9 @@ loads) closes the set: the lobby-phase freeze shows no loader at all, so a
 gap between msr|beat lines is the only way to pin the second the lua main
 loop wedged from a log. Each beat also invokes ClientMethodCommonApi.
 GetNetworkState over InvocationBuilder, giving the java-side freeze
-watchdog a liveness signal only a running lua thread can produce.
+watchdog a liveness signal only a running lua thread can produce, and
+carries the lua heap size in KB (collectgarbage("count")) so a lua-side
+memory flood reads as a climbing number in the seconds before the gap.
 
 patches/patch.py stubs H1/H2 (AdLoadStatus / GetNetworkState) call
 ModMenu.noteLuaAlive() on every such crossing, and ModMenu runs a 5s
@@ -54,6 +56,18 @@ The file keeps its full source embedded in the Lua debug field; to rebuild
 it, extract that source, patch it, compile with chunkname = source and run
 tools/luatranscode.py to convert the luac dump to the engine's chunk format
 (4-byte size_t + rotated opcode block).
+
+luamsghandle.lua carries one local modification on top of Lão Ký's work:
+a per-second counter around every subscribed sandbox handler. A banned
+account can pass login and then freeze about a minute into the lobby while
+the java heap stays clean, which points at a server-side message flood -
+but this file logged its firewall hits through print, which never reaches
+logcat, so message traffic was invisible in a capture log. Every
+subscription now goes through an observe-only wrapper that forwards
+arguments and return values untouched and, at 10 messages a second or
+more, emits one msr|ws n=<count> <type>:<n>... breadcrumb per second
+through gFunc_LogTimeStamp. Rebuilds follow the same extract/patch/
+luac5.1/string.dump/luatranscode pipeline as accountmanager.lua.
 
 MIT License - Copyright (c) 2026 Lao Ky
 
