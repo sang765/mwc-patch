@@ -2,16 +2,21 @@ package modmenu;
 
 import android.app.Activity;
 import android.app.AlarmManager;
+import android.app.AlertDialog;
+import android.app.Application;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Process;
+import android.os.SystemClock;
+import android.util.Log;
 
 import java.lang.ref.WeakReference;
 
@@ -41,6 +46,8 @@ public final class ModMenu {
 
     private static final int NOTIF_ID = 1071;
     private static final long[] RETRY_MS = {2000, 5000, 10000, 20000, 40000, 80000, 160000};
+    /** Lua silence, in a focused window, that counts as a freeze. */
+    private static final long STUCK_MS = 60000;
 
     private static final Handler MAIN = new Handler(Looper.getMainLooper());
 
@@ -61,6 +68,12 @@ public final class ModMenu {
     private static boolean posted;
     private static int retryIdx;
 
+    /** Last lua->java crossing (ad polls / script heartbeat); 0 = none yet. */
+    private static volatile long lastLuaMs;
+    /** Start of the current focus stretch; only touched on the main thread. */
+    private static long resumedMs;
+    private static boolean stuckShown;
+
     private ModMenu() {}
 
     /** Injected at the head of GoogleApplication.onCreate, before any stub can run. */
@@ -74,6 +87,9 @@ public final class ModMenu {
         // before anything else can throw: the crash screen is only useful
         // while the handler is still the one watching the threads
         CrashHandler.install(ctx);
+        // freeze watchdog tick; the lua thread can die while these java
+        // threads keep running, which is exactly the lobby-freeze case
+        MAIN.postDelayed(freezeTick, 5000);
     }
 
     /** Injected at the head of AppPlayBaseActivity.onCreate. */
@@ -153,6 +169,16 @@ public final class ModMenu {
      */
     public static boolean isUnsafe() {
         return unsafe;
+    }
+
+    /**
+     * Called from the ClientMethodCommonApi stubs (H1/H2) at every lua->java
+     * crossing - the lobby ad polls and the script heartbeat. The lobby freeze
+     * wedges the lua main thread while these threads stay healthy, so the
+     * rescue signal has to arrive from the lua side to be trustworthy.
+     */
+    public static void noteLuaAlive() {
+        lastLuaMs = SystemClock.elapsedRealtime();
     }
 
     // commit, not apply: restartGame SIGKILLs the process right after a
@@ -295,5 +321,59 @@ public final class ModMenu {
                 scheduleRetry();
             }
         }, RETRY_MS[retryIdx++]);
+    }
+
+    /**
+     * Freeze watchdog: lua silent for STUCK_MS inside an unbroken focus
+     * stretch means the script loop wedged - the observed lobby freeze shows
+     * no loader and records no ANR, so nothing else will ever surface it.
+     * Fires the restart dialog once per process; focus loss restarts the
+     * grace window, so backgrounding and the notification shade never count.
+     */
+    private static final Runnable freezeTick = new Runnable() {
+        @Override
+        public void run() {
+            long now = SystemClock.elapsedRealtime();
+            Activity a = gameActivity();
+            if (a == null || !a.hasWindowFocus()) {
+                resumedMs = 0;
+            } else if (resumedMs == 0) {
+                resumedMs = now;
+            }
+            long lua = lastLuaMs;
+            if (!stuckShown && resumedMs != 0 && lua != 0
+                    && now - resumedMs > STUCK_MS && now - lua > STUCK_MS) {
+                stuckShown = true;
+                Log.d("ModMenu", "msr|java_wd fire lua quiet " + (now - lua) + "ms");
+                showStuckDialog();
+            }
+            MAIN.postDelayed(this, 5000);
+        }
+    };
+
+    // Its own window, so it draws over a frozen engine; the java main thread
+    // is alive in every freeze seen so far.
+    private static void showStuckDialog() {
+        final Activity a = gameActivity();
+        if (a == null) {
+            Log.d("ModMenu", "msr|java_wd no window for dialog");
+            return;
+        }
+        try {
+            new AlertDialog.Builder(a)
+                    .setTitle(I18n.t(a, "mod_stuck_title"))
+                    .setMessage(I18n.t(a, "mod_stuck_body"))
+                    .setPositiveButton(I18n.t(a, "mod_restart_now"),
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    restartGame(appCtx != null ? appCtx : a);
+                                }
+                            })
+                    .setNegativeButton(I18n.t(a, "mod_restart_later"), null)
+                    .show();
+        } catch (RuntimeException e) {
+            Log.d("ModMenu", "msr|java_wd dialog failed: " + e);
+        }
     }
 }

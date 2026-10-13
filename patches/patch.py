@@ -209,6 +209,19 @@ def build_patches(GAID, DTOKEN, UNIQUE, FLYER, MODEL, OS):
           "Lmodmenu/GmsCompat;->onResult(Lorg/appplay/lib/sdk/GoogleLoginSDK;Landroid/content/Intent;)V",
           "return-void",
           ":modmenu_orig"]),
+        # --- H: lua liveness signal for the java freeze watchdog ---
+        # The lobby freeze wedges the lua main thread while java keeps
+        # running (no ANR, no crash), so the rescue lives on the java side
+        # and needs liveness only the lua thread can provide: the ad polls
+        # (H1) and the script heartbeat (H2) bump ModMenu.lastLuaMs, and
+        # silence past STUCK_MS inside a focused window offers the restart
+        # dialog.
+        ("H1", "smali/org/appplay/lib/ClientMethodCommonApi.smali",
+         "AdLoadStatus(II)Z", 0,
+         [f"invoke-static {{}}, {MODMENU}->noteLuaAlive()V"]),
+        ("H2", "smali/org/appplay/lib/ClientMethodCommonApi.smali",
+         "GetNetworkState()I", 0,
+         [f"invoke-static {{}}, {MODMENU}->noteLuaAlive()V"]),
     ]
 
 

@@ -26,6 +26,8 @@
     <string name="mod_restart_body">The new HWID takes effect on the next launch. Restart the game now?</string>
     <string name="mod_restart_now">Restart now</string>
     <string name="mod_restart_later">Later</string>
+    <string name="mod_stuck_title">Game seems frozen?</string>
+    <string name="mod_stuck_body">The script stopped responding for 60 seconds - the screen is stuck. Restart?</string>
     <string name="mod_gm_label">Change gamemode</string>
     <string name="mod_gm_ok">Gamemode changed</string>
     <string name="mod_gm_fail">Could not change gamemode</string>

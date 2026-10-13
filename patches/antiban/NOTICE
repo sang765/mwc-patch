@@ -36,12 +36,22 @@ pair with observe-only breadcrumbs (show/hide/hook on) - the login frame
 calls those globals directly, so before the hook a stuck modal loader was
 invisible in a capture log - and logs the data_update result as
 msr|l2v2 code=..., since this path has no ban-check call to report it.
-A main-thread heartbeat (msr|beat every 5s via MiniUIScheduler) closes the
-set: the lobby-phase freeze shows no loader at all, so a gap between beats
-is the only way to pin the second the lua main loop wedged from a log.
-The file
-keeps its full source embedded in the Lua debug field; to rebuild it, extract
-that source, patch it, compile with chunkname = source and run
+A main-thread heartbeat (msr|beat every 5s via MiniUIScheduler, retried from
+the first loader show because the scheduler is not ready when this file
+loads) closes the set: the lobby-phase freeze shows no loader at all, so a
+gap between msr|beat lines is the only way to pin the second the lua main
+loop wedged from a log. Each beat also invokes ClientMethodCommonApi.
+GetNetworkState over InvocationBuilder, giving the java-side freeze
+watchdog a liveness signal only a running lua thread can produce.
+
+patches/patch.py stubs H1/H2 (AdLoadStatus / GetNetworkState) call
+ModMenu.noteLuaAlive() on every such crossing, and ModMenu runs a 5s
+watchdog: 60 seconds of lua silence inside an unbroken window-focus stretch
+means the script loop wedged - that freeze records no ANR and no crash, so
+nothing else surfaces it - and it offers a restart dialog (drawn from the
+java side, over the frozen engine) once per process.
+The file keeps its full source embedded in the Lua debug field; to rebuild
+it, extract that source, patch it, compile with chunkname = source and run
 tools/luatranscode.py to convert the luac dump to the engine's chunk format
 (4-byte size_t + rotated opcode block).
 

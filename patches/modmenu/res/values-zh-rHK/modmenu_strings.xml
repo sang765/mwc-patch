@@ -26,6 +26,8 @@
     <string name="mod_restart_body">新的 HWID 將在下次啟動時生效。要現在重新啟動遊戲嗎？</string>
     <string name="mod_restart_now">立即重新啟動</string>
     <string name="mod_restart_later">稍後</string>
+    <string name="mod_stuck_title">遊戲似乎卡住了？</string>
+    <string name="mod_stuck_body">腳本已 60 秒無回應——畫面卡住了。要重新啟動嗎？</string>
     <string name="mod_gm_label">切換遊戲模式</string>
     <string name="mod_gm_ok">已切換遊戲模式</string>
     <string name="mod_gm_fail">無法切換遊戲模式</string>
