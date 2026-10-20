@@ -158,6 +158,27 @@ already loaded; the script answers through `files/mw_bi.json` the way the
 gamemode switch does, so the toast reports what the engine did rather than
 what was hoped.
 
+The **Lua Editor** button opens a code editor for the map's own script
+editor (the *Sửa kịch bản* dialog). The game ships that editor as plain
+text with the API list hidden behind a button; this dialog reads the open
+editor's `contentBox` through `GetCtrl('DeveloperScriptEditor')` and
+edits the source with Lua 5.1 highlighting over the game's own API
+catalog - `scriptapi.csv` baked into `modmenu.MwApi` at build time, with
+the English and Vietnamese descriptions the game ships. Typing suggests
+keywords, Lua 5.1 globals, catalog namespaces and `Namespace:method`
+signatures with their parameter lists; **Check** reports block balance
+(`function`/`if`/`do`/`repeat` against `end`/`until`), bracket balance,
+unterminated strings, and `Namespace:method` names missing from the
+catalog - a warning rather than an error, since custom APIs load
+alongside the built-ins - and tapping an issue jumps to its line.
+**Fill** writes the text back through the view's own `SetContentText`;
+**Save** does the same and then fires the game's `SaveBtnClick`, so the
+game's own `loadstring` check and save path run exactly as they would on
+a tap. The game's editor must be open - the dialog says so otherwise.
+The source travels through a payload file rather than the dispatch event
+string, so script size is no bridge limit; the script answers through
+`files/mw_le.json` and failures breadcrumb `MWLE|` into logcat.
+
 A crash ends in something sendable instead of a silent restart.
 `modmenu.CrashHandler` is installed at the head of `GoogleApplication.onCreate`
 — the earliest point this mod reaches in the process — and takes the

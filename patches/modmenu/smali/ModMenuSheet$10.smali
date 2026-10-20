@@ -3,12 +3,12 @@
 .source "ModMenuSheet.java"
 
 # interfaces
-.implements Ljava/lang/Runnable;
+.implements Landroid/text/TextWatcher;
 
 
 # annotations
 .annotation system Ldalvik/annotation/EnclosingMethod;
-    value = Lmodmenu/ModMenuSheet;->requestGive()V
+    value = Lmodmenu/ModMenuSheet;->showGive()V
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
@@ -33,7 +33,7 @@
         }
     .end annotation
 
-    .line 790
+    .line 700
     iput-object p1, p0, Lmodmenu/ModMenuSheet$10;->this$0:Lmodmenu/ModMenuSheet;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -43,30 +43,28 @@
 
 
 # virtual methods
-.method public run()V
-    .locals 2
+.method public afterTextChanged(Landroid/text/Editable;)V
+    .locals 0
 
-    .line 793
-    iget-object v0, p0, Lmodmenu/ModMenuSheet$10;->this$0:Lmodmenu/ModMenuSheet;
+    .line 711
+    iget-object p1, p0, Lmodmenu/ModMenuSheet$10;->this$0:Lmodmenu/ModMenuSheet;
 
-    invoke-static {v0}, Lmodmenu/ModMenuSheet;->access$1400(Lmodmenu/ModMenuSheet;)Landroid/widget/Button;
+    invoke-static {p1}, Lmodmenu/ModMenuSheet;->access$1400(Lmodmenu/ModMenuSheet;)V
 
-    move-result-object v0
+    .line 712
+    return-void
+.end method
 
-    if-eqz v0, :cond_0
+.method public beforeTextChanged(Ljava/lang/CharSequence;III)V
+    .locals 0
 
-    .line 794
-    iget-object v0, p0, Lmodmenu/ModMenuSheet$10;->this$0:Lmodmenu/ModMenuSheet;
+    .line 703
+    return-void
+.end method
 
-    invoke-static {v0}, Lmodmenu/ModMenuSheet;->access$1400(Lmodmenu/ModMenuSheet;)Landroid/widget/Button;
+.method public onTextChanged(Ljava/lang/CharSequence;III)V
+    .locals 0
 
-    move-result-object v0
-
-    const/4 v1, 0x1
-
-    invoke-virtual {v0, v1}, Landroid/widget/Button;->setEnabled(Z)V
-
-    .line 796
-    :cond_0
+    .line 707
     return-void
 .end method

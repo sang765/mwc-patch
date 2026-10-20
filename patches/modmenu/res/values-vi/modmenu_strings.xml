@@ -91,4 +91,25 @@
     <string name="mod_bi_filled">Đã điền vào ô chat</string>
     <string name="mod_bi_fail">Thất bại — xem logcat</string>
     <string name="mod_bi_nothing">Nhập gì đó trước</string>
+    <string name="mod_le_label">"Lua Editor"</string>
+    <string name="mod_le_hint">"Mã Lua của map"</string>
+    <string name="mod_le_fill">"Điền"</string>
+    <string name="mod_le_save">"Lưu"</string>
+    <string name="mod_le_check">"Kiểm tra"</string>
+    <string name="mod_le_notopen">"Hãy mở trình sửa kịch bản trước"</string>
+    <string name="mod_le_filled">"Đã điền vào ô editor"</string>
+    <string name="mod_le_saved">"Đã điền và lưu"</string>
+    <string name="mod_le_fail">"Lỗi bridge - xem logcat"</string>
+    <string name="mod_le_loadfail">"Không đọc được kịch bản"</string>
+    <string name="mod_le_empty">"Chưa có nội dung"</string>
+    <string name="mod_le_noissues">"Không phát hiện lỗi"</string>
+    <string name="mod_le_lines">"%1$d dòng"</string>
+    <string name="mod_le_i_unclosed_str">"Dòng %1$d: chuỗi chưa đóng"</string>
+    <string name="mod_le_i_unclosed_long">"Dòng %1$d: chuỗi [[ chưa đóng"</string>
+    <string name="mod_le_i_unclosed_br">"Dòng %1$d: chưa đóng '%2$s'"</string>
+    <string name="mod_le_i_extra_end">"Dòng %1$d: 'end' thừa"</string>
+    <string name="mod_le_i_missing_end">"Thiếu %1$d 'end'"</string>
+    <string name="mod_le_i_bad_close">"Dòng %1$d: '%2$s' không khớp"</string>
+    <string name="mod_le_i_extra_close">"Dòng %1$d: '%2$s' thừa"</string>
+    <string name="mod_le_i_unknown_api">"Dòng %1$d: API '%2$s' không có trong danh mục"</string>
 </resources>

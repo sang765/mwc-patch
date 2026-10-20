@@ -91,4 +91,25 @@
     <string name="mod_bi_filled">已填入聊天框</string>
     <string name="mod_bi_fail">失败 — 查看 logcat</string>
     <string name="mod_bi_nothing">请先输入内容</string>
+    <string name="mod_le_label">"Lua 编辑器"</string>
+    <string name="mod_le_hint">"地图 Lua 代码"</string>
+    <string name="mod_le_fill">"填充"</string>
+    <string name="mod_le_save">"保存"</string>
+    <string name="mod_le_check">"检查"</string>
+    <string name="mod_le_notopen">"请先打开脚本编辑器"</string>
+    <string name="mod_le_filled">"已填入编辑器"</string>
+    <string name="mod_le_saved">"已填入并保存"</string>
+    <string name="mod_le_fail">"失败 - 查看日志"</string>
+    <string name="mod_le_loadfail">"无法读取脚本"</string>
+    <string name="mod_le_empty">"没有内容"</string>
+    <string name="mod_le_noissues">"未发现问题"</string>
+    <string name="mod_le_lines">"%1$d 行"</string>
+    <string name="mod_le_i_unclosed_str">"第 %1$d 行：字符串未闭合"</string>
+    <string name="mod_le_i_unclosed_long">"第 %1$d 行：[[ 字符串未闭合"</string>
+    <string name="mod_le_i_unclosed_br">"第 %1$d 行：'%2$s' 未闭合"</string>
+    <string name="mod_le_i_extra_end">"第 %1$d 行：多余的 'end'"</string>
+    <string name="mod_le_i_missing_end">"缺少 %1$d 个 'end'"</string>
+    <string name="mod_le_i_bad_close">"第 %1$d 行：'%2$s' 不匹配"</string>
+    <string name="mod_le_i_extra_close">"第 %1$d 行：多余的 '%2$s'"</string>
+    <string name="mod_le_i_unknown_api">"第 %1$d 行：API '%2$s' 不在目录中"</string>
 </resources>

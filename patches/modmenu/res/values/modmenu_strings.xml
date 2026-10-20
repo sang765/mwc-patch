@@ -91,4 +91,25 @@
     <string name="mod_bi_filled">Filled into the chat box</string>
     <string name="mod_bi_fail">Failed - check logcat</string>
     <string name="mod_bi_nothing">Type something first</string>
+    <string name="mod_le_label">"Lua Editor"</string>
+    <string name="mod_le_hint">"Map Lua code"</string>
+    <string name="mod_le_fill">"Fill"</string>
+    <string name="mod_le_save">"Save"</string>
+    <string name="mod_le_check">"Check"</string>
+    <string name="mod_le_notopen">"Open the script editor first"</string>
+    <string name="mod_le_filled">"Filled into the editor"</string>
+    <string name="mod_le_saved">"Filled and saved"</string>
+    <string name="mod_le_fail">"Failed - check logcat"</string>
+    <string name="mod_le_loadfail">"Could not read the script"</string>
+    <string name="mod_le_empty">"Nothing to fill"</string>
+    <string name="mod_le_noissues">"No issues found"</string>
+    <string name="mod_le_lines">"%1$d lines"</string>
+    <string name="mod_le_i_unclosed_str">"Line %1$d: unterminated string"</string>
+    <string name="mod_le_i_unclosed_long">"Line %1$d: unterminated [[ string"</string>
+    <string name="mod_le_i_unclosed_br">"Line %1$d: unclosed '%2$s'"</string>
+    <string name="mod_le_i_extra_end">"Line %1$d: extra 'end'"</string>
+    <string name="mod_le_i_missing_end">"Missing %1$d 'end'"</string>
+    <string name="mod_le_i_bad_close">"Line %1$d: mismatched '%2$s'"</string>
+    <string name="mod_le_i_extra_close">"Line %1$d: extra '%2$s'"</string>
+    <string name="mod_le_i_unknown_api">"Line %1$d: API '%2$s' not in the catalog"</string>
 </resources>
