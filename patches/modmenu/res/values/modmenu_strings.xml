@@ -77,4 +77,18 @@
     <string name="id_notif_title">Scan complete</string>
     <string name="id_notif_text">Tap to open the id list</string>
     <string name="id_items">items</string>
+    <string name="mod_bi_label">Better Input</string>
+    <string name="mod_bi_hint">Compose with colors, blink, emoji - renders like the game</string>
+    <string name="mod_bi_color">Color</string>
+    <string name="mod_bi_color_insert">Insert color code</string>
+    <string name="mod_bi_blink">Blink #b</string>
+    <string name="mod_bi_gradient">Gradient</string>
+    <string name="mod_bi_icons">Emoji</string>
+    <string name="mod_bi_fill">Fill box</string>
+    <string name="mod_bi_send">Send</string>
+    <string name="mod_bi_chars">Characters: %1$d</string>
+    <string name="mod_bi_sent">Sent</string>
+    <string name="mod_bi_filled">Filled into the chat box</string>
+    <string name="mod_bi_fail">Failed - check logcat</string>
+    <string name="mod_bi_nothing">Type something first</string>
 </resources>

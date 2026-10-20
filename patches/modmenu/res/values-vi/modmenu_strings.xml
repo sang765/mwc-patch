@@ -77,4 +77,18 @@
     <string name="id_notif_title">Quét hoàn thành</string>
     <string name="id_notif_text">Bấm để xem danh sách ID</string>
     <string name="id_items">mục</string>
+    <string name="mod_bi_label">Better Input</string>
+    <string name="mod_bi_hint">Soạn màu, nhấp nháy, emoji — xem trước như game hiển thị</string>
+    <string name="mod_bi_color">Màu</string>
+    <string name="mod_bi_color_insert">Chèn mã màu</string>
+    <string name="mod_bi_blink">Nhấp nháy #b</string>
+    <string name="mod_bi_gradient">Gradient</string>
+    <string name="mod_bi_icons">Emoji</string>
+    <string name="mod_bi_fill">Điền vào ô</string>
+    <string name="mod_bi_send">Gửi</string>
+    <string name="mod_bi_chars">Ký tự: %1$d</string>
+    <string name="mod_bi_sent">Đã gửi</string>
+    <string name="mod_bi_filled">Đã điền vào ô chat</string>
+    <string name="mod_bi_fail">Thất bại — xem logcat</string>
+    <string name="mod_bi_nothing">Nhập gì đó trước</string>
 </resources>

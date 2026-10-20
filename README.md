@@ -133,6 +133,31 @@ loaded, which the panel says out loud (a hint sits next to the count when the
 scan ran outside one) instead of showing an empty category as if nothing
 were wrong.
 
+The **Better Input** button opens a composer for the chat markup the game
+renders but the in-game box will not take back: `#cRRGGBB` recolors from
+there until the next color code, `#R #G #B #K #Y #W` are named-color
+shortcuts, `#r`/`#n` break the line, `#b` makes the text pulse (a native
+effect every client sees) and `#A101` inserts an emoji run. The dialog
+edits the raw markup, renders it in a preview - color runs as spans, emoji
+as their panel names, the `#b` segment as a whole-preview fade, which is
+the closest a Java span can do for a per-segment pulse - and counts the
+characters the server will actually receive, markers included. The color
+wheel is a hue-saturation disc with a value slider; **A** and **B** store
+two picks and **Gradient** re-colors the selection (or the whole text) as
+a per-character `#c` ramp between them, hue included the short way round
+the wheel. Nothing here talks to the network: the dispatch script fills
+the open chat view's own input box - the friend box when the ctrl's
+`_friendUin` says a conversation is open, the room box otherwise - and
+**Send** then fires `ContentBtn_sendClick`, the very handler the game's
+send button runs, so the profanity filter, the credit/spam gates and the
+room-vs-friend routing are the game's own. **Fill box** stops after the
+fill so the game's own input finishes the round trip. With no chat view
+open the fill reports it and the send falls through to
+`SpamPreventionPresenter` directly, which only works where that service is
+already loaded; the script answers through `files/mw_bi.json` the way the
+gamemode switch does, so the toast reports what the engine did rather than
+what was hoped.
+
 A crash ends in something sendable instead of a silent restart.
 `modmenu.CrashHandler` is installed at the head of `GoogleApplication.onCreate`
 — the earliest point this mod reaches in the process — and takes the

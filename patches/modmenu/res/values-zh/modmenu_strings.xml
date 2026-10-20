@@ -77,4 +77,18 @@
     <string name="id_notif_title">扫描完成</string>
     <string name="id_notif_text">点击查看 ID 列表</string>
     <string name="id_items">项</string>
+    <string name="mod_bi_label">Better Input</string>
+    <string name="mod_bi_hint">输入颜色、闪烁、表情 — 预览与游戏中一致</string>
+    <string name="mod_bi_color">颜色</string>
+    <string name="mod_bi_color_insert">插入颜色代码</string>
+    <string name="mod_bi_blink">闪烁 #b</string>
+    <string name="mod_bi_gradient">渐变</string>
+    <string name="mod_bi_icons">表情</string>
+    <string name="mod_bi_fill">填入输入框</string>
+    <string name="mod_bi_send">发送</string>
+    <string name="mod_bi_chars">字符数: %1$d</string>
+    <string name="mod_bi_sent">已发送</string>
+    <string name="mod_bi_filled">已填入聊天框</string>
+    <string name="mod_bi_fail">失败 — 查看 logcat</string>
+    <string name="mod_bi_nothing">请先输入内容</string>
 </resources>

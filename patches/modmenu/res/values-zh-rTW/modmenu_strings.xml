@@ -77,4 +77,18 @@
     <string name="id_notif_title">掃描完成</string>
     <string name="id_notif_text">點擊查看 ID 列表</string>
     <string name="id_items">項</string>
+    <string name="mod_bi_label">Better Input</string>
+    <string name="mod_bi_hint">輸入顏色、閃爍、表情 — 預覽與遊戲中一致</string>
+    <string name="mod_bi_color">顏色</string>
+    <string name="mod_bi_color_insert">插入顏色代碼</string>
+    <string name="mod_bi_blink">閃爍 #b</string>
+    <string name="mod_bi_gradient">漸層</string>
+    <string name="mod_bi_icons">表情</string>
+    <string name="mod_bi_fill">填入輸入框</string>
+    <string name="mod_bi_send">發送</string>
+    <string name="mod_bi_chars">字元數: %1$d</string>
+    <string name="mod_bi_sent">已發送</string>
+    <string name="mod_bi_filled">已填入聊天框</string>
+    <string name="mod_bi_fail">失敗 — 查看 logcat</string>
+    <string name="mod_bi_nothing">請先輸入內容</string>
 </resources>

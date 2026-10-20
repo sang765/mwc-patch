@@ -284,6 +284,21 @@ public final class ModMenuSheet implements View.OnClickListener,
         iLp.topMargin = dp(6);
         sheet.addView(idBtn, iLp);
 
+        Button biBtn = makeButton(I18n.t(host, "mod_bi_label"), 0, p.primary,
+                (p.primary & 0x00FFFFFF) | 0x14000000);
+        // its own listener: makeButton wires every pill to onClick, whose
+        // default action is closing the menu
+        biBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openBetterInput();
+            }
+        });
+        LinearLayout.LayoutParams biLp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, dp(40));
+        biLp.topMargin = dp(6);
+        sheet.addView(biBtn, biLp);
+
         Button close = makeButton(I18n.t(host, "mod_close"), 0, p.primary,
                 (p.primary & 0x00FFFFFF) | 0x14000000);
         LinearLayout.LayoutParams cLp = new LinearLayout.LayoutParams(
@@ -856,6 +871,17 @@ public final class ModMenuSheet implements View.OnClickListener,
             browser.open();
         } catch (RuntimeException e) {
             Log.e("ModMenu", "id browser failed, closing", e);
+            dialog.cancel();
+        }
+    }
+
+    private void openBetterInput() {
+        try {
+            // stays up over the sheet: composing is a detour from the menu,
+            // not a replacement for it
+            BetterInput.show(host, p);
+        } catch (RuntimeException e) {
+            Log.e("ModMenu", "better input failed, closing", e);
             dialog.cancel();
         }
     }
