@@ -146,10 +146,38 @@ final class CrashReport {
                 out.close();
             }
             prune(dir(ctx));
+            mirror(ctx, ts, text);
             return path;
         } catch (Throwable t) {
             MwLog.w(TAG, "report not written to " + path, t);
             return null;
+        }
+    }
+
+    /**
+     * Best-effort second copy where a file manager or adb can reach it. The
+     * crash screen does not have to render and nothing needs permission, so a
+     * crash that wedges the main thread still leaves the stack readable.
+     */
+    private static void mirror(Context ctx, long ts, String text) {
+        try {
+            File external = ctx.getExternalFilesDir(null);
+            File d = external == null ? null : new File(external, "crashes");
+            if (d == null) {
+                return;
+            }
+            if (!d.isDirectory() && !d.mkdirs()) {
+                return;
+            }
+            FileOutputStream out = new FileOutputStream(new File(d, "crash-" + ts + ".txt"));
+            try {
+                out.write(text.getBytes("UTF-8"));
+            } finally {
+                out.close();
+            }
+            prune(d);
+        } catch (Throwable t) {
+            // storage not mounted: the internal copy remains the source of truth
         }
     }
 

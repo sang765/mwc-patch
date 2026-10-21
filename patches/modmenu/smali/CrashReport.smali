@@ -36,17 +36,17 @@
 .method private static abis()Ljava/lang/String;
     .locals 4
 
-    .line 333
+    .line 361
     sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
 
     const/16 v1, 0x15
 
     if-lt v0, v1, :cond_4
 
-    .line 334
+    .line 362
     sget-object v0, Landroid/os/Build;->SUPPORTED_ABIS:[Ljava/lang/String;
 
-    .line 335
+    .line 363
     if-eqz v0, :cond_3
 
     array-length v1, v0
@@ -55,13 +55,13 @@
 
     goto :goto_1
 
-    .line 338
+    .line 366
     :cond_0
     new-instance v1, Ljava/lang/StringBuilder;
 
     invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
 
-    .line 339
+    .line 367
     const/4 v2, 0x0
 
     :goto_0
@@ -69,26 +69,26 @@
 
     if-ge v2, v3, :cond_2
 
-    .line 340
+    .line 368
     if-lez v2, :cond_1
 
-    .line 341
+    .line 369
     const/16 v3, 0x2c
 
     invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
 
-    .line 343
+    .line 371
     :cond_1
     aget-object v3, v0, v2
 
     invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    .line 339
+    .line 367
     add-int/lit8 v2, v2, 0x1
 
     goto :goto_0
 
-    .line 345
+    .line 373
     :cond_2
     invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -96,14 +96,14 @@
 
     return-object v0
 
-    .line 336
+    .line 364
     :cond_3
     :goto_1
     const-string v0, "unknown"
 
     return-object v0
 
-    .line 347
+    .line 375
     :cond_4
     sget-object v0, Landroid/os/Build;->CPU_ABI:Ljava/lang/String;
 
@@ -686,7 +686,7 @@
 .method private static clock()Ljava/lang/String;
     .locals 3
 
-    .line 357
+    .line 385
     new-instance v0, Ljava/text/SimpleDateFormat;
 
     const-string v1, "yyyy-MM-dd HH:mm:ss.SSS Z"
@@ -699,12 +699,12 @@
 
     invoke-direct {v1}, Ljava/util/Date;-><init>()V
 
-    .line 358
+    .line 386
     invoke-virtual {v0, v1}, Ljava/text/SimpleDateFormat;->format(Ljava/util/Date;)Ljava/lang/String;
 
     move-result-object v0
 
-    .line 357
+    .line 385
     return-object v0
 .end method
 
@@ -770,7 +770,7 @@
 .method private static flag(Z)Ljava/lang/String;
     .locals 0
 
-    .line 351
+    .line 379
     if-eqz p0, :cond_0
 
     const-string p0, "on"
@@ -787,15 +787,15 @@
 .method static forIntent(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
     .locals 3
 
-    .line 189
+    .line 217
     if-nez p0, :cond_0
 
-    .line 190
+    .line 218
     const-string p0, ""
 
     return-object p0
 
-    .line 192
+    .line 220
     :cond_0
     invoke-virtual {p0}, Ljava/lang/String;->length()I
 
@@ -805,14 +805,14 @@
 
     if-gt v0, v1, :cond_1
 
-    .line 193
+    .line 221
     return-object p0
 
-    .line 195
+    .line 223
     :cond_1
     nop
 
-    .line 196
+    .line 224
     invoke-virtual {p0, v1}, Ljava/lang/String;->charAt(I)C
 
     move-result v0
@@ -823,10 +823,10 @@
 
     if-eqz v0, :cond_2
 
-    .line 197
+    .line 225
     const v1, 0xbfff
 
-    .line 199
+    .line 227
     :cond_2
     new-instance v0, Ljava/lang/StringBuilder;
 
@@ -868,20 +868,20 @@
 .method static lastLaunch(Landroid/content/Context;)J
     .locals 4
 
-    .line 263
+    .line 291
     invoke-static {p0}, Lmodmenu/CrashReport;->dir(Landroid/content/Context;)Ljava/io/File;
 
     move-result-object p0
 
-    .line 264
+    .line 292
     const-wide/16 v0, 0x0
 
     if-nez p0, :cond_0
 
-    .line 265
+    .line 293
     return-wide v0
 
-    .line 268
+    .line 296
     :cond_0
     :try_start_0
     new-instance v2, Ljava/io/File;
@@ -898,7 +898,7 @@
 
     move-result-object p0
 
-    .line 269
+    .line 297
     if-nez p0, :cond_1
 
     :goto_0
@@ -920,23 +920,23 @@
     :goto_1
     return-wide v0
 
-    .line 270
+    .line 298
     :catchall_0
     move-exception p0
 
-    .line 271
+    .line 299
     return-wide v0
 .end method
 
 .method static logcat()Ljava/lang/String;
     .locals 4
 
-    .line 212
+    .line 240
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
 
-    .line 213
+    .line 241
     new-instance v1, Ljava/lang/Thread;
 
     new-instance v2, Lmodmenu/CrashReport$1;
@@ -947,41 +947,41 @@
 
     invoke-direct {v1, v2, v3}, Ljava/lang/Thread;-><init>(Ljava/lang/Runnable;Ljava/lang/String;)V
 
-    .line 245
+    .line 273
     const/4 v2, 0x1
 
     invoke-virtual {v1, v2}, Ljava/lang/Thread;->setDaemon(Z)V
 
-    .line 247
+    .line 275
     :try_start_0
     invoke-virtual {v1}, Ljava/lang/Thread;->start()V
 
-    .line 248
+    .line 276
     const-wide/16 v2, 0x7d0
 
     invoke-virtual {v1, v2, v3}, Ljava/lang/Thread;->join(J)V
     :try_end_0
     .catch Ljava/lang/InterruptedException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 251
+    .line 279
     goto :goto_0
 
-    .line 249
+    .line 277
     :catch_0
     move-exception v1
 
-    .line 250
+    .line 278
     invoke-static {}, Ljava/lang/Thread;->currentThread()Ljava/lang/Thread;
 
     move-result-object v1
 
     invoke-virtual {v1}, Ljava/lang/Thread;->interrupt()V
 
-    .line 252
+    .line 280
     :goto_0
     monitor-enter v0
 
-    .line 253
+    .line 281
     :try_start_1
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
@@ -991,7 +991,7 @@
 
     return-object v1
 
-    .line 254
+    .line 282
     :catchall_0
     move-exception v1
 
@@ -1000,6 +1000,137 @@
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
     throw v1
+.end method
+
+.method private static mirror(Landroid/content/Context;JLjava/lang/String;)V
+    .locals 4
+
+    .line 164
+    const/4 v0, 0x0
+
+    :try_start_0
+    invoke-virtual {p0, v0}, Landroid/content/Context;->getExternalFilesDir(Ljava/lang/String;)Ljava/io/File;
+
+    move-result-object p0
+
+    .line 165
+    if-nez p0, :cond_0
+
+    :goto_0
+    goto :goto_1
+
+    :cond_0
+    new-instance v0, Ljava/io/File;
+
+    const-string v1, "crashes"
+
+    invoke-direct {v0, p0, v1}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V
+
+    goto :goto_0
+
+    .line 166
+    :goto_1
+    if-nez v0, :cond_1
+
+    .line 167
+    return-void
+
+    .line 169
+    :cond_1
+    invoke-virtual {v0}, Ljava/io/File;->isDirectory()Z
+
+    move-result p0
+
+    if-nez p0, :cond_2
+
+    invoke-virtual {v0}, Ljava/io/File;->mkdirs()Z
+
+    move-result p0
+
+    if-nez p0, :cond_2
+
+    .line 170
+    return-void
+
+    .line 172
+    :cond_2
+    new-instance p0, Ljava/io/FileOutputStream;
+
+    new-instance v1, Ljava/io/File;
+
+    new-instance v2, Ljava/lang/StringBuilder;
+
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v3, "crash-"
+
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v2
+
+    invoke-virtual {v2, p1, p2}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+
+    move-result-object p1
+
+    const-string p2, ".txt"
+
+    invoke-virtual {p1, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object p1
+
+    invoke-virtual {p1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object p1
+
+    invoke-direct {v1, v0, p1}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V
+
+    invoke-direct {p0, v1}, Ljava/io/FileOutputStream;-><init>(Ljava/io/File;)V
+    :try_end_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_1
+
+    .line 174
+    :try_start_1
+    const-string p1, "UTF-8"
+
+    invoke-virtual {p3, p1}, Ljava/lang/String;->getBytes(Ljava/lang/String;)[B
+
+    move-result-object p1
+
+    invoke-virtual {p0, p1}, Ljava/io/FileOutputStream;->write([B)V
+    :try_end_1
+    .catchall {:try_start_1 .. :try_end_1} :catchall_0
+
+    .line 176
+    :try_start_2
+    invoke-virtual {p0}, Ljava/io/FileOutputStream;->close()V
+
+    .line 177
+    nop
+
+    .line 178
+    invoke-static {v0}, Lmodmenu/CrashReport;->prune(Ljava/io/File;)V
+
+    .line 181
+    goto :goto_2
+
+    .line 176
+    :catchall_0
+    move-exception p1
+
+    invoke-virtual {p0}, Ljava/io/FileOutputStream;->close()V
+
+    .line 177
+    throw p1
+    :try_end_2
+    .catchall {:try_start_2 .. :try_end_2} :catchall_1
+
+    .line 179
+    :catchall_1
+    move-exception p0
+
+    .line 182
+    :goto_2
+    return-void
 .end method
 
 .method static pathFor(Landroid/content/Context;J)Ljava/lang/String;
@@ -1059,32 +1190,32 @@
 .method private static prune(Ljava/io/File;)V
     .locals 6
 
-    .line 293
+    .line 321
     if-nez p0, :cond_0
 
-    .line 294
+    .line 322
     return-void
 
-    .line 296
+    .line 324
     :cond_0
     invoke-virtual {p0}, Ljava/io/File;->listFiles()[Ljava/io/File;
 
     move-result-object p0
 
-    .line 297
+    .line 325
     if-nez p0, :cond_1
 
-    .line 298
+    .line 326
     return-void
 
-    .line 300
+    .line 328
     :cond_1
     invoke-static {p0}, Ljava/util/Arrays;->sort([Ljava/lang/Object;)V
 
-    .line 301
+    .line 329
     nop
 
-    .line 302
+    .line 330
     array-length v0, p0
 
     const/4 v1, 0x0
@@ -1100,7 +1231,7 @@
 
     aget-object v5, p0, v2
 
-    .line 303
+    .line 331
     invoke-virtual {v5}, Ljava/io/File;->getName()Ljava/lang/String;
 
     move-result-object v5
@@ -1111,20 +1242,20 @@
 
     if-eqz v4, :cond_2
 
-    .line 304
+    .line 332
     add-int/lit8 v3, v3, 0x1
 
-    .line 302
+    .line 330
     :cond_2
     add-int/lit8 v2, v2, 0x1
 
     goto :goto_0
 
-    .line 307
+    .line 335
     :cond_3
     add-int/lit8 v3, v3, -0xa
 
-    .line 308
+    .line 336
     array-length v0, p0
 
     :goto_1
@@ -1132,13 +1263,13 @@
 
     aget-object v2, p0, v1
 
-    .line 309
+    .line 337
     if-gtz v3, :cond_4
 
-    .line 310
+    .line 338
     return-void
 
-    .line 312
+    .line 340
     :cond_4
     invoke-virtual {v2}, Ljava/io/File;->getName()Ljava/lang/String;
 
@@ -1156,16 +1287,16 @@
 
     if-eqz v2, :cond_5
 
-    .line 313
+    .line 341
     add-int/lit8 v3, v3, -0x1
 
-    .line 308
+    .line 336
     :cond_5
     add-int/lit8 v1, v1, 0x1
 
     goto :goto_1
 
-    .line 316
+    .line 344
     :cond_6
     return-void
 .end method
@@ -1173,7 +1304,7 @@
 .method static read(Ljava/lang/String;)Ljava/lang/String;
     .locals 7
 
-    .line 158
+    .line 186
     const/4 v0, 0x0
 
     if-eqz p0, :cond_4
@@ -1186,24 +1317,24 @@
 
     goto :goto_2
 
-    .line 162
+    .line 190
     :cond_0
     :try_start_0
     new-instance v1, Ljava/io/File;
 
     invoke-direct {v1, p0}, Ljava/io/File;-><init>(Ljava/lang/String;)V
 
-    .line 163
+    .line 191
     invoke-virtual {v1}, Ljava/io/File;->isFile()Z
 
     move-result v2
 
     if-nez v2, :cond_1
 
-    .line 164
+    .line 192
     return-object v0
 
-    .line 166
+    .line 194
     :cond_1
     invoke-virtual {v1}, Ljava/io/File;->length()J
 
@@ -1219,23 +1350,23 @@
 
     new-array v2, v3, [B
 
-    .line 167
+    .line 195
     new-instance v4, Ljava/io/FileInputStream;
 
     invoke-direct {v4, v1}, Ljava/io/FileInputStream;-><init>(Ljava/io/File;)V
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_1
 
-    .line 169
+    .line 197
     const/4 v1, 0x0
 
     const/4 v5, 0x0
 
-    .line 170
+    .line 198
     :goto_0
     if-ge v5, v3, :cond_3
 
-    .line 171
+    .line 199
     sub-int v6, v3, v5
 
     :try_start_1
@@ -1243,20 +1374,20 @@
 
     move-result v6
 
-    .line 172
+    .line 200
     if-gez v6, :cond_2
 
-    .line 173
+    .line 201
     goto :goto_1
 
-    .line 175
+    .line 203
     :cond_2
     add-int/2addr v5, v6
 
-    .line 176
+    .line 204
     goto :goto_0
 
-    .line 177
+    .line 205
     :cond_3
     :goto_1
     new-instance v3, Ljava/lang/String;
@@ -1267,29 +1398,29 @@
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
-    .line 179
+    .line 207
     :try_start_2
     invoke-virtual {v4}, Ljava/io/FileInputStream;->close()V
 
-    .line 177
+    .line 205
     return-object v3
 
-    .line 179
+    .line 207
     :catchall_0
     move-exception v1
 
     invoke-virtual {v4}, Ljava/io/FileInputStream;->close()V
 
-    .line 180
+    .line 208
     throw v1
     :try_end_2
     .catchall {:try_start_2 .. :try_end_2} :catchall_1
 
-    .line 181
+    .line 209
     :catchall_1
     move-exception v1
 
-    .line 182
+    .line 210
     new-instance v2, Ljava/lang/StringBuilder;
 
     invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
@@ -1312,27 +1443,27 @@
 
     invoke-static {v2, p0, v1}, Lmodmenu/MwLog;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V
 
-    .line 183
+    .line 211
     return-object v0
 
-    .line 159
+    .line 187
     :cond_4
     :goto_2
     return-object v0
 .end method
 
 .method static save(Landroid/content/Context;JLjava/lang/String;)Ljava/lang/String;
-    .locals 2
+    .locals 4
 
     .line 137
     invoke-static {p0, p1, p2}, Lmodmenu/CrashReport;->pathFor(Landroid/content/Context;J)Ljava/lang/String;
 
-    move-result-object p1
+    move-result-object v0
 
     .line 138
-    const/4 p2, 0x0
+    const/4 v1, 0x0
 
-    if-eqz p1, :cond_1
+    if-eqz v0, :cond_1
 
     if-nez p3, :cond_0
 
@@ -1341,27 +1472,27 @@
     .line 142
     :cond_0
     :try_start_0
-    new-instance v0, Ljava/io/FileOutputStream;
+    new-instance v2, Ljava/io/FileOutputStream;
 
-    invoke-direct {v0, p1}, Ljava/io/FileOutputStream;-><init>(Ljava/lang/String;)V
+    invoke-direct {v2, v0}, Ljava/io/FileOutputStream;-><init>(Ljava/lang/String;)V
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_1
 
     .line 144
     :try_start_1
-    const-string v1, "UTF-8"
+    const-string v3, "UTF-8"
 
-    invoke-virtual {p3, v1}, Ljava/lang/String;->getBytes(Ljava/lang/String;)[B
+    invoke-virtual {p3, v3}, Ljava/lang/String;->getBytes(Ljava/lang/String;)[B
 
-    move-result-object p3
+    move-result-object v3
 
-    invoke-virtual {v0, p3}, Ljava/io/FileOutputStream;->write([B)V
+    invoke-virtual {v2, v3}, Ljava/io/FileOutputStream;->write([B)V
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
     .line 146
     :try_start_2
-    invoke-virtual {v0}, Ljava/io/FileOutputStream;->close()V
+    invoke-virtual {v2}, Ljava/io/FileOutputStream;->close()V
 
     .line 147
     nop
@@ -1369,40 +1500,43 @@
     .line 148
     invoke-static {p0}, Lmodmenu/CrashReport;->dir(Landroid/content/Context;)Ljava/io/File;
 
-    move-result-object p0
+    move-result-object v2
 
-    invoke-static {p0}, Lmodmenu/CrashReport;->prune(Ljava/io/File;)V
+    invoke-static {v2}, Lmodmenu/CrashReport;->prune(Ljava/io/File;)V
 
     .line 149
-    return-object p1
+    invoke-static {p0, p1, p2, p3}, Lmodmenu/CrashReport;->mirror(Landroid/content/Context;JLjava/lang/String;)V
+
+    .line 150
+    return-object v0
 
     .line 146
     :catchall_0
     move-exception p0
 
-    invoke-virtual {v0}, Ljava/io/FileOutputStream;->close()V
+    invoke-virtual {v2}, Ljava/io/FileOutputStream;->close()V
 
     .line 147
     throw p0
     :try_end_2
     .catchall {:try_start_2 .. :try_end_2} :catchall_1
 
-    .line 150
+    .line 151
     :catchall_1
     move-exception p0
 
-    .line 151
-    new-instance p3, Ljava/lang/StringBuilder;
+    .line 152
+    new-instance p1, Ljava/lang/StringBuilder;
 
-    invoke-direct {p3}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {p1}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v0, "report not written to "
+    const-string p2, "report not written to "
 
-    invoke-virtual {p3, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {p1, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result-object p3
+    move-result-object p1
 
-    invoke-virtual {p3, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {p1, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     move-result-object p1
 
@@ -1410,34 +1544,34 @@
 
     move-result-object p1
 
-    const-string p3, "MWCrash"
+    const-string p2, "MWCrash"
 
-    invoke-static {p3, p1, p0}, Lmodmenu/MwLog;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V
+    invoke-static {p2, p1, p0}, Lmodmenu/MwLog;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V
 
-    .line 152
-    return-object p2
+    .line 153
+    return-object v1
 
     .line 139
     :cond_1
     :goto_0
-    return-object p2
+    return-object v1
 .end method
 
 .method static stampLaunch(Landroid/content/Context;J)V
     .locals 3
 
-    .line 276
+    .line 304
     invoke-static {p0}, Lmodmenu/CrashReport;->dir(Landroid/content/Context;)Ljava/io/File;
 
     move-result-object p0
 
-    .line 277
+    .line 305
     if-nez p0, :cond_0
 
-    .line 278
+    .line 306
     return-void
 
-    .line 281
+    .line 309
     :cond_0
     :try_start_0
     new-instance v0, Ljava/io/FileOutputStream;
@@ -1452,7 +1586,7 @@
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_1
 
-    .line 283
+    .line 311
     :try_start_1
     invoke-static {p1, p2}, Ljava/lang/Long;->toString(J)Ljava/lang/String;
 
@@ -1468,39 +1602,39 @@
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
-    .line 285
+    .line 313
     :try_start_2
     invoke-virtual {v0}, Ljava/io/FileOutputStream;->close()V
 
-    .line 286
+    .line 314
     nop
 
-    .line 289
+    .line 317
     goto :goto_0
 
-    .line 285
+    .line 313
     :catchall_0
     move-exception p0
 
     invoke-virtual {v0}, Ljava/io/FileOutputStream;->close()V
 
-    .line 286
+    .line 314
     throw p0
     :try_end_2
     .catchall {:try_start_2 .. :try_end_2} :catchall_1
 
-    .line 287
+    .line 315
     :catchall_1
     move-exception p0
 
-    .line 288
+    .line 316
     const-string p1, "MWCrash"
 
     const-string p2, "launch marker not written"
 
     invoke-static {p1, p2, p0}, Lmodmenu/MwLog;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V
 
-    .line 290
+    .line 318
     :goto_0
     return-void
 .end method
@@ -1544,21 +1678,21 @@
 .method private static trace(Ljava/lang/Throwable;)Ljava/lang/String;
     .locals 3
 
-    .line 319
+    .line 347
     if-nez p0, :cond_0
 
-    .line 320
+    .line 348
     const-string p0, "unknown (no throwable reached the handler)\n"
 
     return-object p0
 
-    .line 322
+    .line 350
     :cond_0
     invoke-static {p0}, Landroid/util/Log;->getStackTraceString(Ljava/lang/Throwable;)Ljava/lang/String;
 
     move-result-object v0
 
-    .line 323
+    .line 351
     if-eqz v0, :cond_1
 
     invoke-virtual {v0}, Ljava/lang/String;->length()I
@@ -1567,7 +1701,7 @@
 
     if-nez v1, :cond_2
 
-    .line 324
+    .line 352
     :cond_1
     new-instance v0, Ljava/lang/StringBuilder;
 
@@ -1591,7 +1725,7 @@
 
     move-result-object v0
 
-    .line 326
+    .line 354
     :cond_2
     invoke-virtual {v0}, Ljava/lang/String;->length()I
 
@@ -1601,7 +1735,7 @@
 
     if-le p0, v1, :cond_3
 
-    .line 327
+    .line 355
     new-instance p0, Ljava/lang/StringBuilder;
 
     invoke-direct {p0}, Ljava/lang/StringBuilder;-><init>()V
@@ -1626,7 +1760,7 @@
 
     move-result-object v0
 
-    .line 329
+    .line 357
     :cond_3
     return-object v0
 .end method

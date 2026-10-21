@@ -30,7 +30,7 @@
         }
     .end annotation
 
-    .line 213
+    .line 241
     iput-object p1, p0, Lmodmenu/CrashReport$1;->val$out:Ljava/lang/StringBuilder;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -43,10 +43,10 @@
 .method public run()V
     .locals 9
 
-    .line 216
+    .line 244
     nop
 
-    .line 218
+    .line 246
     const/4 v1, 0x0
 
     :try_start_0
@@ -62,7 +62,7 @@
 
     const-string v6, "-t"
 
-    .line 219
+    .line 247
     const/16 v8, 0xc8
 
     invoke-static {v8}, Ljava/lang/String;->valueOf(I)Ljava/lang/String;
@@ -75,7 +75,7 @@
 
     invoke-direct {v0, v2}, Ljava/lang/ProcessBuilder;-><init>([Ljava/lang/String;)V
 
-    .line 220
+    .line 248
     const/4 v2, 0x1
 
     invoke-virtual {v0, v2}, Ljava/lang/ProcessBuilder;->redirectErrorStream(Z)Ljava/lang/ProcessBuilder;
@@ -86,12 +86,12 @@
 
     move-result-object v1
 
-    .line 221
+    .line 249
     new-instance v2, Ljava/io/BufferedReader;
 
     new-instance v0, Ljava/io/InputStreamReader;
 
-    .line 222
+    .line 250
     invoke-virtual {v1}, Ljava/lang/Process;->getInputStream()Ljava/io/InputStream;
 
     move-result-object v3
@@ -104,10 +104,10 @@
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_2
 
-    .line 225
+    .line 253
     const/4 v0, 0x0
 
-    .line 226
+    .line 254
     :goto_0
     if-ge v0, v8, :cond_0
 
@@ -122,21 +122,21 @@
 
     if-ge v3, v4, :cond_0
 
-    .line 227
+    .line 255
     invoke-virtual {v2}, Ljava/io/BufferedReader;->readLine()Ljava/lang/String;
 
     move-result-object v3
 
     if-eqz v3, :cond_0
 
-    .line 228
+    .line 256
     iget-object v4, p0, Lmodmenu/CrashReport$1;->val$out:Ljava/lang/StringBuilder;
 
     monitor-enter v4
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_1
 
-    .line 229
+    .line 257
     :try_start_2
     iget-object v5, p0, Lmodmenu/CrashReport$1;->val$out:Ljava/lang/StringBuilder;
 
@@ -148,15 +148,15 @@
 
     invoke-virtual {v3, v5}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
 
-    .line 230
+    .line 258
     monitor-exit v4
 
-    .line 231
+    .line 259
     add-int/lit8 v0, v0, 0x1
 
     goto :goto_0
 
-    .line 230
+    .line 258
     :catchall_0
     move-exception v0
 
@@ -169,43 +169,43 @@
     :try_end_3
     .catchall {:try_start_3 .. :try_end_3} :catchall_1
 
-    .line 234
+    .line 262
     :catchall_1
     move-exception v0
 
     :try_start_4
     invoke-virtual {v2}, Ljava/io/BufferedReader;->close()V
 
-    .line 235
+    .line 263
     throw v0
 
-    .line 234
+    .line 262
     :cond_0
     invoke-virtual {v2}, Ljava/io/BufferedReader;->close()V
     :try_end_4
     .catchall {:try_start_4 .. :try_end_4} :catchall_2
 
-    .line 235
+    .line 263
     nop
 
-    .line 239
+    .line 267
     if-eqz v1, :cond_1
 
-    .line 240
+    .line 268
     goto :goto_1
 
-    .line 236
+    .line 264
     :catchall_2
     move-exception v0
 
-    .line 239
+    .line 267
     if-eqz v1, :cond_1
 
-    .line 240
+    .line 268
     :goto_1
     invoke-virtual {v1}, Ljava/lang/Process;->destroy()V
 
-    .line 243
+    .line 271
     :cond_1
     return-void
 .end method
