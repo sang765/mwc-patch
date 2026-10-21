@@ -279,6 +279,7 @@ public final class ModMenu {
         if (host == null) {
             return;
         }
+        MwLog.i("ModMenu", "chat open -> better input");
         try {
             BetterInput.show(host, Palette.of(host));
         } catch (RuntimeException e) {
