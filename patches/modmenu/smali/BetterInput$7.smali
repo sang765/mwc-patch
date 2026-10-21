@@ -33,7 +33,7 @@
         }
     .end annotation
 
-    .line 233
+    .line 248
     iput-object p1, p0, Lmodmenu/BetterInput$7;->this$0:Lmodmenu/BetterInput;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -46,7 +46,7 @@
 .method public onProgressChanged(Landroid/widget/SeekBar;IZ)V
     .locals 2
 
-    .line 236
+    .line 251
     iget-object p1, p0, Lmodmenu/BetterInput$7;->this$0:Lmodmenu/BetterInput;
 
     invoke-static {p1}, Lmodmenu/BetterInput;->access$500(Lmodmenu/BetterInput;)Lmodmenu/BetterInput$ColorWheelView;
@@ -61,7 +61,7 @@
 
     invoke-virtual {p1, p2}, Lmodmenu/BetterInput$ColorWheelView;->setValue(F)V
 
-    .line 237
+    .line 252
     iget-object p1, p0, Lmodmenu/BetterInput$7;->this$0:Lmodmenu/BetterInput;
 
     invoke-static {p1}, Lmodmenu/BetterInput;->access$400(Lmodmenu/BetterInput;)Landroid/widget/TextView;
@@ -72,7 +72,7 @@
 
     iget-object p3, p0, Lmodmenu/BetterInput$7;->this$0:Lmodmenu/BetterInput;
 
-    .line 238
+    .line 253
     invoke-static {p3}, Lmodmenu/BetterInput;->access$500(Lmodmenu/BetterInput;)Lmodmenu/BetterInput$ColorWheelView;
 
     move-result-object p3
@@ -97,7 +97,7 @@
 
     aput-object p3, v0, v1
 
-    .line 237
+    .line 252
     const-string p3, "#c%06X"
 
     invoke-static {p2, p3, v0}, Ljava/lang/String;->format(Ljava/util/Locale;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
@@ -106,20 +106,20 @@
 
     invoke-virtual {p1, p2}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    .line 239
+    .line 254
     return-void
 .end method
 
 .method public onStartTrackingTouch(Landroid/widget/SeekBar;)V
     .locals 0
 
-    .line 243
+    .line 258
     return-void
 .end method
 
 .method public onStopTrackingTouch(Landroid/widget/SeekBar;)V
     .locals 0
 
-    .line 247
+    .line 262
     return-void
 .end method

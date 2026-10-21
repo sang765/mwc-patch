@@ -242,6 +242,7 @@ for pat in 'Lmodmenu/ModMenu;' 'Lmodmenu/ModMenuActivity;' \
            '{"r":"wait","want":' 'mod_give_noclient' 'mod_give_full' \
            'Lmodmenu/BetterInput;' 'mw_bi.json' \
            'onChatOpened' '__bi_chat' 'auto better input failed' \
+           'bi_chat.sig' \
            'Lmodmenu/LuaEditor;' 'mw_le.json' 'Lmodmenu/MwApi;' \
            'Lmodmenu/MwLog;' 'mwlog.txt' \
            'Lmodmenu/LogView;'; do

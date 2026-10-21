@@ -51,7 +51,7 @@
         }
     .end annotation
 
-    .line 518
+    .line 533
     iput-object p1, p0, Lmodmenu/BetterInput$18;->this$0:Lmodmenu/BetterInput;
 
     iput-object p2, p0, Lmodmenu/BetterInput$18;->val$paths:[Ljava/lang/String;
@@ -70,14 +70,14 @@
 .method public run()V
     .locals 3
 
-    .line 521
+    .line 536
     iget-object v0, p0, Lmodmenu/BetterInput$18;->val$paths:[Ljava/lang/String;
 
     invoke-static {v0}, Lmodmenu/BetterInput;->access$1900([Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v0
 
-    .line 522
+    .line 537
     new-instance v1, Landroid/os/Handler;
 
     invoke-static {}, Landroid/os/Looper;->getMainLooper()Landroid/os/Looper;
@@ -92,6 +92,6 @@
 
     invoke-virtual {v1, v2}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
 
-    .line 539
+    .line 554
     return-void
 .end method

@@ -30,7 +30,7 @@
         }
     .end annotation
 
-    .line 520
+    .line 594
     iput-object p1, p0, Lmodmenu/ModMenu$7;->val$a:Landroid/app/Activity;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -43,14 +43,14 @@
 .method public onClick(Landroid/content/DialogInterface;I)V
     .locals 0
 
-    .line 523
-    invoke-static {}, Lmodmenu/ModMenu;->access$1100()Landroid/content/Context;
+    .line 597
+    invoke-static {}, Lmodmenu/ModMenu;->access$1200()Landroid/content/Context;
 
     move-result-object p1
 
     if-eqz p1, :cond_0
 
-    invoke-static {}, Lmodmenu/ModMenu;->access$1100()Landroid/content/Context;
+    invoke-static {}, Lmodmenu/ModMenu;->access$1200()Landroid/content/Context;
 
     move-result-object p1
 
@@ -62,6 +62,6 @@
     :goto_0
     invoke-static {p1}, Lmodmenu/ModMenu;->restartGame(Landroid/content/Context;)V
 
-    .line 524
+    .line 598
     return-void
 .end method

@@ -33,7 +33,7 @@
         }
     .end annotation
 
-    .line 319
+    .line 334
     iput-object p1, p0, Lmodmenu/BetterInput$12;->this$0:Lmodmenu/BetterInput;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -46,13 +46,13 @@
 .method public onClick(Landroid/view/View;)V
     .locals 1
 
-    .line 322
+    .line 337
     iget-object p1, p0, Lmodmenu/BetterInput$12;->this$0:Lmodmenu/BetterInput;
 
     const/4 v0, 0x1
 
     invoke-static {p1, v0}, Lmodmenu/BetterInput;->access$800(Lmodmenu/BetterInput;Z)V
 
-    .line 323
+    .line 338
     return-void
 .end method

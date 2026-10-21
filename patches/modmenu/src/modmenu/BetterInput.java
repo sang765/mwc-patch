@@ -37,6 +37,7 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.lang.ref.WeakReference;
 import java.util.Locale;
 
 /**
@@ -96,6 +97,10 @@ final class BetterInput {
             0xFFFFFFFF, // #W
     };
 
+    /** The live composer, so the chat-open poller cannot stack a second. */
+    private static WeakReference<BetterInput> current =
+            new WeakReference<BetterInput>(null);
+
     private final Activity host;
     private final Palette p;
     private final Dialog dialog;
@@ -114,12 +119,22 @@ final class BetterInput {
     private int colorB = 0xFFFFFFFF;
 
     static void show(Activity host, Palette p) {
+        if (showing()) {
+            return;
+        }
         new BetterInput(host, p);
+    }
+
+    /** Is a composer up right now? The chat-open poller asks before stacking. */
+    static boolean showing() {
+        BetterInput b = current.get();
+        return b != null && b.dialog.isShowing();
     }
 
     private BetterInput(Activity host, Palette p) {
         this.host = host;
         this.p = p;
+        current = new WeakReference<BetterInput>(this);
         dialog = new Dialog(host, android.R.style.Theme_Translucent_NoTitleBar);
 
         LinearLayout root = new LinearLayout(host);

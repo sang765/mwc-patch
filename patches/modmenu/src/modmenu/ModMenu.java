@@ -19,6 +19,7 @@ import android.os.SystemClock;
 
 import org.appplay.lib.CommonNatives;
 
+import java.io.File;
 import java.lang.ref.WeakReference;
 
 /**
@@ -50,42 +51,10 @@ public final class ModMenu {
     /** Lua silence, in a focused window, that counts as a freeze. */
     private static final long STUCK_MS = 60000;
 
-    /**
-     * The lua that wraps ChatHelper.OpenChatView so the composer opens the
-     * moment the game's chat does. It runs the original first, so the chat
-     * view is already up when onChatOpened raises BetterInput over it (Fill
-     * and Send dispatch into that open view). Idempotent via _G.__bi_chat, so
-     * it is safe to re-send until the helper has loaded; onChatOpened is
-     * reached through InvocationBuilder, the game's own lua->java bridge.
-     */
-    private static final String CHAT_HOOK_SCRIPT =
-            "(function()"
-            + " if _G.__bi_chat then return end"
-            + " pcall(function()"
-            + " local h=GetInst('ChatHelper')"
-            + " if h==nil then return end"
-            + " local owner=h"
-            + " local mt=getmetatable(h)"
-            + " if mt~=nil and type(mt.__index)=='table'"
-            + " and type(mt.__index.OpenChatView)=='function' then owner=mt.__index end"
-            + " if owner.__bi_chat then return end"
-            + " local orig=owner.OpenChatView"
-            + " if type(orig)~='function' then return end"
-            + " owner.OpenChatView=function(self,...)"
-            + " local r=orig(self,...)"
-            + " pcall(function()"
-            + " InvocationBuilder():setClassName('modmenu/ModMenu')"
-            + " :setMethodName('onChatOpened'):setSignature('()V')"
-            + " :build():invokeStatic()"
-            + " end)"
-            + " return r"
-            + " end"
-            + " owner.__bi_chat=true"
-            + " _G.__bi_chat=true"
-            + " end)"
-            + " end)";
     /** Hook deliveries after the first; the lua side no-ops once installed. */
     private static final int CHAT_HOOK_TRIES = 6;
+    /** Touch file the lua hook writes when the game's chat opens. */
+    private static final String CHAT_SIG = "bi_chat.sig";
 
     private static final Handler MAIN = new Handler(Looper.getMainLooper());
 
@@ -140,6 +109,16 @@ public final class ModMenu {
         // shake backup entry: the notification tap is dropped on some ROMs,
         // and the accelerometer needs no inter-process hop to reach the window
         ShakeOpen.start(ctx);
+        // drop a stale chat signal from a previous run, then watch for the
+        // lua hook touching it: the game opens chat entirely in lua, so the
+        // only reliable lua->java signal is a file the hook writes
+        String[] sig = chatSignalPaths();
+        if (sig != null) {
+            for (int i = 0; i < sig.length; i++) {
+                new File(sig[i]).delete();
+            }
+        }
+        MAIN.postDelayed(chatSignalTick, 250);
     }
 
     /** Injected at the head of AppPlayBaseActivity.onCreate. */
@@ -286,30 +265,25 @@ public final class ModMenu {
     }
 
     /**
-     * Called from lua (the injected OpenChatView hook) the instant the chat
-     * opens, on the lua thread. Hops to main and raises the composer over the
-     * freshly opened chat view, whose own input the Fill/Send dispatch fills.
+     * The lua hook's touch file showed up: the chat just opened. Raise the
+     * composer over the freshly opened chat view, whose own input the Fill/
+     * Send dispatch fills. Runs on the main thread (from the signal poller).
      */
-    public static void onChatOpened() {
-        MAIN.post(new Runnable() {
-            @Override
-            public void run() {
-                long now = SystemClock.elapsedRealtime();
-                if (now - lastBetterInputMs < 600) {
-                    return; // a single open can bounce the hook more than once
-                }
-                lastBetterInputMs = now;
-                Activity host = gameActivity();
-                if (host == null) {
-                    return;
-                }
-                try {
-                    BetterInput.show(host, Palette.of(host));
-                } catch (RuntimeException e) {
-                    MwLog.e("ModMenu", "auto better input failed", e);
-                }
-            }
-        });
+    private static void onChatOpened() {
+        long now = SystemClock.elapsedRealtime();
+        if (now - lastBetterInputMs < 600) {
+            return; // a single open can bounce the hook more than once
+        }
+        lastBetterInputMs = now;
+        Activity host = gameActivity();
+        if (host == null) {
+            return;
+        }
+        try {
+            BetterInput.show(host, Palette.of(host));
+        } catch (RuntimeException e) {
+            MwLog.e("ModMenu", "auto better input failed", e);
+        }
     }
 
     /** Deliver the lua hook; the lua side no-ops once it is installed. */
@@ -317,8 +291,13 @@ public final class ModMenu {
         if (gameActivity() == null) {
             return; // no window yet; the retry below keeps trying
         }
+        String[] sig = chatSignalPaths();
+        if (sig == null) {
+            return; // no files dir yet; the retry below keeps trying
+        }
         try {
-            CommonNatives.javaCallLuaEvent(CHAT_HOOK_SCRIPT, new Object[0]);
+            CommonNatives.javaCallLuaEvent(chatHookScript(sig[0], sig[1]),
+                    new Object[0]);
         } catch (RuntimeException e) {
             MwLog.e("ModMenu", "chat hook install failed", e);
         }
@@ -335,6 +314,101 @@ public final class ModMenu {
                 scheduleChatHookRetry();
             }
         }, 3000);
+    }
+
+    /**
+     * Polls for the lua hook's touch file. The game opens chat entirely in
+     * lua (ChatHelper.OpenChatView -> MiniUIManager), and the one lua->java
+     * bridge that could reach the mod (InvocationBuilder) is gated by a
+     * native whitelist, so the hook drops a file instead and this picks it
+     * up - the same io.open signal path the give/gamemode scripts use.
+     */
+    private static final Runnable chatSignalTick = new Runnable() {
+        @Override
+        public void run() {
+            String[] sig = chatSignalPaths();
+            if (sig != null) {
+                boolean fired = false;
+                for (int i = 0; i < sig.length; i++) {
+                    File f = new File(sig[i]);
+                    if (f.exists()) {
+                        f.delete();
+                        fired = true;
+                    }
+                }
+                if (fired) {
+                    onChatOpened();
+                }
+            }
+            MAIN.postDelayed(this, 250);
+        }
+    };
+
+    /** External files dir first, internal as fallback; both are written. */
+    private static String[] chatSignalPaths() {
+        Context c = appCtx;
+        if (c == null) {
+            return null;
+        }
+        try {
+            File internal = c.getFilesDir();
+            if (internal == null) {
+                return null;
+            }
+            String in = new File(internal, CHAT_SIG).getAbsolutePath();
+            File ext = c.getExternalFilesDir(null);
+            if (ext == null) {
+                return new String[]{in, in};
+            }
+            return new String[]{new File(ext, CHAT_SIG).getAbsolutePath(), in};
+        } catch (RuntimeException e) {
+            MwLog.e("ModMenu", "chat signal paths failed", e);
+            return null;
+        }
+    }
+
+    /**
+     * The hook that wraps ChatHelper.OpenChatView. It runs the original
+     * first, so the chat view is already up when onChatOpened raises
+     * BetterInput over it. On each open it touches the signal file (via
+     * io.open, no lua->java bridge) and the Java poller picks that up.
+     * Idempotent via _G.__bi_chat, safe to re-send until the helper loads.
+     */
+    private static String chatHookScript(String s1, String s2) {
+        return "(function()"
+                + " if _G.__bi_chat then return end"
+                + " pcall(function()"
+                + " local h=GetInst('ChatHelper')"
+                + " if h==nil then return end"
+                + " local owner=h"
+                + " local mt=getmetatable(h)"
+                + " if mt~=nil and type(mt.__index)=='table'"
+                + " and type(mt.__index.OpenChatView)=='function' then owner=mt.__index end"
+                + " if owner.__bi_chat then return end"
+                + " local orig=owner.OpenChatView"
+                + " if type(orig)~='function' then return end"
+                + " local s1='" + luaStr(s1) + "'"
+                + " local s2='" + luaStr(s2) + "'"
+                + " owner.OpenChatView=function(self,...)"
+                + " local r=orig(self,...)"
+                + " pcall(function()"
+                + " local function t(p)"
+                + " local ok,fh=pcall(function() return io.open(p,'w') end)"
+                + " if ok and fh~=nil then pcall(function() fh:close() end) end"
+                + " end"
+                + " t(s1)"
+                + " if s2~=s1 then t(s2) end"
+                + " end)"
+                + " return r"
+                + " end"
+                + " owner.__bi_chat=true"
+                + " _G.__bi_chat=true"
+                + " end)"
+                + " end)";
+    }
+
+    private static String luaStr(String s) {
+        return s == null ? "" : s.replace("\\", "\\\\").replace("'", "\\'");
     }
 
     // commit, not apply: restartGame SIGKILLs the process right after a

@@ -24,6 +24,16 @@
 
 .field private static final TIMEOUT_MS:J = 0xfa0L
 
+.field private static current:Ljava/lang/ref/WeakReference;
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "Ljava/lang/ref/WeakReference<",
+            "Lmodmenu/BetterInput;",
+            ">;"
+        }
+    .end annotation
+.end field
+
 
 # instance fields
 .field private blinkAnim:Landroid/animation/ValueAnimator;
@@ -59,7 +69,7 @@
 .method static constructor <clinit>()V
     .locals 4
 
-    .line 72
+    .line 73
     const/16 v0, 0x24
 
     new-array v0, v0, [[Ljava/lang/String;
@@ -498,12 +508,21 @@
 
     sput-object v0, Lmodmenu/BetterInput;->EMOJI:[[Ljava/lang/String;
 
-    .line 90
+    .line 91
     new-array v0, v2, [I
 
     fill-array-data v0, :array_0
 
     sput-object v0, Lmodmenu/BetterInput;->SHORT_COLORS:[I
+
+    .line 101
+    new-instance v0, Ljava/lang/ref/WeakReference;
+
+    const/4 v1, 0x0
+
+    invoke-direct {v0, v1}, Ljava/lang/ref/WeakReference;-><init>(Ljava/lang/Object;)V
+
+    sput-object v0, Lmodmenu/BetterInput;->current:Ljava/lang/ref/WeakReference;
 
     return-void
 
@@ -521,7 +540,7 @@
 .method private constructor <init>(Landroid/app/Activity;Lmodmenu/Palette;)V
     .locals 20
 
-    .line 120
+    .line 134
     move-object/from16 v0, p0
 
     move-object/from16 v1, p1
@@ -530,23 +549,30 @@
 
     invoke-direct {v0}, Ljava/lang/Object;-><init>()V
 
-    .line 113
+    .line 118
     const/high16 v3, -0x10000
 
     iput v3, v0, Lmodmenu/BetterInput;->colorA:I
 
-    .line 114
+    .line 119
     const/4 v3, -0x1
 
     iput v3, v0, Lmodmenu/BetterInput;->colorB:I
 
-    .line 121
+    .line 135
     iput-object v1, v0, Lmodmenu/BetterInput;->host:Landroid/app/Activity;
 
-    .line 122
+    .line 136
     iput-object v2, v0, Lmodmenu/BetterInput;->p:Lmodmenu/Palette;
 
-    .line 123
+    .line 137
+    new-instance v4, Ljava/lang/ref/WeakReference;
+
+    invoke-direct {v4, v0}, Ljava/lang/ref/WeakReference;-><init>(Ljava/lang/Object;)V
+
+    sput-object v4, Lmodmenu/BetterInput;->current:Ljava/lang/ref/WeakReference;
+
+    .line 138
     new-instance v4, Landroid/app/Dialog;
 
     const v5, 0x1030010
@@ -555,17 +581,17 @@
 
     iput-object v4, v0, Lmodmenu/BetterInput;->dialog:Landroid/app/Dialog;
 
-    .line 125
+    .line 140
     new-instance v4, Landroid/widget/LinearLayout;
 
     invoke-direct {v4, v1}, Landroid/widget/LinearLayout;-><init>(Landroid/content/Context;)V
 
-    .line 126
+    .line 141
     const/4 v5, 0x1
 
     invoke-virtual {v4, v5}, Landroid/widget/LinearLayout;->setOrientation(I)V
 
-    .line 127
+    .line 142
     const/16 v6, 0xe
 
     invoke-direct {v0, v6}, Lmodmenu/BetterInput;->dp(I)I
@@ -586,7 +612,7 @@
 
     invoke-virtual {v4, v7, v8, v9, v6}, Landroid/widget/LinearLayout;->setPadding(IIII)V
 
-    .line 128
+    .line 143
     const/16 v6, 0x10
 
     invoke-direct {v0, v6}, Lmodmenu/BetterInput;->dp(I)I
@@ -601,33 +627,33 @@
 
     invoke-virtual {v4, v7}, Landroid/widget/LinearLayout;->setBackground(Landroid/graphics/drawable/Drawable;)V
 
-    .line 130
+    .line 145
     new-instance v7, Landroid/widget/TextView;
 
     invoke-direct {v7, v1}, Landroid/widget/TextView;-><init>(Landroid/content/Context;)V
 
     iput-object v7, v0, Lmodmenu/BetterInput;->preview:Landroid/widget/TextView;
 
-    .line 131
+    .line 146
     iget-object v7, v0, Lmodmenu/BetterInput;->preview:Landroid/widget/TextView;
 
     const/high16 v8, 0x41700000    # 15.0f
 
     invoke-virtual {v7, v8}, Landroid/widget/TextView;->setTextSize(F)V
 
-    .line 132
+    .line 147
     iget-object v7, v0, Lmodmenu/BetterInput;->preview:Landroid/widget/TextView;
 
     invoke-virtual {v7, v3}, Landroid/widget/TextView;->setTextColor(I)V
 
-    .line 133
+    .line 148
     iget-object v7, v0, Lmodmenu/BetterInput;->preview:Landroid/widget/TextView;
 
     const v9, 0x800003
 
     invoke-virtual {v7, v9}, Landroid/widget/TextView;->setGravity(I)V
 
-    .line 134
+    .line 149
     iget-object v7, v0, Lmodmenu/BetterInput;->preview:Landroid/widget/TextView;
 
     const/16 v10, 0xa
@@ -652,7 +678,7 @@
 
     invoke-virtual {v7, v11, v13, v14, v15}, Landroid/widget/TextView;->setPadding(IIII)V
 
-    .line 135
+    .line 150
     iget-object v7, v0, Lmodmenu/BetterInput;->preview:Landroid/widget/TextView;
 
     invoke-direct {v0, v10}, Lmodmenu/BetterInput;->dp(I)I
@@ -667,14 +693,14 @@
 
     invoke-virtual {v7, v11}, Landroid/widget/TextView;->setBackground(Landroid/graphics/drawable/Drawable;)V
 
-    .line 136
+    .line 151
     iget-object v7, v0, Lmodmenu/BetterInput;->preview:Landroid/widget/TextView;
 
     const/4 v11, 0x2
 
     invoke-virtual {v7, v11}, Landroid/widget/TextView;->setMinLines(I)V
 
-    .line 137
+    .line 152
     iget-object v7, v0, Lmodmenu/BetterInput;->preview:Landroid/widget/TextView;
 
     invoke-direct {v0}, Lmodmenu/BetterInput;->wrap()Landroid/widget/LinearLayout$LayoutParams;
@@ -687,33 +713,33 @@
 
     invoke-virtual {v4, v7, v13}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 139
+    .line 154
     new-instance v7, Landroid/widget/EditText;
 
     invoke-direct {v7, v1}, Landroid/widget/EditText;-><init>(Landroid/content/Context;)V
 
     iput-object v7, v0, Lmodmenu/BetterInput;->input:Landroid/widget/EditText;
 
-    .line 140
+    .line 155
     iget-object v7, v0, Lmodmenu/BetterInput;->input:Landroid/widget/EditText;
 
     invoke-virtual {v7, v8}, Landroid/widget/EditText;->setTextSize(F)V
 
-    .line 141
+    .line 156
     iget-object v7, v0, Lmodmenu/BetterInput;->input:Landroid/widget/EditText;
 
     iget v8, v2, Lmodmenu/Palette;->onSurface:I
 
     invoke-virtual {v7, v8}, Landroid/widget/EditText;->setTextColor(I)V
 
-    .line 142
+    .line 157
     iget-object v7, v0, Lmodmenu/BetterInput;->input:Landroid/widget/EditText;
 
     iget v8, v2, Lmodmenu/Palette;->onSurfaceVariant:I
 
     invoke-virtual {v7, v8}, Landroid/widget/EditText;->setHintTextColor(I)V
 
-    .line 143
+    .line 158
     iget-object v7, v0, Lmodmenu/BetterInput;->input:Landroid/widget/EditText;
 
     const-string v8, "mod_bi_hint"
@@ -724,24 +750,24 @@
 
     invoke-virtual {v7, v8}, Landroid/widget/EditText;->setHint(Ljava/lang/CharSequence;)V
 
-    .line 144
+    .line 159
     iget-object v7, v0, Lmodmenu/BetterInput;->input:Landroid/widget/EditText;
 
     invoke-virtual {v7, v11}, Landroid/widget/EditText;->setMinLines(I)V
 
-    .line 145
+    .line 160
     iget-object v7, v0, Lmodmenu/BetterInput;->input:Landroid/widget/EditText;
 
     const/4 v8, 0x5
 
     invoke-virtual {v7, v8}, Landroid/widget/EditText;->setMaxLines(I)V
 
-    .line 146
+    .line 161
     iget-object v7, v0, Lmodmenu/BetterInput;->input:Landroid/widget/EditText;
 
     invoke-virtual {v7, v9}, Landroid/widget/EditText;->setGravity(I)V
 
-    .line 147
+    .line 162
     iget-object v7, v0, Lmodmenu/BetterInput;->input:Landroid/widget/EditText;
 
     invoke-direct {v0, v10}, Lmodmenu/BetterInput;->dp(I)I
@@ -756,7 +782,7 @@
 
     invoke-virtual {v7, v8}, Landroid/widget/EditText;->setBackground(Landroid/graphics/drawable/Drawable;)V
 
-    .line 148
+    .line 163
     invoke-direct {v0}, Lmodmenu/BetterInput;->wrap()Landroid/widget/LinearLayout$LayoutParams;
 
     move-result-object v7
@@ -765,27 +791,27 @@
 
     move-result-object v7
 
-    .line 149
+    .line 164
     invoke-direct {v0, v12}, Lmodmenu/BetterInput;->dp(I)I
 
     move-result v8
 
     iput v8, v7, Landroid/widget/LinearLayout$LayoutParams;->topMargin:I
 
-    .line 150
+    .line 165
     iget-object v8, v0, Lmodmenu/BetterInput;->input:Landroid/widget/EditText;
 
     invoke-virtual {v4, v8, v7}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 152
+    .line 167
     new-instance v7, Landroid/widget/LinearLayout;
 
     invoke-direct {v7, v1}, Landroid/widget/LinearLayout;-><init>(Landroid/content/Context;)V
 
-    .line 153
+    .line 168
     invoke-virtual {v7, v9}, Landroid/widget/LinearLayout;->setOrientation(I)V
 
-    .line 154
+    .line 169
     const-string v18, "#W"
 
     const-string v19, "#r"
@@ -804,7 +830,7 @@
 
     move-result-object v8
 
-    .line 155
+    .line 170
     const/4 v11, 0x0
 
     :goto_0
@@ -814,44 +840,44 @@
 
     if-ge v11, v14, :cond_0
 
-    .line 156
+    .line 171
     aget-object v14, v8, v11
 
-    .line 157
+    .line 172
     invoke-direct {v0, v14}, Lmodmenu/BetterInput;->pill(Ljava/lang/String;)Landroid/widget/Button;
 
     move-result-object v15
 
-    .line 158
+    .line 173
     new-instance v6, Lmodmenu/BetterInput$1;
 
     invoke-direct {v6, v0, v14}, Lmodmenu/BetterInput$1;-><init>(Lmodmenu/BetterInput;Ljava/lang/String;)V
 
     invoke-virtual {v15, v6}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
-    .line 164
+    .line 179
     invoke-direct {v0}, Lmodmenu/BetterInput;->wrap()Landroid/widget/LinearLayout$LayoutParams;
 
     move-result-object v6
 
-    .line 165
+    .line 180
     invoke-direct {v0, v13}, Lmodmenu/BetterInput;->dp(I)I
 
     move-result v13
 
     iput v13, v6, Landroid/widget/LinearLayout$LayoutParams;->rightMargin:I
 
-    .line 166
+    .line 181
     invoke-virtual {v7, v15, v6}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 155
+    .line 170
     add-int/lit8 v11, v11, 0x1
 
     const/16 v6, 0x10
 
     goto :goto_0
 
-    .line 168
+    .line 183
     :cond_0
     invoke-direct {v0}, Lmodmenu/BetterInput;->wrap()Landroid/widget/LinearLayout$LayoutParams;
 
@@ -861,25 +887,25 @@
 
     move-result-object v6
 
-    .line 169
+    .line 184
     invoke-direct {v0, v12}, Lmodmenu/BetterInput;->dp(I)I
 
     move-result v8
 
     iput v8, v6, Landroid/widget/LinearLayout$LayoutParams;->topMargin:I
 
-    .line 170
+    .line 185
     invoke-virtual {v4, v7, v6}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 172
+    .line 187
     new-instance v6, Landroid/widget/LinearLayout;
 
     invoke-direct {v6, v1}, Landroid/widget/LinearLayout;-><init>(Landroid/content/Context;)V
 
-    .line 173
+    .line 188
     invoke-virtual {v6, v9}, Landroid/widget/LinearLayout;->setOrientation(I)V
 
-    .line 174
+    .line 189
     const-string v7, "mod_bi_color"
 
     invoke-static {v1, v7}, Lmodmenu/I18n;->t(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;
@@ -890,21 +916,21 @@
 
     move-result-object v7
 
-    .line 175
+    .line 190
     new-instance v8, Lmodmenu/BetterInput$2;
 
     invoke-direct {v8, v0}, Lmodmenu/BetterInput$2;-><init>(Lmodmenu/BetterInput;)V
 
     invoke-virtual {v7, v8}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
-    .line 182
+    .line 197
     invoke-direct {v0}, Lmodmenu/BetterInput;->wrap()Landroid/widget/LinearLayout$LayoutParams;
 
     move-result-object v8
 
     invoke-virtual {v6, v7, v8}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 183
+    .line 198
     const-string v7, "mod_bi_blink"
 
     invoke-static {v1, v7}, Lmodmenu/I18n;->t(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;
@@ -915,29 +941,29 @@
 
     move-result-object v7
 
-    .line 184
+    .line 199
     new-instance v8, Lmodmenu/BetterInput$3;
 
     invoke-direct {v8, v0}, Lmodmenu/BetterInput$3;-><init>(Lmodmenu/BetterInput;)V
 
     invoke-virtual {v7, v8}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
-    .line 190
+    .line 205
     invoke-direct {v0}, Lmodmenu/BetterInput;->wrap()Landroid/widget/LinearLayout$LayoutParams;
 
     move-result-object v8
 
-    .line 191
+    .line 206
     invoke-direct {v0, v13}, Lmodmenu/BetterInput;->dp(I)I
 
     move-result v11
 
     iput v11, v8, Landroid/widget/LinearLayout$LayoutParams;->leftMargin:I
 
-    .line 192
+    .line 207
     invoke-virtual {v6, v7, v8}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 193
+    .line 208
     const-string v7, "mod_bi_gradient"
 
     invoke-static {v1, v7}, Lmodmenu/I18n;->t(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;
@@ -948,29 +974,29 @@
 
     move-result-object v7
 
-    .line 194
+    .line 209
     new-instance v8, Lmodmenu/BetterInput$4;
 
     invoke-direct {v8, v0}, Lmodmenu/BetterInput$4;-><init>(Lmodmenu/BetterInput;)V
 
     invoke-virtual {v7, v8}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
-    .line 200
+    .line 215
     invoke-direct {v0}, Lmodmenu/BetterInput;->wrap()Landroid/widget/LinearLayout$LayoutParams;
 
     move-result-object v8
 
-    .line 201
+    .line 216
     invoke-direct {v0, v13}, Lmodmenu/BetterInput;->dp(I)I
 
     move-result v11
 
     iput v11, v8, Landroid/widget/LinearLayout$LayoutParams;->leftMargin:I
 
-    .line 202
+    .line 217
     invoke-virtual {v6, v7, v8}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 203
+    .line 218
     const-string v7, "mod_bi_icons"
 
     invoke-static {v1, v7}, Lmodmenu/I18n;->t(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;
@@ -981,29 +1007,29 @@
 
     move-result-object v7
 
-    .line 204
+    .line 219
     new-instance v8, Lmodmenu/BetterInput$5;
 
     invoke-direct {v8, v0}, Lmodmenu/BetterInput$5;-><init>(Lmodmenu/BetterInput;)V
 
     invoke-virtual {v7, v8}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
-    .line 210
+    .line 225
     invoke-direct {v0}, Lmodmenu/BetterInput;->wrap()Landroid/widget/LinearLayout$LayoutParams;
 
     move-result-object v8
 
-    .line 211
+    .line 226
     invoke-direct {v0, v13}, Lmodmenu/BetterInput;->dp(I)I
 
     move-result v11
 
     iput v11, v8, Landroid/widget/LinearLayout$LayoutParams;->leftMargin:I
 
-    .line 212
+    .line 227
     invoke-virtual {v6, v7, v8}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 213
+    .line 228
     invoke-direct {v0}, Lmodmenu/BetterInput;->wrap()Landroid/widget/LinearLayout$LayoutParams;
 
     move-result-object v7
@@ -1012,34 +1038,34 @@
 
     move-result-object v7
 
-    .line 214
+    .line 229
     invoke-direct {v0, v12}, Lmodmenu/BetterInput;->dp(I)I
 
     move-result v8
 
     iput v8, v7, Landroid/widget/LinearLayout$LayoutParams;->topMargin:I
 
-    .line 215
+    .line 230
     invoke-virtual {v4, v6, v7}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 217
+    .line 232
     new-instance v6, Landroid/widget/LinearLayout;
 
     invoke-direct {v6, v1}, Landroid/widget/LinearLayout;-><init>(Landroid/content/Context;)V
 
     iput-object v6, v0, Lmodmenu/BetterInput;->colorPanel:Landroid/widget/LinearLayout;
 
-    .line 218
+    .line 233
     iget-object v6, v0, Lmodmenu/BetterInput;->colorPanel:Landroid/widget/LinearLayout;
 
     invoke-virtual {v6, v5}, Landroid/widget/LinearLayout;->setOrientation(I)V
 
-    .line 219
+    .line 234
     iget-object v5, v0, Lmodmenu/BetterInput;->colorPanel:Landroid/widget/LinearLayout;
 
     invoke-virtual {v5, v12}, Landroid/widget/LinearLayout;->setVisibility(I)V
 
-    .line 220
+    .line 235
     new-instance v5, Lmodmenu/BetterInput$ColorWheelView;
 
     new-instance v6, Lmodmenu/BetterInput$6;
@@ -1050,7 +1076,7 @@
 
     iput-object v5, v0, Lmodmenu/BetterInput;->wheel:Lmodmenu/BetterInput$ColorWheelView;
 
-    .line 226
+    .line 241
     invoke-direct {v0}, Lmodmenu/BetterInput;->wrap()Landroid/widget/LinearLayout$LayoutParams;
 
     move-result-object v5
@@ -1059,41 +1085,41 @@
 
     move-result-object v5
 
-    .line 227
+    .line 242
     invoke-direct {v0, v12}, Lmodmenu/BetterInput;->dp(I)I
 
     move-result v6
 
     iput v6, v5, Landroid/widget/LinearLayout$LayoutParams;->topMargin:I
 
-    .line 228
+    .line 243
     iget-object v6, v0, Lmodmenu/BetterInput;->colorPanel:Landroid/widget/LinearLayout;
 
     iget-object v7, v0, Lmodmenu/BetterInput;->wheel:Lmodmenu/BetterInput$ColorWheelView;
 
     invoke-virtual {v6, v7, v5}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 230
+    .line 245
     new-instance v5, Landroid/widget/SeekBar;
 
     invoke-direct {v5, v1}, Landroid/widget/SeekBar;-><init>(Landroid/content/Context;)V
 
-    .line 231
+    .line 246
     const/16 v6, 0xff
 
     invoke-virtual {v5, v6}, Landroid/widget/SeekBar;->setMax(I)V
 
-    .line 232
+    .line 247
     invoke-virtual {v5, v6}, Landroid/widget/SeekBar;->setProgress(I)V
 
-    .line 233
+    .line 248
     new-instance v6, Lmodmenu/BetterInput$7;
 
     invoke-direct {v6, v0}, Lmodmenu/BetterInput$7;-><init>(Lmodmenu/BetterInput;)V
 
     invoke-virtual {v5, v6}, Landroid/widget/SeekBar;->setOnSeekBarChangeListener(Landroid/widget/SeekBar$OnSeekBarChangeListener;)V
 
-    .line 249
+    .line 264
     iget-object v6, v0, Lmodmenu/BetterInput;->colorPanel:Landroid/widget/LinearLayout;
 
     invoke-direct {v0}, Lmodmenu/BetterInput;->wrap()Landroid/widget/LinearLayout$LayoutParams;
@@ -1106,49 +1132,49 @@
 
     invoke-virtual {v6, v5, v7}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 251
+    .line 266
     new-instance v5, Landroid/widget/TextView;
 
     invoke-direct {v5, v1}, Landroid/widget/TextView;-><init>(Landroid/content/Context;)V
 
     iput-object v5, v0, Lmodmenu/BetterInput;->hexView:Landroid/widget/TextView;
 
-    .line 252
+    .line 267
     iget-object v5, v0, Lmodmenu/BetterInput;->hexView:Landroid/widget/TextView;
 
     const/high16 v6, 0x41600000    # 14.0f
 
     invoke-virtual {v5, v6}, Landroid/widget/TextView;->setTextSize(F)V
 
-    .line 253
+    .line 268
     iget-object v5, v0, Lmodmenu/BetterInput;->hexView:Landroid/widget/TextView;
 
     iget v6, v2, Lmodmenu/Palette;->onSurface:I
 
     invoke-virtual {v5, v6}, Landroid/widget/TextView;->setTextColor(I)V
 
-    .line 254
+    .line 269
     iget-object v5, v0, Lmodmenu/BetterInput;->hexView:Landroid/widget/TextView;
 
     sget-object v6, Landroid/graphics/Typeface;->MONOSPACE:Landroid/graphics/Typeface;
 
     invoke-virtual {v5, v6}, Landroid/widget/TextView;->setTypeface(Landroid/graphics/Typeface;)V
 
-    .line 255
+    .line 270
     iget-object v5, v0, Lmodmenu/BetterInput;->hexView:Landroid/widget/TextView;
 
     const/16 v6, 0x11
 
     invoke-virtual {v5, v6}, Landroid/widget/TextView;->setGravity(I)V
 
-    .line 256
+    .line 271
     iget-object v5, v0, Lmodmenu/BetterInput;->hexView:Landroid/widget/TextView;
 
     const-string v7, "#cFF0000"
 
     invoke-virtual {v5, v7}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    .line 257
+    .line 272
     invoke-direct {v0}, Lmodmenu/BetterInput;->wrap()Landroid/widget/LinearLayout$LayoutParams;
 
     move-result-object v5
@@ -1157,29 +1183,29 @@
 
     move-result-object v5
 
-    .line 258
+    .line 273
     invoke-direct {v0, v13}, Lmodmenu/BetterInput;->dp(I)I
 
     move-result v7
 
     iput v7, v5, Landroid/widget/LinearLayout$LayoutParams;->topMargin:I
 
-    .line 259
+    .line 274
     iget-object v7, v0, Lmodmenu/BetterInput;->colorPanel:Landroid/widget/LinearLayout;
 
     iget-object v8, v0, Lmodmenu/BetterInput;->hexView:Landroid/widget/TextView;
 
     invoke-virtual {v7, v8, v5}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 261
+    .line 276
     new-instance v5, Landroid/widget/LinearLayout;
 
     invoke-direct {v5, v1}, Landroid/widget/LinearLayout;-><init>(Landroid/content/Context;)V
 
-    .line 262
+    .line 277
     invoke-virtual {v5, v9}, Landroid/widget/LinearLayout;->setOrientation(I)V
 
-    .line 263
+    .line 278
     const-string v7, "mod_bi_color_insert"
 
     invoke-static {v1, v7}, Lmodmenu/I18n;->t(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;
@@ -1190,14 +1216,14 @@
 
     move-result-object v7
 
-    .line 264
+    .line 279
     new-instance v8, Lmodmenu/BetterInput$8;
 
     invoke-direct {v8, v0}, Lmodmenu/BetterInput$8;-><init>(Lmodmenu/BetterInput;)V
 
     invoke-virtual {v7, v8}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
-    .line 270
+    .line 285
     invoke-direct {v0}, Lmodmenu/BetterInput;->wrap()Landroid/widget/LinearLayout$LayoutParams;
 
     move-result-object v8
@@ -1208,65 +1234,65 @@
 
     invoke-virtual {v5, v7, v8}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 271
+    .line 286
     const-string v7, "A"
 
     invoke-direct {v0, v7}, Lmodmenu/BetterInput;->pill(Ljava/lang/String;)Landroid/widget/Button;
 
     move-result-object v7
 
-    .line 272
+    .line 287
     new-instance v8, Lmodmenu/BetterInput$9;
 
     invoke-direct {v8, v0}, Lmodmenu/BetterInput$9;-><init>(Lmodmenu/BetterInput;)V
 
     invoke-virtual {v7, v8}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
-    .line 278
+    .line 293
     invoke-direct {v0}, Lmodmenu/BetterInput;->wrap()Landroid/widget/LinearLayout$LayoutParams;
 
     move-result-object v8
 
-    .line 279
+    .line 294
     invoke-direct {v0, v13}, Lmodmenu/BetterInput;->dp(I)I
 
     move-result v11
 
     iput v11, v8, Landroid/widget/LinearLayout$LayoutParams;->leftMargin:I
 
-    .line 280
+    .line 295
     invoke-virtual {v5, v7, v8}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 281
+    .line 296
     const-string v7, "B"
 
     invoke-direct {v0, v7}, Lmodmenu/BetterInput;->pill(Ljava/lang/String;)Landroid/widget/Button;
 
     move-result-object v7
 
-    .line 282
+    .line 297
     new-instance v8, Lmodmenu/BetterInput$10;
 
     invoke-direct {v8, v0}, Lmodmenu/BetterInput$10;-><init>(Lmodmenu/BetterInput;)V
 
     invoke-virtual {v7, v8}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
-    .line 288
+    .line 303
     invoke-direct {v0}, Lmodmenu/BetterInput;->wrap()Landroid/widget/LinearLayout$LayoutParams;
 
     move-result-object v8
 
-    .line 289
+    .line 304
     invoke-direct {v0, v13}, Lmodmenu/BetterInput;->dp(I)I
 
     move-result v11
 
     iput v11, v8, Landroid/widget/LinearLayout$LayoutParams;->leftMargin:I
 
-    .line 290
+    .line 305
     invoke-virtual {v5, v7, v8}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 291
+    .line 306
     invoke-direct {v0}, Lmodmenu/BetterInput;->wrap()Landroid/widget/LinearLayout$LayoutParams;
 
     move-result-object v7
@@ -1275,19 +1301,19 @@
 
     move-result-object v7
 
-    .line 292
+    .line 307
     invoke-direct {v0, v13}, Lmodmenu/BetterInput;->dp(I)I
 
     move-result v8
 
     iput v8, v7, Landroid/widget/LinearLayout$LayoutParams;->topMargin:I
 
-    .line 293
+    .line 308
     iget-object v8, v0, Lmodmenu/BetterInput;->colorPanel:Landroid/widget/LinearLayout;
 
     invoke-virtual {v8, v5, v7}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 294
+    .line 309
     iget-object v5, v0, Lmodmenu/BetterInput;->colorPanel:Landroid/widget/LinearLayout;
 
     invoke-direct {v0}, Lmodmenu/BetterInput;->wrap()Landroid/widget/LinearLayout$LayoutParams;
@@ -1300,28 +1326,28 @@
 
     invoke-virtual {v4, v5, v7}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 296
+    .line 311
     new-instance v5, Landroid/widget/TextView;
 
     invoke-direct {v5, v1}, Landroid/widget/TextView;-><init>(Landroid/content/Context;)V
 
     iput-object v5, v0, Lmodmenu/BetterInput;->counter:Landroid/widget/TextView;
 
-    .line 297
+    .line 312
     iget-object v5, v0, Lmodmenu/BetterInput;->counter:Landroid/widget/TextView;
 
     const/high16 v7, 0x41400000    # 12.0f
 
     invoke-virtual {v5, v7}, Landroid/widget/TextView;->setTextSize(F)V
 
-    .line 298
+    .line 313
     iget-object v5, v0, Lmodmenu/BetterInput;->counter:Landroid/widget/TextView;
 
     iget v7, v2, Lmodmenu/Palette;->onSurfaceVariant:I
 
     invoke-virtual {v5, v7}, Landroid/widget/TextView;->setTextColor(I)V
 
-    .line 299
+    .line 314
     invoke-direct {v0}, Lmodmenu/BetterInput;->wrap()Landroid/widget/LinearLayout$LayoutParams;
 
     move-result-object v5
@@ -1330,27 +1356,27 @@
 
     move-result-object v5
 
-    .line 300
+    .line 315
     invoke-direct {v0, v12}, Lmodmenu/BetterInput;->dp(I)I
 
     move-result v7
 
     iput v7, v5, Landroid/widget/LinearLayout$LayoutParams;->topMargin:I
 
-    .line 301
+    .line 316
     iget-object v7, v0, Lmodmenu/BetterInput;->counter:Landroid/widget/TextView;
 
     invoke-virtual {v4, v7, v5}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 303
+    .line 318
     new-instance v5, Landroid/widget/LinearLayout;
 
     invoke-direct {v5, v1}, Landroid/widget/LinearLayout;-><init>(Landroid/content/Context;)V
 
-    .line 304
+    .line 319
     invoke-virtual {v5, v9}, Landroid/widget/LinearLayout;->setOrientation(I)V
 
-    .line 305
+    .line 320
     const-string v7, "mod_bi_fill"
 
     invoke-static {v1, v7}, Lmodmenu/I18n;->t(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;
@@ -1363,7 +1389,7 @@
 
     iput-object v7, v0, Lmodmenu/BetterInput;->fillBtn:Landroid/widget/Button;
 
-    .line 306
+    .line 321
     iget-object v7, v0, Lmodmenu/BetterInput;->fillBtn:Landroid/widget/Button;
 
     new-instance v8, Lmodmenu/BetterInput$11;
@@ -1372,7 +1398,7 @@
 
     invoke-virtual {v7, v8}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
-    .line 312
+    .line 327
     iget-object v7, v0, Lmodmenu/BetterInput;->fillBtn:Landroid/widget/Button;
 
     invoke-direct {v0}, Lmodmenu/BetterInput;->wrap()Landroid/widget/LinearLayout$LayoutParams;
@@ -1385,7 +1411,7 @@
 
     invoke-virtual {v5, v7, v8}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 313
+    .line 328
     const-string v7, "mod_bi_send"
 
     invoke-static {v1, v7}, Lmodmenu/I18n;->t(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;
@@ -1398,14 +1424,14 @@
 
     iput-object v7, v0, Lmodmenu/BetterInput;->sendBtn:Landroid/widget/Button;
 
-    .line 314
+    .line 329
     iget-object v7, v0, Lmodmenu/BetterInput;->sendBtn:Landroid/widget/Button;
 
     iget v8, v2, Lmodmenu/Palette;->onPrimary:I
 
     invoke-virtual {v7, v8}, Landroid/widget/Button;->setTextColor(I)V
 
-    .line 315
+    .line 330
     iget-object v7, v0, Lmodmenu/BetterInput;->sendBtn:Landroid/widget/Button;
 
     const/16 v8, 0x14
@@ -1422,7 +1448,7 @@
 
     invoke-virtual {v7, v2}, Landroid/widget/Button;->setBackground(Landroid/graphics/drawable/Drawable;)V
 
-    .line 316
+    .line 331
     invoke-direct {v0}, Lmodmenu/BetterInput;->wrap()Landroid/widget/LinearLayout$LayoutParams;
 
     move-result-object v2
@@ -1431,19 +1457,19 @@
 
     move-result-object v2
 
-    .line 317
+    .line 332
     invoke-direct {v0, v13}, Lmodmenu/BetterInput;->dp(I)I
 
     move-result v7
 
     iput v7, v2, Landroid/widget/LinearLayout$LayoutParams;->leftMargin:I
 
-    .line 318
+    .line 333
     iget-object v7, v0, Lmodmenu/BetterInput;->sendBtn:Landroid/widget/Button;
 
     invoke-virtual {v5, v7, v2}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 319
+    .line 334
     iget-object v2, v0, Lmodmenu/BetterInput;->sendBtn:Landroid/widget/Button;
 
     new-instance v7, Lmodmenu/BetterInput$12;
@@ -1452,7 +1478,7 @@
 
     invoke-virtual {v2, v7}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
-    .line 325
+    .line 340
     const-string v2, "mod_close"
 
     invoke-static {v1, v2}, Lmodmenu/I18n;->t(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;
@@ -1463,14 +1489,14 @@
 
     move-result-object v2
 
-    .line 326
+    .line 341
     new-instance v7, Lmodmenu/BetterInput$13;
 
     invoke-direct {v7, v0}, Lmodmenu/BetterInput$13;-><init>(Lmodmenu/BetterInput;)V
 
     invoke-virtual {v2, v7}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
-    .line 332
+    .line 347
     invoke-direct {v0}, Lmodmenu/BetterInput;->wrap()Landroid/widget/LinearLayout$LayoutParams;
 
     move-result-object v7
@@ -1479,17 +1505,17 @@
 
     move-result-object v7
 
-    .line 333
+    .line 348
     invoke-direct {v0, v13}, Lmodmenu/BetterInput;->dp(I)I
 
     move-result v8
 
     iput v8, v7, Landroid/widget/LinearLayout$LayoutParams;->leftMargin:I
 
-    .line 334
+    .line 349
     invoke-virtual {v5, v2, v7}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 335
+    .line 350
     invoke-direct {v0}, Lmodmenu/BetterInput;->wrap()Landroid/widget/LinearLayout$LayoutParams;
 
     move-result-object v2
@@ -1498,17 +1524,17 @@
 
     move-result-object v2
 
-    .line 336
+    .line 351
     invoke-direct {v0, v10}, Lmodmenu/BetterInput;->dp(I)I
 
     move-result v7
 
     iput v7, v2, Landroid/widget/LinearLayout$LayoutParams;->topMargin:I
 
-    .line 337
+    .line 352
     invoke-virtual {v4, v5, v2}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 339
+    .line 354
     iget-object v2, v0, Lmodmenu/BetterInput;->input:Landroid/widget/EditText;
 
     new-instance v5, Lmodmenu/BetterInput$14;
@@ -1517,7 +1543,7 @@
 
     invoke-virtual {v2, v5}, Landroid/widget/EditText;->addTextChangedListener(Landroid/text/TextWatcher;)V
 
-    .line 354
+    .line 369
     iget-object v2, v0, Lmodmenu/BetterInput;->dialog:Landroid/app/Dialog;
 
     invoke-virtual {v2}, Landroid/app/Dialog;->getWindow()Landroid/view/Window;
@@ -1526,27 +1552,27 @@
 
     invoke-virtual {v2, v3, v3}, Landroid/view/Window;->setLayout(II)V
 
-    .line 356
+    .line 371
     new-instance v2, Landroid/widget/FrameLayout;
 
     invoke-direct {v2, v1}, Landroid/widget/FrameLayout;-><init>(Landroid/content/Context;)V
 
-    .line 357
+    .line 372
     new-instance v5, Lmodmenu/BetterInput$15;
 
     invoke-direct {v5, v0}, Lmodmenu/BetterInput$15;-><init>(Lmodmenu/BetterInput;)V
 
     invoke-virtual {v2, v5}, Landroid/widget/FrameLayout;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
-    .line 363
+    .line 378
     new-instance v5, Landroid/widget/ScrollView;
 
     invoke-direct {v5, v1}, Landroid/widget/ScrollView;-><init>(Landroid/content/Context;)V
 
-    .line 364
+    .line 379
     invoke-virtual {v5, v9}, Landroid/widget/ScrollView;->setVerticalScrollBarEnabled(Z)V
 
-    .line 365
+    .line 380
     new-instance v1, Landroid/widget/FrameLayout$LayoutParams;
 
     const/4 v7, -0x2
@@ -1555,15 +1581,15 @@
 
     invoke-virtual {v5, v4, v1}, Landroid/widget/ScrollView;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 368
+    .line 383
     new-instance v1, Landroid/widget/FrameLayout$LayoutParams;
 
     invoke-direct {v1, v3, v7}, Landroid/widget/FrameLayout$LayoutParams;-><init>(II)V
 
-    .line 371
+    .line 386
     iput v6, v1, Landroid/widget/FrameLayout$LayoutParams;->gravity:I
 
-    .line 372
+    .line 387
     const/16 v3, 0x10
 
     invoke-direct {v0, v3}, Lmodmenu/BetterInput;->dp(I)I
@@ -1572,22 +1598,22 @@
 
     iput v4, v1, Landroid/widget/FrameLayout$LayoutParams;->leftMargin:I
 
-    .line 373
+    .line 388
     invoke-direct {v0, v3}, Lmodmenu/BetterInput;->dp(I)I
 
     move-result v3
 
     iput v3, v1, Landroid/widget/FrameLayout$LayoutParams;->rightMargin:I
 
-    .line 374
+    .line 389
     invoke-virtual {v2, v5, v1}, Landroid/widget/FrameLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 375
+    .line 390
     iget-object v1, v0, Lmodmenu/BetterInput;->dialog:Landroid/app/Dialog;
 
     invoke-virtual {v1, v2}, Landroid/app/Dialog;->setContentView(Landroid/view/View;)V
 
-    .line 376
+    .line 391
     iget-object v1, v0, Lmodmenu/BetterInput;->dialog:Landroid/app/Dialog;
 
     new-instance v2, Lmodmenu/BetterInput$16;
@@ -1596,22 +1622,22 @@
 
     invoke-virtual {v1, v2}, Landroid/app/Dialog;->setOnDismissListener(Landroid/content/DialogInterface$OnDismissListener;)V
 
-    .line 385
+    .line 400
     invoke-direct {v0}, Lmodmenu/BetterInput;->renderPreview()V
 
-    .line 386
+    .line 401
     iget-object v1, v0, Lmodmenu/BetterInput;->dialog:Landroid/app/Dialog;
 
     invoke-virtual {v1}, Landroid/app/Dialog;->show()V
 
-    .line 387
+    .line 402
     return-void
 .end method
 
 .method static synthetic access$000(Lmodmenu/BetterInput;Ljava/lang/String;)V
     .locals 0
 
-    .line 65
+    .line 66
     invoke-direct {p0, p1}, Lmodmenu/BetterInput;->insert(Ljava/lang/String;)V
 
     return-void
@@ -1620,7 +1646,7 @@
 .method static synthetic access$100(Lmodmenu/BetterInput;)Landroid/widget/LinearLayout;
     .locals 0
 
-    .line 65
+    .line 66
     iget-object p0, p0, Lmodmenu/BetterInput;->colorPanel:Landroid/widget/LinearLayout;
 
     return-object p0
@@ -1629,7 +1655,7 @@
 .method static synthetic access$1000(Lmodmenu/BetterInput;)V
     .locals 0
 
-    .line 65
+    .line 66
     invoke-direct {p0}, Lmodmenu/BetterInput;->renderPreview()V
 
     return-void
@@ -1638,7 +1664,7 @@
 .method static synthetic access$1100(Lmodmenu/BetterInput;)Landroid/animation/ValueAnimator;
     .locals 0
 
-    .line 65
+    .line 66
     iget-object p0, p0, Lmodmenu/BetterInput;->blinkAnim:Landroid/animation/ValueAnimator;
 
     return-object p0
@@ -1647,7 +1673,7 @@
 .method static synthetic access$1102(Lmodmenu/BetterInput;Landroid/animation/ValueAnimator;)Landroid/animation/ValueAnimator;
     .locals 0
 
-    .line 65
+    .line 66
     iput-object p1, p0, Lmodmenu/BetterInput;->blinkAnim:Landroid/animation/ValueAnimator;
 
     return-object p1
@@ -1656,7 +1682,7 @@
 .method static synthetic access$1200(Lmodmenu/BetterInput;)Landroid/app/Activity;
     .locals 0
 
-    .line 65
+    .line 66
     iget-object p0, p0, Lmodmenu/BetterInput;->host:Landroid/app/Activity;
 
     return-object p0
@@ -1665,7 +1691,7 @@
 .method static synthetic access$1300(Lmodmenu/BetterInput;I)I
     .locals 0
 
-    .line 65
+    .line 66
     invoke-direct {p0, p1}, Lmodmenu/BetterInput;->dp(I)I
 
     move-result p0
@@ -1676,7 +1702,7 @@
 .method static synthetic access$1400(Lmodmenu/BetterInput;)Lmodmenu/Palette;
     .locals 0
 
-    .line 65
+    .line 66
     iget-object p0, p0, Lmodmenu/BetterInput;->p:Lmodmenu/Palette;
 
     return-object p0
@@ -1685,7 +1711,7 @@
 .method static synthetic access$1500(Lmodmenu/BetterInput;II)Landroid/graphics/drawable/GradientDrawable;
     .locals 0
 
-    .line 65
+    .line 66
     invoke-direct {p0, p1, p2}, Lmodmenu/BetterInput;->round(II)Landroid/graphics/drawable/GradientDrawable;
 
     move-result-object p0
@@ -1696,7 +1722,7 @@
 .method static synthetic access$1600(Lmodmenu/BetterInput;)Landroid/widget/LinearLayout$LayoutParams;
     .locals 0
 
-    .line 65
+    .line 66
     invoke-direct {p0}, Lmodmenu/BetterInput;->wrap()Landroid/widget/LinearLayout$LayoutParams;
 
     move-result-object p0
@@ -1707,7 +1733,7 @@
 .method static synthetic access$1700(Lmodmenu/BetterInput;Landroid/widget/LinearLayout$LayoutParams;)Landroid/widget/LinearLayout$LayoutParams;
     .locals 0
 
-    .line 65
+    .line 66
     invoke-direct {p0, p1}, Lmodmenu/BetterInput;->match(Landroid/widget/LinearLayout$LayoutParams;)Landroid/widget/LinearLayout$LayoutParams;
 
     move-result-object p0
@@ -1718,7 +1744,7 @@
 .method static synthetic access$1800()[[Ljava/lang/String;
     .locals 1
 
-    .line 65
+    .line 66
     sget-object v0, Lmodmenu/BetterInput;->EMOJI:[[Ljava/lang/String;
 
     return-object v0
@@ -1727,7 +1753,7 @@
 .method static synthetic access$1900([Ljava/lang/String;)Ljava/lang/String;
     .locals 0
 
-    .line 65
+    .line 66
     invoke-static {p0}, Lmodmenu/BetterInput;->await([Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object p0
@@ -1738,7 +1764,7 @@
 .method static synthetic access$200(Lmodmenu/BetterInput;)V
     .locals 0
 
-    .line 65
+    .line 66
     invoke-direct {p0}, Lmodmenu/BetterInput;->applyGradient()V
 
     return-void
@@ -1747,7 +1773,7 @@
 .method static synthetic access$2000(Lmodmenu/BetterInput;)Landroid/widget/Button;
     .locals 0
 
-    .line 65
+    .line 66
     iget-object p0, p0, Lmodmenu/BetterInput;->sendBtn:Landroid/widget/Button;
 
     return-object p0
@@ -1756,7 +1782,7 @@
 .method static synthetic access$2100(Lmodmenu/BetterInput;)Landroid/widget/Button;
     .locals 0
 
-    .line 65
+    .line 66
     iget-object p0, p0, Lmodmenu/BetterInput;->fillBtn:Landroid/widget/Button;
 
     return-object p0
@@ -1765,7 +1791,7 @@
 .method static synthetic access$2200(Landroid/content/Context;Ljava/lang/String;)V
     .locals 0
 
-    .line 65
+    .line 66
     invoke-static {p0, p1}, Lmodmenu/BetterInput;->toast(Landroid/content/Context;Ljava/lang/String;)V
 
     return-void
@@ -1774,7 +1800,7 @@
 .method static synthetic access$2300(Lmodmenu/BetterInput;)Landroid/widget/TextView;
     .locals 0
 
-    .line 65
+    .line 66
     iget-object p0, p0, Lmodmenu/BetterInput;->preview:Landroid/widget/TextView;
 
     return-object p0
@@ -1783,7 +1809,7 @@
 .method static synthetic access$300(Lmodmenu/BetterInput;)V
     .locals 0
 
-    .line 65
+    .line 66
     invoke-direct {p0}, Lmodmenu/BetterInput;->pickEmoji()V
 
     return-void
@@ -1792,7 +1818,7 @@
 .method static synthetic access$400(Lmodmenu/BetterInput;)Landroid/widget/TextView;
     .locals 0
 
-    .line 65
+    .line 66
     iget-object p0, p0, Lmodmenu/BetterInput;->hexView:Landroid/widget/TextView;
 
     return-object p0
@@ -1801,7 +1827,7 @@
 .method static synthetic access$500(Lmodmenu/BetterInput;)Lmodmenu/BetterInput$ColorWheelView;
     .locals 0
 
-    .line 65
+    .line 66
     iget-object p0, p0, Lmodmenu/BetterInput;->wheel:Lmodmenu/BetterInput$ColorWheelView;
 
     return-object p0
@@ -1810,7 +1836,7 @@
 .method static synthetic access$602(Lmodmenu/BetterInput;I)I
     .locals 0
 
-    .line 65
+    .line 66
     iput p1, p0, Lmodmenu/BetterInput;->colorA:I
 
     return p1
@@ -1819,7 +1845,7 @@
 .method static synthetic access$702(Lmodmenu/BetterInput;I)I
     .locals 0
 
-    .line 65
+    .line 66
     iput p1, p0, Lmodmenu/BetterInput;->colorB:I
 
     return p1
@@ -1828,7 +1854,7 @@
 .method static synthetic access$800(Lmodmenu/BetterInput;Z)V
     .locals 0
 
-    .line 65
+    .line 66
     invoke-direct {p0, p1}, Lmodmenu/BetterInput;->dispatch(Z)V
 
     return-void
@@ -1837,7 +1863,7 @@
 .method static synthetic access$900(Lmodmenu/BetterInput;)Landroid/app/Dialog;
     .locals 0
 
-    .line 65
+    .line 66
     iget-object p0, p0, Lmodmenu/BetterInput;->dialog:Landroid/app/Dialog;
 
     return-object p0
@@ -1846,7 +1872,7 @@
 .method private applyGradient()V
     .locals 21
 
-    .line 400
+    .line 415
     move-object/from16 v0, p0
 
     iget-object v1, v0, Lmodmenu/BetterInput;->input:Landroid/widget/EditText;
@@ -1855,14 +1881,14 @@
 
     move-result v1
 
-    .line 401
+    .line 416
     iget-object v2, v0, Lmodmenu/BetterInput;->input:Landroid/widget/EditText;
 
     invoke-virtual {v2}, Landroid/widget/EditText;->getSelectionEnd()I
 
     move-result v2
 
-    .line 402
+    .line 417
     const/4 v3, 0x0
 
     if-ltz v1, :cond_0
@@ -1871,11 +1897,11 @@
 
     if-ne v1, v2, :cond_1
 
-    .line 403
+    .line 418
     :cond_0
     nop
 
-    .line 404
+    .line 419
     iget-object v1, v0, Lmodmenu/BetterInput;->input:Landroid/widget/EditText;
 
     invoke-virtual {v1}, Landroid/widget/EditText;->length()I
@@ -1884,24 +1910,24 @@
 
     const/4 v1, 0x0
 
-    .line 406
+    .line 421
     :cond_1
     if-le v1, v2, :cond_2
 
-    .line 407
+    .line 422
     nop
 
-    .line 408
+    .line 423
     nop
 
-    .line 409
+    .line 424
     move/from16 v20, v2
 
     move v2, v1
 
     move/from16 v1, v20
 
-    .line 411
+    .line 426
     :cond_2
     iget-object v4, v0, Lmodmenu/BetterInput;->input:Landroid/widget/EditText;
 
@@ -1917,53 +1943,53 @@
 
     move-result-object v4
 
-    .line 412
+    .line 427
     invoke-virtual {v4}, Ljava/lang/String;->isEmpty()Z
 
     move-result v5
 
     if-eqz v5, :cond_3
 
-    .line 413
+    .line 428
     return-void
 
-    .line 415
+    .line 430
     :cond_3
     new-instance v5, Ljava/lang/StringBuilder;
 
     invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
 
-    .line 416
+    .line 431
     const/4 v6, 0x3
 
     new-array v7, v6, [F
 
-    .line 417
+    .line 432
     new-array v8, v6, [F
 
-    .line 418
+    .line 433
     iget v9, v0, Lmodmenu/BetterInput;->colorA:I
 
     invoke-static {v9, v7}, Landroid/graphics/Color;->colorToHSV(I[F)V
 
-    .line 419
+    .line 434
     iget v9, v0, Lmodmenu/BetterInput;->colorB:I
 
     invoke-static {v9, v8}, Landroid/graphics/Color;->colorToHSV(I[F)V
 
-    .line 420
+    .line 435
     invoke-virtual {v4}, Ljava/lang/String;->length()I
 
     move-result v9
 
-    .line 423
+    .line 438
     aget v10, v8, v3
 
     aget v11, v7, v3
 
     sub-float/2addr v10, v11
 
-    .line 424
+    .line 439
     const/high16 v11, 0x43340000    # 180.0f
 
     const/high16 v12, 0x43b40000    # 360.0f
@@ -1972,12 +1998,12 @@
 
     if-lez v11, :cond_4
 
-    .line 425
+    .line 440
     sub-float/2addr v10, v12
 
     goto :goto_0
 
-    .line 426
+    .line 441
     :cond_4
     const/high16 v11, -0x3ccc0000    # -180.0f
 
@@ -1985,10 +2011,10 @@
 
     if-gez v11, :cond_5
 
-    .line 427
+    .line 442
     add-float/2addr v10, v12
 
-    .line 429
+    .line 444
     :cond_5
     :goto_0
     const/4 v11, 0x0
@@ -1996,7 +2022,7 @@
     :goto_1
     if-ge v11, v9, :cond_8
 
-    .line 430
+    .line 445
     const/4 v13, 0x1
 
     if-ne v9, v13, :cond_6
@@ -2014,11 +2040,11 @@
 
     div-float/2addr v14, v15
 
-    .line 431
+    .line 446
     :goto_2
     new-array v15, v6, [F
 
-    .line 432
+    .line 447
     aget v16, v7, v3
 
     mul-float v17, v10, v14
@@ -2031,7 +2057,7 @@
 
     aput v16, v15, v3
 
-    .line 433
+    .line 448
     const/4 v3, 0x1
 
     const/16 v16, 0x0
@@ -2039,7 +2065,7 @@
     :goto_3
     if-ge v3, v6, :cond_7
 
-    .line 434
+    .line 449
     aget v17, v7, v3
 
     aget v18, v8, v3
@@ -2054,12 +2080,12 @@
 
     aput v17, v15, v3
 
-    .line 433
+    .line 448
     add-int/lit8 v3, v3, 0x1
 
     goto :goto_3
 
-    .line 436
+    .line 451
     :cond_7
     invoke-static {v15}, Landroid/graphics/Color;->HSVToColor([F)I
 
@@ -2069,7 +2095,7 @@
 
     and-int/2addr v3, v14
 
-    .line 437
+    .line 452
     sget-object v14, Ljava/util/Locale;->US:Ljava/util/Locale;
 
     invoke-static {v3}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -2090,21 +2116,21 @@
 
     move-result-object v3
 
-    .line 438
+    .line 453
     invoke-virtual {v4, v11}, Ljava/lang/String;->charAt(I)C
 
     move-result v13
 
     invoke-virtual {v3, v13}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
 
-    .line 429
+    .line 444
     add-int/lit8 v11, v11, 0x1
 
     const/4 v3, 0x0
 
     goto :goto_1
 
-    .line 440
+    .line 455
     :cond_8
     iget-object v3, v0, Lmodmenu/BetterInput;->input:Landroid/widget/EditText;
 
@@ -2118,14 +2144,14 @@
 
     invoke-interface {v3, v1, v2, v4}, Landroid/text/Editable;->replace(IILjava/lang/CharSequence;)Landroid/text/Editable;
 
-    .line 441
+    .line 456
     return-void
 .end method
 
 .method private static await([Ljava/lang/String;)Ljava/lang/String;
     .locals 5
 
-    .line 616
+    .line 631
     invoke-static {}, Ljava/lang/System;->currentTimeMillis()J
 
     move-result-wide v0
@@ -2134,7 +2160,7 @@
 
     add-long/2addr v0, v2
 
-    .line 617
+    .line 632
     :goto_0
     invoke-static {}, Ljava/lang/System;->currentTimeMillis()J
 
@@ -2144,7 +2170,7 @@
 
     if-gez v4, :cond_2
 
-    .line 618
+    .line 633
     const/4 v2, 0x0
 
     :goto_1
@@ -2152,26 +2178,26 @@
 
     if-ge v2, v3, :cond_1
 
-    .line 619
+    .line 634
     aget-object v3, p0, v2
 
     invoke-static {v3}, Lmodmenu/BetterInput;->state(Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v3
 
-    .line 620
+    .line 635
     if-eqz v3, :cond_0
 
-    .line 621
+    .line 636
     return-object v3
 
-    .line 618
+    .line 633
     :cond_0
     add-int/lit8 v2, v2, 0x1
 
     goto :goto_1
 
-    .line 625
+    .line 640
     :cond_1
     const-wide/16 v2, 0x3c
 
@@ -2180,17 +2206,17 @@
     :try_end_0
     .catch Ljava/lang/InterruptedException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 628
+    .line 643
     goto :goto_0
 
-    .line 626
+    .line 641
     :catch_0
     move-exception p0
 
-    .line 627
+    .line 642
     nop
 
-    .line 630
+    .line 645
     :cond_2
     const-string p0, "timeout"
 
@@ -2200,7 +2226,7 @@
 .method private dispatch(Z)V
     .locals 6
 
-    .line 493
+    .line 508
     iget-object v0, p0, Lmodmenu/BetterInput;->input:Landroid/widget/EditText;
 
     invoke-virtual {v0}, Landroid/widget/EditText;->getText()Landroid/text/Editable;
@@ -2211,14 +2237,14 @@
 
     move-result-object v0
 
-    .line 494
+    .line 509
     invoke-virtual {v0}, Ljava/lang/String;->isEmpty()Z
 
     move-result v1
 
     if-eqz v1, :cond_0
 
-    .line 495
+    .line 510
     iget-object p1, p0, Lmodmenu/BetterInput;->host:Landroid/app/Activity;
 
     iget-object v0, p0, Lmodmenu/BetterInput;->host:Landroid/app/Activity;
@@ -2231,19 +2257,19 @@
 
     invoke-static {p1, v0}, Lmodmenu/BetterInput;->toast(Landroid/content/Context;Ljava/lang/String;)V
 
-    .line 496
+    .line 511
     return-void
 
-    .line 498
+    .line 513
     :cond_0
     invoke-direct {p0}, Lmodmenu/BetterInput;->paths()[Ljava/lang/String;
 
     move-result-object v1
 
-    .line 499
+    .line 514
     if-nez v1, :cond_1
 
-    .line 500
+    .line 515
     iget-object p1, p0, Lmodmenu/BetterInput;->host:Landroid/app/Activity;
 
     iget-object v0, p0, Lmodmenu/BetterInput;->host:Landroid/app/Activity;
@@ -2256,10 +2282,10 @@
 
     invoke-static {p1, v0}, Lmodmenu/BetterInput;->toast(Landroid/content/Context;Ljava/lang/String;)V
 
-    .line 501
+    .line 516
     return-void
 
-    .line 503
+    .line 518
     :cond_1
     const/4 v2, 0x0
 
@@ -2270,7 +2296,7 @@
 
     if-ge v3, v4, :cond_2
 
-    .line 504
+    .line 519
     new-instance v4, Ljava/io/File;
 
     aget-object v5, v1, v3
@@ -2279,23 +2305,23 @@
 
     invoke-virtual {v4}, Ljava/io/File;->delete()Z
 
-    .line 503
+    .line 518
     add-int/lit8 v3, v3, 0x1
 
     goto :goto_0
 
-    .line 506
+    .line 521
     :cond_2
     iget-object v3, p0, Lmodmenu/BetterInput;->sendBtn:Landroid/widget/Button;
 
     invoke-virtual {v3, v2}, Landroid/widget/Button;->setEnabled(Z)V
 
-    .line 507
+    .line 522
     iget-object v3, p0, Lmodmenu/BetterInput;->fillBtn:Landroid/widget/Button;
 
     invoke-virtual {v3, v2}, Landroid/widget/Button;->setEnabled(Z)V
 
-    .line 509
+    .line 524
     const/4 v3, 0x1
 
     :try_start_0
@@ -2313,17 +2339,17 @@
     :try_end_0
     .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 516
+    .line 531
     nop
 
-    .line 517
+    .line 532
     iget-object v0, p0, Lmodmenu/BetterInput;->host:Landroid/app/Activity;
 
     invoke-virtual {v0}, Landroid/app/Activity;->getApplicationContext()Landroid/content/Context;
 
     move-result-object v0
 
-    .line 518
+    .line 533
     new-instance v2, Ljava/lang/Thread;
 
     new-instance v3, Lmodmenu/BetterInput$18;
@@ -2334,41 +2360,41 @@
 
     invoke-direct {v2, v3, p1}, Ljava/lang/Thread;-><init>(Ljava/lang/Runnable;Ljava/lang/String;)V
 
-    .line 540
+    .line 555
     invoke-virtual {v2}, Ljava/lang/Thread;->start()V
 
-    .line 541
+    .line 556
     return-void
 
-    .line 511
+    .line 526
     :catch_0
     move-exception p1
 
-    .line 512
+    .line 527
     const-string v0, "ModMenu"
 
     const-string v1, "better input dispatch failed"
 
     invoke-static {v0, v1, p1}, Lmodmenu/MwLog;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V
 
-    .line 513
+    .line 528
     iget-object p1, p0, Lmodmenu/BetterInput;->sendBtn:Landroid/widget/Button;
 
     invoke-virtual {p1, v3}, Landroid/widget/Button;->setEnabled(Z)V
 
-    .line 514
+    .line 529
     iget-object p1, p0, Lmodmenu/BetterInput;->fillBtn:Landroid/widget/Button;
 
     invoke-virtual {p1, v3}, Landroid/widget/Button;->setEnabled(Z)V
 
-    .line 515
+    .line 530
     return-void
 .end method
 
 .method private dp(I)I
     .locals 1
 
-    .line 808
+    .line 823
     int-to-float p1, p1
 
     iget-object v0, p0, Lmodmenu/BetterInput;->host:Landroid/app/Activity;
@@ -2397,7 +2423,7 @@
 .method private static emojiName(I)Ljava/lang/String;
     .locals 3
 
-    .line 743
+    .line 758
     const/4 v0, 0x0
 
     const/4 v1, 0x0
@@ -2409,7 +2435,7 @@
 
     if-ge v1, v2, :cond_1
 
-    .line 744
+    .line 759
     sget-object v2, Lmodmenu/BetterInput;->EMOJI:[[Ljava/lang/String;
 
     aget-object v2, v2, v1
@@ -2422,7 +2448,7 @@
 
     if-ne v2, p0, :cond_0
 
-    .line 745
+    .line 760
     sget-object p0, Lmodmenu/BetterInput;->EMOJI:[[Ljava/lang/String;
 
     aget-object p0, p0, v1
@@ -2433,13 +2459,13 @@
 
     return-object p0
 
-    .line 743
+    .line 758
     :cond_0
     add-int/lit8 v1, v1, 0x1
 
     goto :goto_0
 
-    .line 748
+    .line 763
     :cond_1
     new-instance v0, Ljava/lang/StringBuilder;
 
@@ -2465,18 +2491,18 @@
 .method private static esc(Ljava/lang/String;)Ljava/lang/String;
     .locals 2
 
-    .line 592
+    .line 607
     if-nez p0, :cond_0
 
     const-string p0, ""
 
     goto :goto_0
 
-    .line 593
+    .line 608
     :cond_0
     nop
 
-    .line 592
+    .line 607
     const-string v0, "\\"
 
     const-string v1, "\\\\"
@@ -2493,7 +2519,7 @@
 
     move-result-object p0
 
-    .line 593
+    .line 608
     const-string v0, "\r"
 
     const-string v1, "\\r"
@@ -2510,7 +2536,7 @@
 
     move-result-object p0
 
-    .line 592
+    .line 607
     :goto_0
     return-object p0
 .end method
@@ -2518,7 +2544,7 @@
 .method private insert(Ljava/lang/String;)V
     .locals 2
 
-    .line 390
+    .line 405
     iget-object v0, p0, Lmodmenu/BetterInput;->input:Landroid/widget/EditText;
 
     invoke-virtual {v0}, Landroid/widget/EditText;->getSelectionStart()I
@@ -2541,7 +2567,7 @@
 
     move-result v0
 
-    .line 391
+    .line 406
     iget-object v1, p0, Lmodmenu/BetterInput;->input:Landroid/widget/EditText;
 
     invoke-virtual {v1}, Landroid/widget/EditText;->getText()Landroid/text/Editable;
@@ -2550,26 +2576,26 @@
 
     invoke-interface {v1, v0, p1}, Landroid/text/Editable;->insert(ILjava/lang/CharSequence;)Landroid/text/Editable;
 
-    .line 392
+    .line 407
     return-void
 .end method
 
 .method private match(Landroid/widget/LinearLayout$LayoutParams;)Landroid/widget/LinearLayout$LayoutParams;
     .locals 1
 
-    .line 797
+    .line 812
     const/4 v0, -0x1
 
     iput v0, p1, Landroid/widget/LinearLayout$LayoutParams;->width:I
 
-    .line 798
+    .line 813
     return-object p1
 .end method
 
 .method private static parseDec(Ljava/lang/String;)I
     .locals 0
 
-    .line 761
+    .line 776
     :try_start_0
     invoke-static {p0}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
 
@@ -2579,11 +2605,11 @@
 
     return p0
 
-    .line 762
+    .line 777
     :catch_0
     move-exception p0
 
-    .line 763
+    .line 778
     const/4 p0, -0x1
 
     return p0
@@ -2592,7 +2618,7 @@
 .method private static parseHex(Ljava/lang/String;)I
     .locals 2
 
-    .line 753
+    .line 768
     const/16 v0, 0x10
 
     :try_start_0
@@ -2606,11 +2632,11 @@
 
     return p0
 
-    .line 754
+    .line 769
     :catch_0
     move-exception p0
 
-    .line 755
+    .line 770
     const/4 p0, -0x1
 
     return p0
@@ -2619,7 +2645,7 @@
 .method private paths()[Ljava/lang/String;
     .locals 5
 
-    .line 599
+    .line 614
     const-string v0, "mw_bi.json"
 
     const/4 v1, 0x0
@@ -2631,13 +2657,13 @@
 
     move-result-object v2
 
-    .line 600
+    .line 615
     if-nez v2, :cond_0
 
-    .line 601
+    .line 616
     return-object v1
 
-    .line 603
+    .line 618
     :cond_0
     new-instance v3, Ljava/io/File;
 
@@ -2647,24 +2673,24 @@
 
     move-result-object v2
 
-    .line 604
+    .line 619
     iget-object v3, p0, Lmodmenu/BetterInput;->host:Landroid/app/Activity;
 
     invoke-virtual {v3, v1}, Landroid/app/Activity;->getExternalFilesDir(Ljava/lang/String;)Ljava/io/File;
 
     move-result-object v3
 
-    .line 605
+    .line 620
     if-nez v3, :cond_1
 
-    .line 606
+    .line 621
     filled-new-array {v2, v2}, [Ljava/lang/String;
 
     move-result-object v0
 
     return-object v0
 
-    .line 608
+    .line 623
     :cond_1
     new-instance v4, Ljava/io/File;
 
@@ -2682,32 +2708,32 @@
 
     return-object v0
 
-    .line 609
+    .line 624
     :catch_0
     move-exception v0
 
-    .line 610
+    .line 625
     const-string v2, "ModMenu"
 
     const-string v3, "paths failed"
 
     invoke-static {v2, v3, v0}, Lmodmenu/MwLog;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V
 
-    .line 611
+    .line 626
     return-object v1
 .end method
 
 .method private pickEmoji()V
     .locals 6
 
-    .line 444
+    .line 459
     sget-object v0, Lmodmenu/BetterInput;->EMOJI:[[Ljava/lang/String;
 
     array-length v0, v0
 
     new-array v0, v0, [Ljava/lang/String;
 
-    .line 445
+    .line 460
     const/4 v1, 0x0
 
     const/4 v2, 0x0
@@ -2719,7 +2745,7 @@
 
     if-ge v2, v3, :cond_0
 
-    .line 446
+    .line 461
     new-instance v3, Ljava/lang/StringBuilder;
 
     invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
@@ -2764,12 +2790,12 @@
 
     aput-object v3, v0, v2
 
-    .line 445
+    .line 460
     add-int/lit8 v2, v2, 0x1
 
     goto :goto_0
 
-    .line 448
+    .line 463
     :cond_0
     new-instance v1, Lmodmenu/BetterInput$17;
 
@@ -2779,55 +2805,55 @@
 
     invoke-direct {v1, p0, v2, v3, v0}, Lmodmenu/BetterInput$17;-><init>(Lmodmenu/BetterInput;Landroid/content/Context;I[Ljava/lang/String;)V
 
-    .line 483
+    .line 498
     invoke-virtual {v1}, Lmodmenu/BetterInput$17;->show()V
 
-    .line 484
+    .line 499
     return-void
 .end method
 
 .method private pill(Ljava/lang/String;)Landroid/widget/Button;
     .locals 3
 
-    .line 776
+    .line 791
     new-instance v0, Landroid/widget/Button;
 
     iget-object v1, p0, Lmodmenu/BetterInput;->host:Landroid/app/Activity;
 
     invoke-direct {v0, v1}, Landroid/widget/Button;-><init>(Landroid/content/Context;)V
 
-    .line 777
+    .line 792
     invoke-virtual {v0, p1}, Landroid/widget/Button;->setText(Ljava/lang/CharSequence;)V
 
-    .line 778
+    .line 793
     const/4 p1, 0x0
 
     invoke-virtual {v0, p1}, Landroid/widget/Button;->setAllCaps(Z)V
 
-    .line 779
+    .line 794
     const/high16 v1, 0x41500000    # 13.0f
 
     invoke-virtual {v0, v1}, Landroid/widget/Button;->setTextSize(F)V
 
-    .line 780
+    .line 795
     iget-object v1, p0, Lmodmenu/BetterInput;->p:Lmodmenu/Palette;
 
     iget v1, v1, Lmodmenu/Palette;->onSurface:I
 
     invoke-virtual {v0, v1}, Landroid/widget/Button;->setTextColor(I)V
 
-    .line 781
+    .line 796
     const/16 v1, 0x11
 
     invoke-virtual {v0, v1}, Landroid/widget/Button;->setGravity(I)V
 
-    .line 782
+    .line 797
     invoke-virtual {v0, p1}, Landroid/widget/Button;->setMinHeight(I)V
 
-    .line 783
+    .line 798
     invoke-virtual {v0, p1}, Landroid/widget/Button;->setMinWidth(I)V
 
-    .line 784
+    .line 799
     const/16 v1, 0xe
 
     invoke-direct {p0, v1}, Lmodmenu/BetterInput;->dp(I)I
@@ -2840,7 +2866,7 @@
 
     invoke-virtual {v0, v2, p1, v1, p1}, Landroid/widget/Button;->setPadding(IIII)V
 
-    .line 785
+    .line 800
     const/16 p1, 0x12
 
     invoke-direct {p0, p1}, Lmodmenu/BetterInput;->dp(I)I
@@ -2855,14 +2881,14 @@
 
     invoke-virtual {v0, p1}, Landroid/widget/Button;->setBackground(Landroid/graphics/drawable/Drawable;)V
 
-    .line 786
+    .line 801
     return-object v0
 .end method
 
 .method private renderPreview()V
     .locals 13
 
-    .line 664
+    .line 679
     iget-object v0, p0, Lmodmenu/BetterInput;->input:Landroid/widget/EditText;
 
     invoke-virtual {v0}, Landroid/widget/EditText;->getText()Landroid/text/Editable;
@@ -2873,18 +2899,18 @@
 
     move-result-object v0
 
-    .line 665
+    .line 680
     new-instance v1, Landroid/text/SpannableStringBuilder;
 
     invoke-direct {v1}, Landroid/text/SpannableStringBuilder;-><init>()V
 
-    .line 666
+    .line 681
     nop
 
-    .line 667
+    .line 682
     nop
 
-    .line 668
+    .line 683
     const/4 v2, -0x1
 
     const/4 v3, 0x0
@@ -2895,7 +2921,7 @@
 
     const/4 v6, -0x1
 
-    .line 669
+    .line 684
     :goto_0
     invoke-virtual {v0}, Ljava/lang/String;->length()I
 
@@ -2903,12 +2929,12 @@
 
     if-ge v4, v7, :cond_c
 
-    .line 670
+    .line 685
     invoke-virtual {v0, v4}, Ljava/lang/String;->charAt(I)C
 
     move-result v7
 
-    .line 671
+    .line 686
     const/16 v8, 0x23
 
     const/16 v9, 0x21
@@ -2923,12 +2949,12 @@
 
     if-ge v8, v10, :cond_b
 
-    .line 672
+    .line 687
     invoke-virtual {v0, v8}, Ljava/lang/String;->charAt(I)C
 
     move-result v8
 
-    .line 673
+    .line 688
     const/16 v10, 0x63
 
     const/high16 v11, -0x1000000
@@ -2948,7 +2974,7 @@
 
     if-gt v10, v12, :cond_2
 
-    .line 674
+    .line 689
     add-int/lit8 v8, v4, 0x2
 
     invoke-virtual {v0, v8, v10}, Ljava/lang/String;->substring(II)Ljava/lang/String;
@@ -2959,21 +2985,21 @@
 
     move-result v8
 
-    .line 675
+    .line 690
     if-ltz v8, :cond_1
 
-    .line 676
+    .line 691
     or-int v6, v8, v11
 
-    .line 677
+    .line 692
     nop
 
-    .line 678
+    .line 693
     move v4, v10
 
     goto :goto_0
 
-    .line 680
+    .line 695
     :cond_1
     goto/16 :goto_4
 
@@ -2988,7 +3014,7 @@
 
     goto/16 :goto_3
 
-    .line 684
+    .line 699
     :cond_3
     const/16 v10, 0x62
 
@@ -3000,7 +3026,7 @@
 
     goto :goto_2
 
-    .line 690
+    .line 705
     :cond_4
     const/16 v10, 0x41
 
@@ -3012,7 +3038,7 @@
 
     goto :goto_1
 
-    .line 703
+    .line 718
     :cond_5
     const-string v10, "RGBKYW"
 
@@ -3020,10 +3046,10 @@
 
     move-result v8
 
-    .line 704
+    .line 719
     if-ltz v8, :cond_b
 
-    .line 705
+    .line 720
     sget-object v6, Lmodmenu/BetterInput;->SHORT_COLORS:[I
 
     aget v6, v6, v8
@@ -3034,20 +3060,20 @@
 
     or-int/2addr v6, v11
 
-    .line 706
+    .line 721
     add-int/lit8 v4, v4, 0x2
 
-    .line 707
+    .line 722
     goto :goto_0
 
-    .line 691
+    .line 706
     :cond_6
     :goto_1
     add-int/lit8 v8, v4, 0x2
 
     add-int/lit8 v10, v4, 0x5
 
-    .line 692
+    .line 707
     invoke-virtual {v0}, Ljava/lang/String;->length()I
 
     move-result v11
@@ -3056,7 +3082,7 @@
 
     move-result v11
 
-    .line 691
+    .line 706
     invoke-virtual {v0, v8, v11}, Ljava/lang/String;->substring(II)Ljava/lang/String;
 
     move-result-object v8
@@ -3065,7 +3091,7 @@
 
     move-result v8
 
-    .line 693
+    .line 708
     if-lez v8, :cond_7
 
     invoke-virtual {v0}, Ljava/lang/String;->length()I
@@ -3074,12 +3100,12 @@
 
     if-gt v10, v11, :cond_7
 
-    .line 694
+    .line 709
     invoke-static {v8}, Lmodmenu/BetterInput;->emojiName(I)Ljava/lang/String;
 
     move-result-object v4
 
-    .line 695
+    .line 710
     const/16 v7, 0x5b
 
     invoke-virtual {v1, v7}, Landroid/text/SpannableStringBuilder;->append(C)Landroid/text/SpannableStringBuilder;
@@ -3094,12 +3120,12 @@
 
     invoke-virtual {v7, v8}, Landroid/text/SpannableStringBuilder;->append(C)Landroid/text/SpannableStringBuilder;
 
-    .line 696
+    .line 711
     new-instance v7, Landroid/text/style/ForegroundColorSpan;
 
     invoke-direct {v7, v6}, Landroid/text/style/ForegroundColorSpan;-><init>(I)V
 
-    .line 697
+    .line 712
     invoke-virtual {v1}, Landroid/text/SpannableStringBuilder;->length()I
 
     move-result v8
@@ -3116,62 +3142,62 @@
 
     move-result v4
 
-    .line 696
+    .line 711
     invoke-virtual {v1, v7, v8, v4, v9}, Landroid/text/SpannableStringBuilder;->setSpan(Ljava/lang/Object;III)V
 
-    .line 699
+    .line 714
     nop
 
-    .line 700
+    .line 715
     move v4, v10
 
     goto/16 :goto_0
 
-    .line 702
+    .line 717
     :cond_7
     goto :goto_4
 
-    .line 685
+    .line 700
     :cond_8
     :goto_2
     if-gez v5, :cond_9
 
-    .line 686
+    .line 701
     invoke-virtual {v1}, Landroid/text/SpannableStringBuilder;->length()I
 
     move-result v5
 
-    .line 688
+    .line 703
     :cond_9
     add-int/lit8 v4, v4, 0x2
 
-    .line 689
+    .line 704
     goto/16 :goto_0
 
-    .line 681
+    .line 696
     :cond_a
     :goto_3
     const/16 v7, 0xa
 
     invoke-virtual {v1, v7}, Landroid/text/SpannableStringBuilder;->append(C)Landroid/text/SpannableStringBuilder;
 
-    .line 682
+    .line 697
     add-int/lit8 v4, v4, 0x2
 
-    .line 683
+    .line 698
     goto/16 :goto_0
 
-    .line 711
+    .line 726
     :cond_b
     :goto_4
     invoke-virtual {v1}, Landroid/text/SpannableStringBuilder;->length()I
 
     move-result v8
 
-    .line 712
+    .line 727
     invoke-virtual {v1, v7}, Landroid/text/SpannableStringBuilder;->append(C)Landroid/text/SpannableStringBuilder;
 
-    .line 713
+    .line 728
     new-instance v7, Landroid/text/style/ForegroundColorSpan;
 
     invoke-direct {v7, v6}, Landroid/text/style/ForegroundColorSpan;-><init>(I)V
@@ -3182,19 +3208,19 @@
 
     invoke-virtual {v1, v7, v8, v10, v9}, Landroid/text/SpannableStringBuilder;->setSpan(Ljava/lang/Object;III)V
 
-    .line 715
+    .line 730
     add-int/lit8 v4, v4, 0x1
 
-    .line 716
+    .line 731
     goto/16 :goto_0
 
-    .line 717
+    .line 732
     :cond_c
     iget-object v4, p0, Lmodmenu/BetterInput;->preview:Landroid/widget/TextView;
 
     invoke-virtual {v4, v1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    .line 718
+    .line 733
     iget-object v1, p0, Lmodmenu/BetterInput;->counter:Landroid/widget/TextView;
 
     iget-object v4, p0, Lmodmenu/BetterInput;->host:Landroid/app/Activity;
@@ -3225,19 +3251,19 @@
 
     invoke-virtual {v1, v0}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    .line 719
+    .line 734
     nop
 
-    .line 735
+    .line 750
     iget-object v0, p0, Lmodmenu/BetterInput;->blinkAnim:Landroid/animation/ValueAnimator;
 
-    .line 719
+    .line 734
     if-ltz v5, :cond_d
 
-    .line 720
+    .line 735
     if-nez v0, :cond_e
 
-    .line 721
+    .line 736
     const/16 v0, 0x50
 
     const/16 v1, 0xff
@@ -3252,19 +3278,19 @@
 
     iput-object v0, p0, Lmodmenu/BetterInput;->blinkAnim:Landroid/animation/ValueAnimator;
 
-    .line 722
+    .line 737
     iget-object v0, p0, Lmodmenu/BetterInput;->blinkAnim:Landroid/animation/ValueAnimator;
 
     const-wide/16 v3, 0x578
 
     invoke-virtual {v0, v3, v4}, Landroid/animation/ValueAnimator;->setDuration(J)Landroid/animation/ValueAnimator;
 
-    .line 723
+    .line 738
     iget-object v0, p0, Lmodmenu/BetterInput;->blinkAnim:Landroid/animation/ValueAnimator;
 
     invoke-virtual {v0, v2}, Landroid/animation/ValueAnimator;->setRepeatCount(I)V
 
-    .line 724
+    .line 739
     iget-object v0, p0, Lmodmenu/BetterInput;->blinkAnim:Landroid/animation/ValueAnimator;
 
     new-instance v1, Lmodmenu/BetterInput$19;
@@ -3273,35 +3299,35 @@
 
     invoke-virtual {v0, v1}, Landroid/animation/ValueAnimator;->addUpdateListener(Landroid/animation/ValueAnimator$AnimatorUpdateListener;)V
 
-    .line 733
+    .line 748
     iget-object v0, p0, Lmodmenu/BetterInput;->blinkAnim:Landroid/animation/ValueAnimator;
 
     invoke-virtual {v0}, Landroid/animation/ValueAnimator;->start()V
 
     goto :goto_5
 
-    .line 735
+    .line 750
     :cond_d
     if-eqz v0, :cond_e
 
-    .line 736
+    .line 751
     iget-object v0, p0, Lmodmenu/BetterInput;->blinkAnim:Landroid/animation/ValueAnimator;
 
     invoke-virtual {v0}, Landroid/animation/ValueAnimator;->cancel()V
 
-    .line 737
+    .line 752
     const/4 v0, 0x0
 
     iput-object v0, p0, Lmodmenu/BetterInput;->blinkAnim:Landroid/animation/ValueAnimator;
 
-    .line 738
+    .line 753
     iget-object v0, p0, Lmodmenu/BetterInput;->preview:Landroid/widget/TextView;
 
     const/high16 v1, 0x3f800000    # 1.0f
 
     invoke-virtual {v0, v1}, Landroid/widget/TextView;->setAlpha(F)V
 
-    .line 740
+    .line 755
     :cond_e
     :goto_5
     return-void
@@ -3310,27 +3336,27 @@
 .method private round(II)Landroid/graphics/drawable/GradientDrawable;
     .locals 1
 
-    .line 790
+    .line 805
     new-instance v0, Landroid/graphics/drawable/GradientDrawable;
 
     invoke-direct {v0}, Landroid/graphics/drawable/GradientDrawable;-><init>()V
 
-    .line 791
+    .line 806
     invoke-virtual {v0, p2}, Landroid/graphics/drawable/GradientDrawable;->setColor(I)V
 
-    .line 792
+    .line 807
     int-to-float p1, p1
 
     invoke-virtual {v0, p1}, Landroid/graphics/drawable/GradientDrawable;->setCornerRadius(F)V
 
-    .line 793
+    .line 808
     return-object v0
 .end method
 
 .method private static script(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Z)Ljava/lang/String;
     .locals 2
 
-    .line 554
+    .line 569
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -3341,7 +3367,7 @@
 
     move-result-object v0
 
-    .line 555
+    .line 570
     invoke-static {p0}, Lmodmenu/BetterInput;->esc(Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object p0
@@ -3356,7 +3382,7 @@
 
     move-result-object p0
 
-    .line 556
+    .line 571
     invoke-static {p1}, Lmodmenu/BetterInput;->esc(Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object p1
@@ -3371,7 +3397,7 @@
 
     move-result-object p0
 
-    .line 563
+    .line 578
     invoke-static {p2}, Lmodmenu/BetterInput;->esc(Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object p1
@@ -3386,7 +3412,7 @@
 
     move-result-object p0
 
-    .line 573
+    .line 588
     const-string p1, ""
 
     if-eqz p3, :cond_0
@@ -3409,14 +3435,14 @@
 
     move-result-object p0
 
-    .line 576
+    .line 591
     if-eqz p3, :cond_1
 
     const-string p1, " if not ok then ok,err=pcall(function() if CurMainPlayer and CurMainPlayer.onInputContent then CurMainPlayer:onInputContent(t) end SpamPreventionPresenter:requestSendChat(ReplaceFilterString(t),\'NewInputContent\') w(\'{\"r\":\"ok\"}\') end) end"
 
     goto :goto_1
 
-    .line 582
+    .line 597
     :cond_1
     nop
 
@@ -3435,26 +3461,71 @@
 
     move-result-object p0
 
-    .line 554
+    .line 569
     return-object p0
 .end method
 
 .method static show(Landroid/app/Activity;Lmodmenu/Palette;)V
     .locals 1
 
-    .line 117
+    .line 122
+    invoke-static {}, Lmodmenu/BetterInput;->showing()Z
+
+    move-result v0
+
+    if-eqz v0, :cond_0
+
+    .line 123
+    return-void
+
+    .line 125
+    :cond_0
     new-instance v0, Lmodmenu/BetterInput;
 
     invoke-direct {v0, p0, p1}, Lmodmenu/BetterInput;-><init>(Landroid/app/Activity;Lmodmenu/Palette;)V
 
-    .line 118
+    .line 126
     return-void
+.end method
+
+.method static showing()Z
+    .locals 1
+
+    .line 130
+    sget-object v0, Lmodmenu/BetterInput;->current:Ljava/lang/ref/WeakReference;
+
+    invoke-virtual {v0}, Ljava/lang/ref/WeakReference;->get()Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Lmodmenu/BetterInput;
+
+    .line 131
+    if-eqz v0, :cond_0
+
+    iget-object v0, v0, Lmodmenu/BetterInput;->dialog:Landroid/app/Dialog;
+
+    invoke-virtual {v0}, Landroid/app/Dialog;->isShowing()Z
+
+    move-result v0
+
+    if-eqz v0, :cond_0
+
+    const/4 v0, 0x1
+
+    goto :goto_0
+
+    :cond_0
+    const/4 v0, 0x0
+
+    :goto_0
+    return v0
 .end method
 
 .method private static state(Ljava/lang/String;)Ljava/lang/String;
     .locals 5
 
-    .line 637
+    .line 652
     const/4 v0, 0x0
 
     :try_start_0
@@ -3462,17 +3533,17 @@
 
     invoke-direct {v1, p0}, Ljava/io/File;-><init>(Ljava/lang/String;)V
 
-    .line 638
+    .line 653
     invoke-virtual {v1}, Ljava/io/File;->isFile()Z
 
     move-result p0
 
     if-nez p0, :cond_0
 
-    .line 639
+    .line 654
     return-object v0
 
-    .line 641
+    .line 656
     :cond_0
     new-instance p0, Ljava/io/FileInputStream;
 
@@ -3480,18 +3551,18 @@
     :try_end_0
     .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 643
+    .line 658
     :try_start_1
     new-instance v1, Ljava/io/ByteArrayOutputStream;
 
     invoke-direct {v1}, Ljava/io/ByteArrayOutputStream;-><init>()V
 
-    .line 644
+    .line 659
     const/16 v2, 0x200
 
     new-array v2, v2, [B
 
-    .line 646
+    .line 661
     :goto_0
     invoke-virtual {p0, v2}, Ljava/io/FileInputStream;->read([B)I
 
@@ -3499,14 +3570,14 @@
 
     if-lez v3, :cond_1
 
-    .line 647
+    .line 662
     const/4 v4, 0x0
 
     invoke-virtual {v1, v2, v4, v3}, Ljava/io/ByteArrayOutputStream;->write([BII)V
 
     goto :goto_0
 
-    .line 649
+    .line 664
     :cond_1
     new-instance v2, Lorg/json/JSONObject;
 
@@ -3518,7 +3589,7 @@
 
     invoke-direct {v2, v1}, Lorg/json/JSONObject;-><init>(Ljava/lang/String;)V
 
-    .line 650
+    .line 665
     const-string v1, "r"
 
     const-string v3, ""
@@ -3527,7 +3598,7 @@
 
     move-result-object v1
 
-    .line 651
+    .line 666
     invoke-virtual {v1}, Ljava/lang/String;->isEmpty()Z
 
     move-result v2
@@ -3538,37 +3609,37 @@
 
     move-object v1, v0
 
-    .line 653
+    .line 668
     :cond_2
     :try_start_2
     invoke-virtual {p0}, Ljava/io/FileInputStream;->close()V
 
-    .line 651
+    .line 666
     return-object v1
 
-    .line 653
+    .line 668
     :catchall_0
     move-exception v1
 
     invoke-virtual {p0}, Ljava/io/FileInputStream;->close()V
 
-    .line 654
+    .line 669
     throw v1
     :try_end_2
     .catch Ljava/lang/Exception; {:try_start_2 .. :try_end_2} :catch_0
 
-    .line 655
+    .line 670
     :catch_0
     move-exception p0
 
-    .line 656
+    .line 671
     return-object v0
 .end method
 
 .method private static toast(Landroid/content/Context;Ljava/lang/String;)V
     .locals 1
 
-    .line 769
+    .line 784
     const/4 v0, 0x0
 
     :try_start_0
@@ -3580,21 +3651,21 @@
     :try_end_0
     .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 772
+    .line 787
     goto :goto_0
 
-    .line 770
+    .line 785
     :catch_0
     move-exception p0
 
-    .line 771
+    .line 786
     const-string p1, "ModMenu"
 
     const-string v0, "toast failed"
 
     invoke-static {p1, v0, p0}, Lmodmenu/MwLog;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V
 
-    .line 773
+    .line 788
     :goto_0
     return-void
 .end method
@@ -3602,7 +3673,7 @@
 .method private wrap()Landroid/widget/LinearLayout$LayoutParams;
     .locals 2
 
-    .line 802
+    .line 817
     new-instance v0, Landroid/widget/LinearLayout$LayoutParams;
 
     const/4 v1, -0x2

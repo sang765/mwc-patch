@@ -43,7 +43,7 @@
         }
     .end annotation
 
-    .line 522
+    .line 537
     iput-object p1, p0, Lmodmenu/BetterInput$18$1;->this$1:Lmodmenu/BetterInput$18;
 
     iput-object p2, p0, Lmodmenu/BetterInput$18$1;->val$state:Ljava/lang/String;
@@ -58,7 +58,7 @@
 .method public run()V
     .locals 3
 
-    .line 525
+    .line 540
     iget-object v0, p0, Lmodmenu/BetterInput$18$1;->this$1:Lmodmenu/BetterInput$18;
 
     iget-object v0, v0, Lmodmenu/BetterInput$18;->this$0:Lmodmenu/BetterInput;
@@ -71,7 +71,7 @@
 
     invoke-virtual {v0, v1}, Landroid/widget/Button;->setEnabled(Z)V
 
-    .line 526
+    .line 541
     iget-object v0, p0, Lmodmenu/BetterInput$18$1;->this$1:Lmodmenu/BetterInput$18;
 
     iget-object v0, v0, Lmodmenu/BetterInput$18;->this$0:Lmodmenu/BetterInput;
@@ -82,7 +82,7 @@
 
     invoke-virtual {v0, v1}, Landroid/widget/Button;->setEnabled(Z)V
 
-    .line 528
+    .line 543
     iget-object v0, p0, Lmodmenu/BetterInput$18$1;->val$state:Ljava/lang/String;
 
     const-string v1, "ok"
@@ -91,13 +91,13 @@
 
     move-result v0
 
-    .line 531
+    .line 546
     iget-object v2, p0, Lmodmenu/BetterInput$18$1;->this$1:Lmodmenu/BetterInput$18;
 
-    .line 528
+    .line 543
     if-eqz v0, :cond_1
 
-    .line 529
+    .line 544
     iget-object v0, v2, Lmodmenu/BetterInput$18;->val$app:Landroid/content/Context;
 
     iget-object v2, p0, Lmodmenu/BetterInput$18$1;->this$1:Lmodmenu/BetterInput$18;
@@ -120,7 +120,7 @@
 
     goto :goto_1
 
-    .line 531
+    .line 546
     :cond_1
     iget-object v0, v2, Lmodmenu/BetterInput$18;->val$app:Landroid/content/Context;
 
@@ -130,7 +130,7 @@
 
     move-result-object v0
 
-    .line 533
+    .line 548
     :goto_1
     iget-object v2, p0, Lmodmenu/BetterInput$18$1;->this$1:Lmodmenu/BetterInput$18;
 
@@ -138,7 +138,7 @@
 
     invoke-static {v2, v0}, Lmodmenu/BetterInput;->access$2200(Landroid/content/Context;Ljava/lang/String;)V
 
-    .line 534
+    .line 549
     iget-object v0, p0, Lmodmenu/BetterInput$18$1;->val$state:Ljava/lang/String;
 
     invoke-virtual {v1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
@@ -147,7 +147,7 @@
 
     if-eqz v0, :cond_2
 
-    .line 535
+    .line 550
     iget-object v0, p0, Lmodmenu/BetterInput$18$1;->this$1:Lmodmenu/BetterInput$18;
 
     iget-object v0, v0, Lmodmenu/BetterInput$18;->this$0:Lmodmenu/BetterInput;
@@ -158,7 +158,7 @@
 
     invoke-virtual {v0}, Landroid/app/Dialog;->cancel()V
 
-    .line 537
+    .line 552
     :cond_2
     return-void
 .end method
