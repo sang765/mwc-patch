@@ -15,9 +15,11 @@ import java.util.Locale;
  * Every log call the mod makes goes to logcat AND to filesDir/mwlog.txt, so
  * the in-menu log viewer can show, copy and export the trail of a failed
  * notification tap or menu open on a device where reading logcat from an app
- * is denied (which is why LogFox sits on "Waiting for logs"). The appends are
- * synchronous - mod log calls are rare - and any file failure drops to
- * logcat-only rather than take the caller down.
+ * is denied (which is why LogFox sits on "Waiting for logs"). A second copy
+ * is kept in getExternalFilesDir, same name, so the trail survives a tap that
+ * could not open the viewer at all and is readable with a file manager or adb.
+ * The appends are synchronous - mod log calls are rare - and any file failure
+ * drops to logcat-only rather than take the caller down.
  */
 public final class MwLog {
 
@@ -33,6 +35,14 @@ public final class MwLog {
     private static File file;
     private static FileOutputStream out;
     private static long bytes;
+    /**
+     * The same log where a file manager can reach it, so a tap that opens
+     * nothing at all can still be diagnosed: the in-menu viewer is behind the
+     * very menu the tap failed to open. Null when external storage is absent.
+     */
+    private static File mirrorFile;
+    private static FileOutputStream mirror;
+    private static long mirrorBytes;
 
     private MwLog() {
     }
@@ -53,6 +63,20 @@ public final class MwLog {
             file = null;
             out = null;
             Log.w("ModLog", "log file unavailable", e);
+        }
+        try {
+            File ext = ctx.getApplicationContext().getExternalFilesDir(null);
+            if (ext != null) {
+                mirrorFile = new File(ext, FILE);
+                if (mirrorFile.length() > MAX_BYTES) {
+                    mirrorFile.delete();
+                }
+                mirror = new FileOutputStream(mirrorFile, true);
+                mirrorBytes = mirrorFile.length();
+            }
+        } catch (Exception e) {
+            mirrorFile = null;
+            mirror = null;
         }
     }
 
@@ -88,38 +112,63 @@ public final class MwLog {
 
     private static synchronized void append(char lvl, String tag, String msg,
             Throwable tr) {
-        if (out == null) {
+        // either copy is enough to diagnose with, so losing one keeps the
+        // other alive instead of going quiet
+        if (out == null && mirror == null) {
             return;
         }
-        try {
-            if (bytes > MAX_BYTES) {
-                out.close();
-                out = new FileOutputStream(file, false);
-                bytes = 0;
+        StringBuilder sb = new StringBuilder(96 + msg.length());
+        sb.append(STAMP.format(new Date())).append('/').append(lvl)
+                .append(' ').append(tag).append(": ").append(msg);
+        if (tr != null) {
+            String trace = Log.getStackTraceString(tr);
+            if (trace.length() > MAX_TR) {
+                trace = trace.substring(0, MAX_TR);
             }
-            StringBuilder sb = new StringBuilder(96 + msg.length());
-            sb.append(STAMP.format(new Date())).append('/').append(lvl)
-                    .append(' ').append(tag).append(": ").append(msg);
-            if (tr != null) {
-                String trace = Log.getStackTraceString(tr);
-                if (trace.length() > MAX_TR) {
-                    trace = trace.substring(0, MAX_TR);
-                }
-                sb.append('\n').append(trace);
-            }
-            sb.append('\n');
-            String line = sb.toString();
-            out.write(line.getBytes("UTF-8"));
-            out.flush();
-            bytes += line.length();
-        } catch (Exception e) {
-            // the caller must never pay for a broken log; logcat still has it
+            sb.append('\n').append(trace);
+        }
+        sb.append('\n');
+        String line = sb.toString();
+        if (out != null) {
             try {
-                out.close();
-            } catch (Exception ignored) {
+                if (bytes > MAX_BYTES) {
+                    out.close();
+                    out = new FileOutputStream(file, false);
+                    bytes = 0;
+                }
+                out.write(line.getBytes("UTF-8"));
+                out.flush();
+                bytes += line.length();
+            } catch (Exception e) {
+                // the caller must never pay for a broken log; logcat still has it
+                try {
+                    out.close();
+                } catch (Exception ignored) {
+                }
+                out = null;
+                file = null;
             }
-            out = null;
-            file = null;
+        }
+        // a dead internal file is exactly when the external copy is worth
+        // keeping, so the two writes must not share a try
+        if (mirror != null) {
+            try {
+                if (mirrorBytes > MAX_BYTES) {
+                    mirror.close();
+                    mirror = new FileOutputStream(mirrorFile, false);
+                    mirrorBytes = 0;
+                }
+                mirror.write(line.getBytes("UTF-8"));
+                mirror.flush();
+                mirrorBytes += line.length();
+            } catch (Exception e) {
+                try {
+                    mirror.close();
+                } catch (Exception ignored) {
+                }
+                mirror = null;
+                mirrorFile = null;
+            }
         }
     }
 }
