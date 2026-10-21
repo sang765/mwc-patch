@@ -33,7 +33,7 @@
         }
     .end annotation
 
-    .line 726
+    .line 725
     iput-object p1, p0, Lmodmenu/BetterInput$19;->this$0:Lmodmenu/BetterInput;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -46,14 +46,14 @@
 .method public onAnimationUpdate(Landroid/animation/ValueAnimator;)V
     .locals 2
 
-    .line 730
+    .line 729
     iget-object v0, p0, Lmodmenu/BetterInput$19;->this$0:Lmodmenu/BetterInput;
 
     invoke-static {v0}, Lmodmenu/BetterInput;->access$2300(Lmodmenu/BetterInput;)Landroid/widget/TextView;
 
     move-result-object v0
 
-    .line 731
+    .line 730
     invoke-virtual {p1}, Landroid/animation/ValueAnimator;->getAnimatedValue()Ljava/lang/Object;
 
     move-result-object p1
@@ -70,9 +70,9 @@
 
     div-float/2addr p1, v1
 
-    .line 730
+    .line 729
     invoke-virtual {v0, p1}, Landroid/widget/TextView;->setAlpha(F)V
 
-    .line 732
+    .line 731
     return-void
 .end method

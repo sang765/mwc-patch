@@ -16,7 +16,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Process;
 import android.os.SystemClock;
-import android.util.Log;
 
 import java.lang.ref.WeakReference;
 
@@ -66,6 +65,7 @@ public final class ModMenu {
     private static boolean bootRotated;
     private static boolean notifyStarted;
     private static boolean posted;
+    private static boolean deniedLogged;
     private static int retryIdx;
 
     /** Last lua->java crossing (ad polls / script heartbeat); 0 = none yet. */
@@ -78,6 +78,9 @@ public final class ModMenu {
 
     /** Injected at the head of GoogleApplication.onCreate, before any stub can run. */
     public static void onAppCreate(Context ctx) {
+        // first thing: the viewer's file has to be open before anything
+        // below can log, or the failure trail starts empty
+        MwLog.init(ctx);
         loadPrefs(ctx);
         // step the identity once per process, before any spoof stub reads it
         if (hwidAutoRotate && !bootRotated) {
@@ -123,23 +126,64 @@ public final class ModMenu {
      * The menu's content intent. Normally a broadcast: ModMenuReceiver opens
      * the sheet as a dialog on the live game window, whose activity is never
      * paused - the script loop, rendering and voice chat keep running behind
-     * the menu. Bouncing a notification tap into startActivity would also be
-     * blocked as a trampoline on Android 12+. Only when there is no live
-     * window to attach to does the old standalone activity get started, and
-     * directly by the system through getActivity, which that rule allows.
+     * the menu; the receiver re-posts through repostForActivity() when that
+     * tap finds no usable window.
      */
     static PendingIntent menuIntent(Context c, int requestCode, boolean openIds) {
-        Intent i;
-        int flags = PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE;
         if (gameActivity() != null) {
-            i = new Intent(c, ModMenuReceiver.class)
+            Intent i = new Intent(c, ModMenuReceiver.class)
                     .putExtra(ModMenuActivity.EXTRA_OPEN_IDS, openIds);
+            int flags = PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE;
             return PendingIntent.getBroadcast(c, requestCode, i, flags);
         }
-        i = new Intent(c, ModMenuActivity.class)
+        return activityIntent(c, requestCode, openIds);
+    }
+
+    /** Straight getActivity: the only form a notification tap may start an
+     *  activity through on Android 12+ (no receiver bounce in between). */
+    private static PendingIntent activityIntent(Context c, int requestCode,
+                                                 boolean openIds) {
+        Intent i = new Intent(c, ModMenuActivity.class)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP)
                 .putExtra(ModMenuActivity.EXTRA_OPEN_IDS, openIds);
+        int flags = PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE;
         return PendingIntent.getActivity(c, requestCode, i, flags);
+    }
+
+    /** Shared by tryPost and the receiver's re-post below. */
+    private static Notification notif(PendingIntent pi) {
+        // resolved here rather than in a static: the class can load before
+        // appCtx is set, and resource selection needs the configuration
+        String title = I18n.t(appCtx, "mod_notif_title");
+        String text = I18n.t(appCtx, "mod_notif_text");
+        NotificationManager nm = (NotificationManager)
+                appCtx.getSystemService(Context.NOTIFICATION_SERVICE);
+        return Build.VERSION.SDK_INT >= 26
+                ? Api26.build(appCtx, nm, title, text, pi)
+                : legacyBuild(title, text, pi);
+    }
+
+    /**
+     * Re-post the menu notification aimed straight at ModMenuActivity. The
+     * receiver reaches this when the tap cannot show the sheet where it is -
+     * the game window is dead or not in front - and starting an activity
+     * from that broadcast is a trampoline Android 12+ refuses silently. The
+     * re-posted intent is a direct getActivity the system fires itself,
+     * which is allowed, so the next tap opens the standalone sheet; the next
+     * game start swaps the broadcast form back in.
+     */
+    static void repostForActivity(boolean openIds) {
+        if (appCtx == null) {
+            return;
+        }
+        try {
+            NotificationManager nm = (NotificationManager)
+                    appCtx.getSystemService(Context.NOTIFICATION_SERVICE);
+            nm.notify(NOTIF_ID, notif(activityIntent(appCtx, 0, openIds)));
+            MwLog.i("ModMenu", "notification re-posted for a direct activity tap");
+        } catch (RuntimeException e) {
+            MwLog.e("ModMenu", "notification re-post failed", e);
+        }
     }
 
     /** Toggle checks called by the WebView-block, HWID, ad-reward and anti-track stubs. */
@@ -284,20 +328,17 @@ public final class ModMenu {
             return;
         }
         if (Build.VERSION.SDK_INT >= 33 && !Api33.canPost(appCtx)) {
+            if (!deniedLogged) {
+                deniedLogged = true;
+                MwLog.w("ModMenu", "notification not posted: POST_NOTIFICATIONS denied");
+            }
             return;
         }
-        PendingIntent pi = menuIntent(appCtx, 0, false);
         NotificationManager nm = (NotificationManager)
                 appCtx.getSystemService(Context.NOTIFICATION_SERVICE);
-        // resolved here rather than in a static: the class can load before
-        // appCtx is set, and resource selection needs the configuration
-        String title = I18n.t(appCtx, "mod_notif_title");
-        String text = I18n.t(appCtx, "mod_notif_text");
-        Notification n = Build.VERSION.SDK_INT >= 26
-                ? Api26.build(appCtx, nm, title, text, pi)
-                : legacyBuild(title, text, pi);
-        nm.notify(NOTIF_ID, n);
+        nm.notify(NOTIF_ID, notif(menuIntent(appCtx, 0, false)));
         posted = true;
+        MwLog.i("ModMenu", "menu notification posted");
     }
 
     // pre-26 path; the channel-taking Builder exists only on 26+
@@ -344,7 +385,7 @@ public final class ModMenu {
             if (!stuckShown && resumedMs != 0 && lua != 0
                     && now - resumedMs > STUCK_MS && now - lua > STUCK_MS) {
                 stuckShown = true;
-                Log.d("ModMenu", "msr|java_wd fire lua quiet " + (now - lua) + "ms");
+                MwLog.d("ModMenu", "msr|java_wd fire lua quiet " + (now - lua) + "ms");
                 showStuckDialog();
             }
             MAIN.postDelayed(this, 5000);
@@ -356,7 +397,7 @@ public final class ModMenu {
     private static void showStuckDialog() {
         final Activity a = gameActivity();
         if (a == null) {
-            Log.d("ModMenu", "msr|java_wd no window for dialog");
+            MwLog.d("ModMenu", "msr|java_wd no window for dialog");
             return;
         }
         try {
@@ -373,7 +414,7 @@ public final class ModMenu {
                     .setNegativeButton(I18n.t(a, "mod_restart_later"), null)
                     .show();
         } catch (RuntimeException e) {
-            Log.d("ModMenu", "msr|java_wd dialog failed: " + e);
+            MwLog.d("ModMenu", "msr|java_wd dialog failed: " + e);
         }
     }
 }

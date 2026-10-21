@@ -38,14 +38,14 @@
         }
     .end annotation
 
-    .line 343
+    .line 342
     iput-object p1, p0, Lmodmenu/LuaEditor$10;->this$0:Lmodmenu/LuaEditor;
 
     iput-object p4, p0, Lmodmenu/LuaEditor$10;->val$issues:Ljava/util/List;
 
     invoke-direct {p0, p2, p3}, Landroid/app/Dialog;-><init>(Landroid/content/Context;I)V
 
-    .line 345
+    .line 344
     new-instance p1, Landroid/widget/LinearLayout;
 
     iget-object p2, p0, Lmodmenu/LuaEditor$10;->this$0:Lmodmenu/LuaEditor;
@@ -56,12 +56,12 @@
 
     invoke-direct {p1, p2}, Landroid/widget/LinearLayout;-><init>(Landroid/content/Context;)V
 
-    .line 346
+    .line 345
     const/4 p2, 0x1
 
     invoke-virtual {p1, p2}, Landroid/widget/LinearLayout;->setOrientation(I)V
 
-    .line 347
+    .line 346
     iget-object p2, p0, Lmodmenu/LuaEditor$10;->this$0:Lmodmenu/LuaEditor;
 
     const/16 p3, 0xe
@@ -90,7 +90,7 @@
 
     invoke-virtual {p1, p2, p4, v0, p3}, Landroid/widget/LinearLayout;->setPadding(IIII)V
 
-    .line 348
+    .line 347
     iget-object p2, p0, Lmodmenu/LuaEditor$10;->this$0:Lmodmenu/LuaEditor;
 
     iget-object p3, p0, Lmodmenu/LuaEditor$10;->this$0:Lmodmenu/LuaEditor;
@@ -115,7 +115,7 @@
 
     invoke-virtual {p1, p2}, Landroid/widget/LinearLayout;->setBackground(Landroid/graphics/drawable/Drawable;)V
 
-    .line 349
+    .line 348
     new-instance p2, Landroid/widget/TextView;
 
     iget-object p3, p0, Lmodmenu/LuaEditor$10;->this$0:Lmodmenu/LuaEditor;
@@ -126,7 +126,7 @@
 
     invoke-direct {p2, p3}, Landroid/widget/TextView;-><init>(Landroid/content/Context;)V
 
-    .line 350
+    .line 349
     iget-object p3, p0, Lmodmenu/LuaEditor$10;->this$0:Lmodmenu/LuaEditor;
 
     invoke-static {p3}, Lmodmenu/LuaEditor;->access$900(Lmodmenu/LuaEditor;)Landroid/app/Activity;
@@ -141,7 +141,7 @@
 
     invoke-virtual {p2, p3}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    .line 351
+    .line 350
     iget-object p3, p0, Lmodmenu/LuaEditor$10;->this$0:Lmodmenu/LuaEditor;
 
     invoke-static {p3}, Lmodmenu/LuaEditor;->access$1100(Lmodmenu/LuaEditor;)Lmodmenu/Palette;
@@ -152,12 +152,12 @@
 
     invoke-virtual {p2, p3}, Landroid/widget/TextView;->setTextColor(I)V
 
-    .line 352
+    .line 351
     const/high16 p3, 0x41800000    # 16.0f
 
     invoke-virtual {p2, p3}, Landroid/widget/TextView;->setTextSize(F)V
 
-    .line 353
+    .line 352
     iget-object p3, p0, Lmodmenu/LuaEditor$10;->this$0:Lmodmenu/LuaEditor;
 
     iget-object p4, p0, Lmodmenu/LuaEditor$10;->this$0:Lmodmenu/LuaEditor;
@@ -172,7 +172,7 @@
 
     invoke-virtual {p1, p2, p3}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 354
+    .line 353
     new-instance p2, Landroid/widget/ListView;
 
     iget-object p3, p0, Lmodmenu/LuaEditor$10;->this$0:Lmodmenu/LuaEditor;
@@ -183,7 +183,7 @@
 
     invoke-direct {p2, p3}, Landroid/widget/ListView;-><init>(Landroid/content/Context;)V
 
-    .line 355
+    .line 354
     new-instance p3, Lmodmenu/LuaEditor$10$1;
 
     iget-object p4, p0, Lmodmenu/LuaEditor$10;->this$0:Lmodmenu/LuaEditor;
@@ -200,19 +200,19 @@
 
     invoke-virtual {p2, p3}, Landroid/widget/ListView;->setAdapter(Landroid/widget/ListAdapter;)V
 
-    .line 367
+    .line 366
     new-instance p3, Lmodmenu/LuaEditor$10$2;
 
     invoke-direct {p3, p0}, Lmodmenu/LuaEditor$10$2;-><init>(Lmodmenu/LuaEditor$10;)V
 
     invoke-virtual {p2, p3}, Landroid/widget/ListView;->setOnItemClickListener(Landroid/widget/AdapterView$OnItemClickListener;)V
 
-    .line 376
+    .line 375
     new-instance p3, Landroid/widget/LinearLayout$LayoutParams;
 
     iget-object p4, p0, Lmodmenu/LuaEditor$10;->this$0:Lmodmenu/LuaEditor;
 
-    .line 377
+    .line 376
     const/16 v0, 0x12c
 
     invoke-static {p4, v0}, Lmodmenu/LuaEditor;->access$1000(Lmodmenu/LuaEditor;I)I
@@ -223,12 +223,12 @@
 
     invoke-direct {p3, v0, p4}, Landroid/widget/LinearLayout$LayoutParams;-><init>(II)V
 
-    .line 376
+    .line 375
     invoke-virtual {p1, p2, p3}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 378
+    .line 377
     invoke-virtual {p0, p1}, Lmodmenu/LuaEditor$10;->setContentView(Landroid/view/View;)V
 
-    .line 379
+    .line 378
     return-void
 .end method

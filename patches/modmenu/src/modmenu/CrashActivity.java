@@ -13,7 +13,6 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.RippleDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -72,7 +71,7 @@ public class CrashActivity extends Activity implements View.OnClickListener {
         } catch (Throwable t) {
             // a crash screen that throws must close, not loop back into the
             // handler that is watching this very activity
-            Log.e(TAG, "crash screen failed, closing", t);
+            MwLog.e(TAG, "crash screen failed, closing", t);
             finish();
         }
     }
@@ -167,7 +166,7 @@ public class CrashActivity extends Activity implements View.OnClickListener {
                     "Mini World mod crash report", report));
             toast(I18n.t(this, "mod_crash_copied"));
         } catch (Throwable t) {
-            Log.e(TAG, "copy failed", t);
+            MwLog.e(TAG, "copy failed", t);
             toast(I18n.t(this, "mod_crash_failed"));
         }
     }
@@ -197,7 +196,7 @@ public class CrashActivity extends Activity implements View.OnClickListener {
             }
             toast(I18n.t(this, "mod_crash_saved") + " " + out.getAbsolutePath());
         } catch (Throwable t) {
-            Log.e(TAG, "save failed", t);
+            MwLog.e(TAG, "save failed", t);
             toast(I18n.t(this, "mod_crash_failed"));
         }
     }
@@ -214,7 +213,7 @@ public class CrashActivity extends Activity implements View.OnClickListener {
             startActivity(Intent.createChooser(send,
                     I18n.t(this, "mod_crash_share")));
         } catch (Throwable t) {
-            Log.e(TAG, "share failed", t);
+            MwLog.e(TAG, "share failed", t);
             toast(I18n.t(this, "mod_crash_failed"));
         }
     }

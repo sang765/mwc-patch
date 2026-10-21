@@ -112,4 +112,14 @@
     <string name="mod_le_i_bad_close">"第 %1$d 行：'%2$s' 不匹配"</string>
     <string name="mod_le_i_extra_close">"第 %1$d 行：多余的 '%2$s'"</string>
     <string name="mod_le_i_unknown_api">"第 %1$d 行：API '%2$s' 不在目录中"</string>
+    <string name="mod_log_label">"日志"</string>
+    <string name="mod_log_empty">"暂无日志"</string>
+    <string name="mod_log_refresh">"刷新"</string>
+    <string name="mod_log_copy">"复制"</string>
+    <string name="mod_log_copied">"已复制"</string>
+    <string name="mod_log_export">"导出"</string>
+    <string name="mod_log_exported">"已导出：%1$s"</string>
+    <string name="mod_log_status">"%1$d 行 · %2$s"</string>
+    <string name="mod_tapagain">"再次点按通知以打开菜单"</string>
+    <string name="mod_menufail">"菜单打开失败：%1$s"</string>
 </resources>

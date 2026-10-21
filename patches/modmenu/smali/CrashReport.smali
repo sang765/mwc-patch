@@ -758,7 +758,7 @@
 
     const-string v1, "report dir unavailable"
 
-    invoke-static {v0, v1, p0}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
+    invoke-static {v0, v1, p0}, Lmodmenu/MwLog;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V
 
     .line 55
     :goto_1
@@ -1310,7 +1310,7 @@
 
     const-string v2, "MWCrash"
 
-    invoke-static {v2, p0, v1}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
+    invoke-static {v2, p0, v1}, Lmodmenu/MwLog;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V
 
     .line 183
     return-object v0
@@ -1412,7 +1412,7 @@
 
     const-string p3, "MWCrash"
 
-    invoke-static {p3, p1, p0}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
+    invoke-static {p3, p1, p0}, Lmodmenu/MwLog;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V
 
     .line 152
     return-object p2
@@ -1498,7 +1498,7 @@
 
     const-string p2, "launch marker not written"
 
-    invoke-static {p1, p2, p0}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
+    invoke-static {p1, p2, p0}, Lmodmenu/MwLog;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V
 
     .line 290
     :goto_0

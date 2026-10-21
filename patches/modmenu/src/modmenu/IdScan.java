@@ -7,7 +7,6 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 
 import org.appplay.lib.CommonNatives;
 import org.json.JSONArray;
@@ -182,7 +181,7 @@ public final class IdScan {
         }
         final String[] p = paths(ctx);
         if (p == null) {
-            Log.d(TAG, "no writable files dir");
+            MwLog.d(TAG, "no writable files dir");
             cached = Result.fail("nopath");
             return;
         }
@@ -207,7 +206,7 @@ public final class IdScan {
                     if (r.error == null) {
                         wantScan = false;
                     }
-                    Log.d(TAG, "scan done: entries=" + r.entries.size()
+                    MwLog.d(TAG, "scan done: entries=" + r.entries.size()
                             + " error=" + r.error);
                     MAIN.post(new Runnable() {
                         @Override
@@ -224,10 +223,10 @@ public final class IdScan {
                     });
                 }
             }, "mw-idscan").start();
-            Log.d(TAG, "scan shipped at menu close");
+            MwLog.d(TAG, "scan shipped at menu close");
         } catch (RuntimeException e) {
             polling = false;
-            Log.d(TAG, "dispatch failed: " + e);
+            MwLog.d(TAG, "dispatch failed: " + e);
             cached = Result.fail("send: " + e);
             return; // wantScan stays set: the next menu close retries
         }
@@ -255,11 +254,11 @@ public final class IdScan {
                     ? Api26.build(c, nm, title, text, pi)
                     : legacy(c, title, text, pi);
             nm.notify(NOTIF_ID, n);
-            Log.d(TAG, "scan notification posted");
+            MwLog.d(TAG, "scan notification posted");
         } catch (Throwable t) {
             // a scan is done whatever the notification layer says; the list
             // is still reachable from the menu
-            Log.w(TAG, "scan notification failed", t);
+            MwLog.w(TAG, "scan notification failed", t);
         }
     }
 
@@ -288,7 +287,7 @@ public final class IdScan {
             }
             return new String[]{new File(ext, FILE).getAbsolutePath(), in};
         } catch (RuntimeException e) {
-            Log.d(TAG, "paths failed: " + e);
+            MwLog.d(TAG, "paths failed: " + e);
             return null;
         }
     }
@@ -347,7 +346,7 @@ public final class IdScan {
             int s = new JSONObject(body).optInt("s", -1);
             if (s >= 0 && s != progress) {
                 progress = s;
-                Log.d(TAG, "scan step " + s);
+                MwLog.d(TAG, "scan step " + s);
             }
         } catch (Exception ignored) {
             // a half-written marker reads as unparsable; the next poll

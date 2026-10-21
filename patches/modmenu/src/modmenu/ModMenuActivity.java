@@ -20,6 +20,15 @@ public class ModMenuActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // the re-posted tap can land here while a sheet is already up (the
+        // window behind it lost focus to its own dialog) - bring nothing
+        // forward over a menu that is already open
+        if (ModMenuSheet.showing()) {
+            MwLog.i("ModMenu", "menu activity: sheet already up, finishing");
+            finish();
+            return;
+        }
+        MwLog.i("ModMenu", "menu activity: opening standalone sheet");
         // show() builds the sheet, logs its own failures and finishes this
         // activity through the sheet's dismiss handler
         ModMenuSheet.show(this, getIntent() != null

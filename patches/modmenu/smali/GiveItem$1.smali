@@ -38,7 +38,7 @@
         }
     .end annotation
 
-    .line 101
+    .line 100
     iput-object p1, p0, Lmodmenu/GiveItem$1;->val$p:[Ljava/lang/String;
 
     iput p2, p0, Lmodmenu/GiveItem$1;->val$item:I
@@ -59,12 +59,12 @@
 .method public run()V
     .locals 7
 
-    .line 105
+    .line 104
     const-string v0, "fail"
 
     const-string v1, "MWGiveItem"
 
-    .line 107
+    .line 106
     const/4 v2, 0x0
 
     :try_start_0
@@ -76,14 +76,14 @@
 
     move-result-object v3
 
-    .line 109
+    .line 108
     iget-object v4, p0, Lmodmenu/GiveItem$1;->val$p:[Ljava/lang/String;
 
     invoke-static {v4}, Lmodmenu/GiveItem;->access$100([Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v2
 
-    .line 110
+    .line 109
     const-string v4, "wait"
 
     invoke-virtual {v4, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
@@ -92,7 +92,7 @@
 
     if-eqz v4, :cond_0
 
-    .line 111
+    .line 110
     iget-object v3, p0, Lmodmenu/GiveItem$1;->val$p:[Ljava/lang/String;
 
     iget v4, p0, Lmodmenu/GiveItem$1;->val$item:I
@@ -105,15 +105,15 @@
     :try_end_0
     .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 118
+    .line 117
     :cond_0
     goto :goto_0
 
-    .line 113
+    .line 112
     :catch_0
     move-exception v3
 
-    .line 116
+    .line 115
     new-instance v4, Ljava/lang/StringBuilder;
 
     invoke-direct {v4}, Ljava/lang/StringBuilder;-><init>()V
@@ -132,18 +132,18 @@
 
     move-result-object v3
 
-    invoke-static {v1, v3}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+    invoke-static {v1, v3}, Lmodmenu/MwLog;->d(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 117
+    .line 116
     move-object v3, v0
 
-    .line 119
+    .line 118
     :goto_0
     const/4 v4, 0x0
 
     invoke-static {v4}, Lmodmenu/GiveItem;->access$302(Z)Z
 
-    .line 120
+    .line 119
     const-string v4, "timeout"
 
     invoke-virtual {v4, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
@@ -157,11 +157,11 @@
     :cond_1
     move-object v0, v3
 
-    .line 121
+    .line 120
     :goto_1
     nop
 
-    .line 122
+    .line 121
     new-instance v3, Ljava/lang/StringBuilder;
 
     invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
@@ -190,9 +190,9 @@
 
     move-result-object v3
 
-    invoke-static {v1, v3}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+    invoke-static {v1, v3}, Lmodmenu/MwLog;->d(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 123
+    .line 122
     invoke-static {}, Lmodmenu/GiveItem;->access$500()Landroid/os/Handler;
 
     move-result-object v1
@@ -203,6 +203,6 @@
 
     invoke-virtual {v1, v3}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
 
-    .line 130
+    .line 129
     return-void
 .end method

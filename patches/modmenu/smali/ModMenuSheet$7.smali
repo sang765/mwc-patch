@@ -8,7 +8,7 @@
 
 # annotations
 .annotation system Ldalvik/annotation/EnclosingMethod;
-    value = Lmodmenu/ModMenuSheet;->settingRow(Lmodmenu/Palette;Ljava/lang/String;Ljava/lang/String;Landroid/widget/Switch;)Landroid/widget/LinearLayout;
+    value = Lmodmenu/ModMenuSheet;->build()V
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
@@ -20,33 +20,21 @@
 # instance fields
 .field final synthetic this$0:Lmodmenu/ModMenuSheet;
 
-.field final synthetic val$sw:Landroid/widget/Switch;
-
 
 # direct methods
-.method constructor <init>(Lmodmenu/ModMenuSheet;Landroid/widget/Switch;)V
+.method constructor <init>(Lmodmenu/ModMenuSheet;)V
     .locals 0
     .annotation system Ldalvik/annotation/MethodParameters;
         accessFlags = {
-            0x8010,
-            0x1010
+            0x8010
         }
         names = {
-            null,
             null
         }
     .end annotation
 
-    .annotation system Ldalvik/annotation/Signature;
-        value = {
-            "()V"
-        }
-    .end annotation
-
-    .line 375
+    .line 339
     iput-object p1, p0, Lmodmenu/ModMenuSheet$7;->this$0:Lmodmenu/ModMenuSheet;
-
-    iput-object p2, p0, Lmodmenu/ModMenuSheet$7;->val$sw:Landroid/widget/Switch;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
@@ -58,11 +46,11 @@
 .method public onClick(Landroid/view/View;)V
     .locals 0
 
-    .line 378
-    iget-object p1, p0, Lmodmenu/ModMenuSheet$7;->val$sw:Landroid/widget/Switch;
+    .line 342
+    iget-object p1, p0, Lmodmenu/ModMenuSheet$7;->this$0:Lmodmenu/ModMenuSheet;
 
-    invoke-virtual {p1}, Landroid/widget/Switch;->performClick()Z
+    invoke-static {p1}, Lmodmenu/ModMenuSheet;->access$1200(Lmodmenu/ModMenuSheet;)V
 
-    .line 379
+    .line 343
     return-void
 .end method

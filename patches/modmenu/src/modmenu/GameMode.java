@@ -3,7 +3,6 @@ package modmenu;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.widget.Toast;
 
 import org.appplay.lib.CommonNatives;
@@ -57,7 +56,7 @@ public final class GameMode {
     public static void request(Context ctx, final Runnable done) {
         final String[] p = paths(ctx);
         if (p == null) {
-            Log.d(TAG, "no writable files dir");
+            MwLog.d(TAG, "no writable files dir");
             toast(ctx, "nopath");
             done.run();
             return;
@@ -82,7 +81,7 @@ public final class GameMode {
                     if (!"timeout".equals(state)) {
                         polling = false;
                     }
-                    Log.d(TAG, "switch done: " + state);
+                    MwLog.d(TAG, "switch done: " + state);
                     MAIN.post(new Runnable() {
                         @Override
                         public void run() {
@@ -92,12 +91,12 @@ public final class GameMode {
                     });
                 }
             }, "mw-gamemode").start();
-            Log.d(TAG, fresh ? "switch shipped" : "resuming poll");
+            MwLog.d(TAG, fresh ? "switch shipped" : "resuming poll");
         } catch (RuntimeException e) {
             if (fresh) {
                 polling = false;
             }
-            Log.d(TAG, "dispatch failed: " + e);
+            MwLog.d(TAG, "dispatch failed: " + e);
             toast(ctx, "fail");
             done.run();
         }
@@ -107,7 +106,7 @@ public final class GameMode {
         try {
             Toast.makeText(c, message(c, state), Toast.LENGTH_SHORT).show();
         } catch (RuntimeException e) {
-            Log.d(TAG, "toast failed: " + e);
+            MwLog.d(TAG, "toast failed: " + e);
         }
     }
 
@@ -138,7 +137,7 @@ public final class GameMode {
             }
             return new String[]{new File(ext, FILE).getAbsolutePath(), in};
         } catch (RuntimeException e) {
-            Log.d(TAG, "paths failed: " + e);
+            MwLog.d(TAG, "paths failed: " + e);
             return null;
         }
     }

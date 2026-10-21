@@ -33,7 +33,7 @@
         }
     .end annotation
 
-    .line 221
+    .line 220
     iput-object p1, p0, Lmodmenu/BetterInput$6;->this$0:Lmodmenu/BetterInput;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -46,7 +46,7 @@
 .method public onColor(I)V
     .locals 4
 
-    .line 224
+    .line 223
     iget-object v0, p0, Lmodmenu/BetterInput$6;->this$0:Lmodmenu/BetterInput;
 
     invoke-static {v0}, Lmodmenu/BetterInput;->access$400(Lmodmenu/BetterInput;)Landroid/widget/TextView;
@@ -79,6 +79,6 @@
 
     invoke-virtual {v0, p1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    .line 225
+    .line 224
     return-void
 .end method

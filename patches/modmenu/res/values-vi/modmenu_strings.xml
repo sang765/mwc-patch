@@ -112,4 +112,14 @@
     <string name="mod_le_i_bad_close">"Dòng %1$d: '%2$s' không khớp"</string>
     <string name="mod_le_i_extra_close">"Dòng %1$d: '%2$s' thừa"</string>
     <string name="mod_le_i_unknown_api">"Dòng %1$d: API '%2$s' không có trong danh mục"</string>
+    <string name="mod_log_label">"Log"</string>
+    <string name="mod_log_empty">"Chưa có log"</string>
+    <string name="mod_log_refresh">"Làm mới"</string>
+    <string name="mod_log_copy">"Sao chép"</string>
+    <string name="mod_log_copied">"Đã sao chép"</string>
+    <string name="mod_log_export">"Xuất file"</string>
+    <string name="mod_log_exported">"Đã xuất: %1$s"</string>
+    <string name="mod_log_status">"%1$d dòng · %2$s"</string>
+    <string name="mod_tapagain">"Chạm thông báo lần nữa để mở menu"</string>
+    <string name="mod_menufail">"Menu lỗi: %1$s"</string>
 </resources>

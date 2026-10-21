@@ -21,7 +21,7 @@
 .method static constructor <clinit>()V
     .locals 2
 
-    .line 43
+    .line 42
     new-instance v0, Landroid/os/Handler;
 
     invoke-static {}, Landroid/os/Looper;->getMainLooper()Landroid/os/Looper;
@@ -38,7 +38,7 @@
 .method private constructor <init>()V
     .locals 0
 
-    .line 52
+    .line 51
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     return-void
@@ -47,7 +47,7 @@
 .method static synthetic access$000([Ljava/lang/String;)Ljava/lang/String;
     .locals 0
 
-    .line 37
+    .line 36
     invoke-static {p0}, Lmodmenu/GameMode;->awaitGuarded([Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object p0
@@ -58,7 +58,7 @@
 .method static synthetic access$102(Z)Z
     .locals 0
 
-    .line 37
+    .line 36
     sput-boolean p0, Lmodmenu/GameMode;->polling:Z
 
     return p0
@@ -67,7 +67,7 @@
 .method static synthetic access$200(Landroid/content/Context;Ljava/lang/String;)V
     .locals 0
 
-    .line 37
+    .line 36
     invoke-static {p0, p1}, Lmodmenu/GameMode;->toast(Landroid/content/Context;Ljava/lang/String;)V
 
     return-void
@@ -76,7 +76,7 @@
 .method static synthetic access$300()Landroid/os/Handler;
     .locals 1
 
-    .line 37
+    .line 36
     sget-object v0, Lmodmenu/GameMode;->MAIN:Landroid/os/Handler;
 
     return-object v0
@@ -85,7 +85,7 @@
 .method private static await([Ljava/lang/String;)Ljava/lang/String;
     .locals 5
 
-    .line 155
+    .line 154
     invoke-static {}, Ljava/lang/System;->currentTimeMillis()J
 
     move-result-wide v0
@@ -94,7 +94,7 @@
 
     add-long/2addr v0, v2
 
-    .line 156
+    .line 155
     :goto_0
     invoke-static {}, Ljava/lang/System;->currentTimeMillis()J
 
@@ -104,7 +104,7 @@
 
     if-gez v4, :cond_2
 
-    .line 157
+    .line 156
     const/4 v2, 0x0
 
     :goto_1
@@ -112,26 +112,26 @@
 
     if-ge v2, v3, :cond_1
 
-    .line 158
+    .line 157
     aget-object v3, p0, v2
 
     invoke-static {v3}, Lmodmenu/GameMode;->state(Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v3
 
-    .line 159
+    .line 158
     if-eqz v3, :cond_0
 
-    .line 160
+    .line 159
     return-object v3
 
-    .line 157
+    .line 156
     :cond_0
     add-int/lit8 v2, v2, 0x1
 
     goto :goto_1
 
-    .line 164
+    .line 163
     :cond_1
     const-wide/16 v2, 0xfa
 
@@ -140,17 +140,17 @@
     :try_end_0
     .catch Ljava/lang/InterruptedException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 167
+    .line 166
     goto :goto_0
 
-    .line 165
+    .line 164
     :catch_0
     move-exception p0
 
-    .line 166
+    .line 165
     nop
 
-    .line 169
+    .line 168
     :cond_2
     const-string p0, "timeout"
 
@@ -160,7 +160,7 @@
 .method private static awaitGuarded([Ljava/lang/String;)Ljava/lang/String;
     .locals 0
 
-    .line 148
+    .line 147
     :try_start_0
     invoke-static {p0}, Lmodmenu/GameMode;->await([Ljava/lang/String;)Ljava/lang/String;
 
@@ -170,11 +170,11 @@
 
     return-object p0
 
-    .line 149
+    .line 148
     :catch_0
     move-exception p0
 
-    .line 150
+    .line 149
     const-string p0, "fail"
 
     return-object p0
@@ -183,7 +183,7 @@
 .method private static luaStr(Ljava/lang/String;)Ljava/lang/String;
     .locals 2
 
-    .line 216
+    .line 215
     if-nez p0, :cond_0
 
     const-string p0, ""
@@ -214,7 +214,7 @@
 .method private static message(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;
     .locals 1
 
-    .line 115
+    .line 114
     const-string v0, "ok"
 
     invoke-virtual {v0, p1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
@@ -223,7 +223,7 @@
 
     if-eqz v0, :cond_0
 
-    .line 116
+    .line 115
     const-string p1, "mod_gm_ok"
 
     invoke-static {p0, p1}, Lmodmenu/I18n;->t(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;
@@ -232,7 +232,7 @@
 
     return-object p0
 
-    .line 118
+    .line 117
     :cond_0
     const-string v0, "nomap"
 
@@ -242,7 +242,7 @@
 
     if-eqz v0, :cond_1
 
-    .line 119
+    .line 118
     const-string p1, "mod_gm_nomap"
 
     invoke-static {p0, p1}, Lmodmenu/I18n;->t(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;
@@ -251,7 +251,7 @@
 
     return-object p0
 
-    .line 121
+    .line 120
     :cond_1
     const-string v0, "unsupported"
 
@@ -261,7 +261,7 @@
 
     if-eqz p1, :cond_2
 
-    .line 122
+    .line 121
     const-string p1, "mod_gm_unsupported"
 
     invoke-static {p0, p1}, Lmodmenu/I18n;->t(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;
@@ -270,7 +270,7 @@
 
     return-object p0
 
-    .line 124
+    .line 123
     :cond_2
     const-string p1, "mod_gm_fail"
 
@@ -284,7 +284,7 @@
 .method private static paths(Landroid/content/Context;)[Ljava/lang/String;
     .locals 4
 
-    .line 130
+    .line 129
     const-string v0, "mw_gm.json"
 
     const/4 v1, 0x0
@@ -294,13 +294,13 @@
 
     move-result-object v2
 
-    .line 131
+    .line 130
     if-nez v2, :cond_0
 
-    .line 132
+    .line 131
     return-object v1
 
-    .line 134
+    .line 133
     :cond_0
     new-instance v3, Ljava/io/File;
 
@@ -310,22 +310,22 @@
 
     move-result-object v2
 
-    .line 135
+    .line 134
     invoke-virtual {p0, v1}, Landroid/content/Context;->getExternalFilesDir(Ljava/lang/String;)Ljava/io/File;
 
     move-result-object p0
 
-    .line 136
+    .line 135
     if-nez p0, :cond_1
 
-    .line 137
+    .line 136
     filled-new-array {v2, v2}, [Ljava/lang/String;
 
     move-result-object p0
 
     return-object p0
 
-    .line 139
+    .line 138
     :cond_1
     new-instance v3, Ljava/io/File;
 
@@ -343,11 +343,11 @@
 
     return-object p0
 
-    .line 140
+    .line 139
     :catch_0
     move-exception p0
 
-    .line 141
+    .line 140
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -368,19 +368,19 @@
 
     const-string v0, "MWGameMode"
 
-    invoke-static {v0, p0}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+    invoke-static {v0, p0}, Lmodmenu/MwLog;->d(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 142
+    .line 141
     return-object v1
 .end method
 
 .method private static read(Ljava/lang/String;)Ljava/lang/String;
     .locals 5
 
-    .line 193
+    .line 192
     nop
 
-    .line 195
+    .line 194
     const/4 v0, 0x0
 
     :try_start_0
@@ -391,18 +391,18 @@
     .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_3
     .catchall {:try_start_0 .. :try_end_0} :catchall_1
 
-    .line 196
+    .line 195
     :try_start_1
     new-instance p0, Ljava/io/ByteArrayOutputStream;
 
     invoke-direct {p0}, Ljava/io/ByteArrayOutputStream;-><init>()V
 
-    .line 197
+    .line 196
     const/16 v2, 0x2000
 
     new-array v2, v2, [B
 
-    .line 199
+    .line 198
     :goto_0
     invoke-virtual {v1, v2}, Ljava/io/FileInputStream;->read([B)I
 
@@ -410,14 +410,14 @@
 
     if-lez v3, :cond_0
 
-    .line 200
+    .line 199
     const/4 v4, 0x0
 
     invoke-virtual {p0, v2, v4, v3}, Ljava/io/ByteArrayOutputStream;->write([BII)V
 
     goto :goto_0
 
-    .line 202
+    .line 201
     :cond_0
     const-string v2, "UTF-8"
 
@@ -428,27 +428,27 @@
     .catch Ljava/lang/Exception; {:try_start_1 .. :try_end_1} :catch_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
-    .line 206
+    .line 205
     nop
 
-    .line 208
+    .line 207
     :try_start_2
     invoke-virtual {v1}, Ljava/io/FileInputStream;->close()V
     :try_end_2
     .catch Ljava/lang/Exception; {:try_start_2 .. :try_end_2} :catch_0
 
-    .line 210
+    .line 209
     goto :goto_1
 
-    .line 209
+    .line 208
     :catch_0
     move-exception v0
 
-    .line 202
+    .line 201
     :goto_1
     return-object p0
 
-    .line 206
+    .line 205
     :catchall_0
     move-exception p0
 
@@ -456,64 +456,64 @@
 
     goto :goto_2
 
-    .line 203
+    .line 202
     :catch_1
     move-exception p0
 
     goto :goto_4
 
-    .line 206
+    .line 205
     :catchall_1
     move-exception p0
 
     :goto_2
     if-eqz v0, :cond_1
 
-    .line 208
+    .line 207
     :try_start_3
     invoke-virtual {v0}, Ljava/io/FileInputStream;->close()V
     :try_end_3
     .catch Ljava/lang/Exception; {:try_start_3 .. :try_end_3} :catch_2
 
-    .line 210
+    .line 209
     goto :goto_3
 
-    .line 209
+    .line 208
     :catch_2
     move-exception v0
 
-    .line 212
+    .line 211
     :cond_1
     :goto_3
     throw p0
 
-    .line 203
+    .line 202
     :catch_3
     move-exception p0
 
     move-object v1, v0
 
-    .line 204
+    .line 203
     :goto_4
     nop
 
-    .line 206
+    .line 205
     if-eqz v1, :cond_2
 
-    .line 208
+    .line 207
     :try_start_4
     invoke-virtual {v1}, Ljava/io/FileInputStream;->close()V
     :try_end_4
     .catch Ljava/lang/Exception; {:try_start_4 .. :try_end_4} :catch_4
 
-    .line 210
+    .line 209
     goto :goto_5
 
-    .line 209
+    .line 208
     :catch_4
     move-exception p0
 
-    .line 204
+    .line 203
     :cond_2
     :goto_5
     return-object v0
@@ -522,42 +522,42 @@
 .method public static request(Landroid/content/Context;Ljava/lang/Runnable;)V
     .locals 7
 
-    .line 58
+    .line 57
     invoke-static {p0}, Lmodmenu/GameMode;->paths(Landroid/content/Context;)[Ljava/lang/String;
 
     move-result-object v0
 
-    .line 59
+    .line 58
     const-string v1, "MWGameMode"
 
     if-nez v0, :cond_0
 
-    .line 60
+    .line 59
     const-string v0, "no writable files dir"
 
-    invoke-static {v1, v0}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+    invoke-static {v1, v0}, Lmodmenu/MwLog;->d(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 61
+    .line 60
     const-string v0, "nopath"
 
     invoke-static {p0, v0}, Lmodmenu/GameMode;->toast(Landroid/content/Context;Ljava/lang/String;)V
 
-    .line 62
+    .line 61
     invoke-interface {p1}, Ljava/lang/Runnable;->run()V
 
-    .line 63
+    .line 62
     return-void
 
-    .line 65
+    .line 64
     :cond_0
     sget-boolean v2, Lmodmenu/GameMode;->polling:Z
 
-    .line 70
+    .line 69
     const/4 v3, 0x0
 
     if-nez v2, :cond_2
 
-    .line 71
+    .line 70
     const/4 v4, 0x0
 
     :goto_0
@@ -566,7 +566,7 @@
 
     if-ge v4, v5, :cond_1
 
-    .line 72
+    .line 71
     new-instance v5, Ljava/io/File;
 
     aget-object v6, v0, v4
@@ -575,18 +575,18 @@
 
     invoke-virtual {v5}, Ljava/io/File;->delete()Z
 
-    .line 71
+    .line 70
     add-int/lit8 v4, v4, 0x1
 
     goto :goto_0
 
-    .line 74
+    .line 73
     :cond_1
     const/4 v4, 0x1
 
     sput-boolean v4, Lmodmenu/GameMode;->polling:Z
 
-    .line 75
+    .line 74
     aget-object v5, v0, v3
 
     aget-object v4, v0, v4
@@ -599,13 +599,13 @@
 
     invoke-static {v4, v5}, Lorg/appplay/lib/CommonNatives;->javaCallLuaEvent(Ljava/lang/String;[Ljava/lang/Object;)V
 
-    .line 77
+    .line 76
     :cond_2
     invoke-virtual {p0}, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
 
     move-result-object v4
 
-    .line 78
+    .line 77
     new-instance v5, Ljava/lang/Thread;
 
     new-instance v6, Lmodmenu/GameMode$1;
@@ -616,10 +616,10 @@
 
     invoke-direct {v5, v6, v0}, Ljava/lang/Thread;-><init>(Ljava/lang/Runnable;Ljava/lang/String;)V
 
-    .line 94
+    .line 93
     invoke-virtual {v5}, Ljava/lang/Thread;->start()V
 
-    .line 95
+    .line 94
     if-nez v2, :cond_3
 
     const-string v0, "switch shipped"
@@ -630,24 +630,24 @@
     const-string v0, "resuming poll"
 
     :goto_1
-    invoke-static {v1, v0}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+    invoke-static {v1, v0}, Lmodmenu/MwLog;->d(Ljava/lang/String;Ljava/lang/String;)V
     :try_end_0
     .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 103
+    .line 102
     goto :goto_2
 
-    .line 96
+    .line 95
     :catch_0
     move-exception v0
 
-    .line 97
+    .line 96
     if-nez v2, :cond_4
 
-    .line 98
+    .line 97
     sput-boolean v3, Lmodmenu/GameMode;->polling:Z
 
-    .line 100
+    .line 99
     :cond_4
     new-instance v2, Ljava/lang/StringBuilder;
 
@@ -667,17 +667,17 @@
 
     move-result-object v0
 
-    invoke-static {v1, v0}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+    invoke-static {v1, v0}, Lmodmenu/MwLog;->d(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 101
+    .line 100
     const-string v0, "fail"
 
     invoke-static {p0, v0}, Lmodmenu/GameMode;->toast(Landroid/content/Context;Ljava/lang/String;)V
 
-    .line 102
+    .line 101
     invoke-interface {p1}, Ljava/lang/Runnable;->run()V
 
-    .line 104
+    .line 103
     :goto_2
     return-void
 .end method
@@ -685,7 +685,7 @@
 .method static script(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
     .locals 2
 
-    .line 235
+    .line 234
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -696,7 +696,7 @@
 
     move-result-object v0
 
-    .line 236
+    .line 235
     invoke-static {p0}, Lmodmenu/GameMode;->luaStr(Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object p0
@@ -711,7 +711,7 @@
 
     move-result-object p0
 
-    .line 237
+    .line 236
     invoke-static {p1}, Lmodmenu/GameMode;->luaStr(Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object p1
@@ -730,19 +730,19 @@
 
     move-result-object p0
 
-    .line 235
+    .line 234
     return-object p0
 .end method
 
 .method private static state(Ljava/lang/String;)Ljava/lang/String;
     .locals 3
 
-    .line 176
+    .line 175
     invoke-static {p0}, Lmodmenu/GameMode;->read(Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object p0
 
-    .line 177
+    .line 176
     const/4 v0, 0x0
 
     if-eqz p0, :cond_4
@@ -757,14 +757,14 @@
 
     goto :goto_1
 
-    .line 181
+    .line 180
     :cond_0
     :try_start_0
     new-instance v1, Lorg/json/JSONObject;
 
     invoke-direct {v1, p0}, Lorg/json/JSONObject;-><init>(Ljava/lang/String;)V
 
-    .line 182
+    .line 181
     const-string p0, "started"
 
     const/4 v2, 0x0
@@ -775,10 +775,10 @@
 
     if-eqz p0, :cond_1
 
-    .line 183
+    .line 182
     return-object v0
 
-    .line 185
+    .line 184
     :cond_1
     const-string p0, "r"
 
@@ -786,7 +786,7 @@
 
     move-result-object p0
 
-    .line 186
+    .line 185
     if-eqz p0, :cond_3
 
     invoke-virtual {p0}, Ljava/lang/String;->length()I
@@ -806,14 +806,14 @@
     :goto_0
     return-object v0
 
-    .line 187
+    .line 186
     :catch_0
     move-exception p0
 
-    .line 188
+    .line 187
     return-object v0
 
-    .line 178
+    .line 177
     :cond_4
     :goto_1
     return-object v0
@@ -822,7 +822,7 @@
 .method private static toast(Landroid/content/Context;Ljava/lang/String;)V
     .locals 1
 
-    .line 108
+    .line 107
     :try_start_0
     invoke-static {p0, p1}, Lmodmenu/GameMode;->message(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;
 
@@ -838,14 +838,14 @@
     :try_end_0
     .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 111
+    .line 110
     goto :goto_0
 
-    .line 109
+    .line 108
     :catch_0
     move-exception p0
 
-    .line 110
+    .line 109
     new-instance p1, Ljava/lang/StringBuilder;
 
     invoke-direct {p1}, Ljava/lang/StringBuilder;-><init>()V
@@ -866,9 +866,9 @@
 
     const-string p1, "MWGameMode"
 
-    invoke-static {p1, p0}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+    invoke-static {p1, p0}, Lmodmenu/MwLog;->d(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 112
+    .line 111
     :goto_0
     return-void
 .end method

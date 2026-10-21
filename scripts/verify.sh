@@ -231,7 +231,11 @@ for pat in 'Lmodmenu/ModMenu;' 'Lmodmenu/ModMenuActivity;' \
            'hostToggleMpGameMode' 'clientToggleMpGameMode' \
            '{"r":"unsupported"' \
            'Lmodmenu/GiveItem;' 'mw_give.json' \
-           '{"r":"wait","want":' 'mod_give_noclient' 'mod_give_full'; do
+           '{"r":"wait","want":' 'mod_give_noclient' 'mod_give_full' \
+           'Lmodmenu/BetterInput;' 'mw_bi.json' \
+           'Lmodmenu/LuaEditor;' 'mw_le.json' 'Lmodmenu/MwApi;' \
+           'Lmodmenu/MwLog;' 'mwlog.txt' \
+           'Lmodmenu/LogView;'; do
   if grep -aqF -- "$pat" "$WORK/dexcheck"/*.dex 2>/dev/null; then
     echo "  present: $pat"
   else
@@ -268,6 +272,10 @@ needles = [
     "Trao vật phẩm",                        # vi give button
     "给予物品",                              # zh give button
     "給予物品",                              # zh-Hant give button
+    "Tap the notification again",           # en mod_tapagain (re-post toast)
+    "Chạm thông báo lần nữa",               # vi mod_tapagain
+    "No log yet",                           # en mod_log_empty (log viewer)
+    "Chưa có log",                          # vi mod_log_empty
 ]
 failed = False
 for s in needles:

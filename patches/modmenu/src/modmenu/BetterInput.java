@@ -15,7 +15,6 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -510,7 +509,7 @@ final class BetterInput {
             CommonNatives.javaCallLuaEvent(script(paths[0], paths[1], text, send),
                     new Object[0]);
         } catch (RuntimeException e) {
-            Log.e(TAG, "better input dispatch failed", e);
+            MwLog.e(TAG, "better input dispatch failed", e);
             sendBtn.setEnabled(true);
             fillBtn.setEnabled(true);
             return;
@@ -608,7 +607,7 @@ final class BetterInput {
             }
             return new String[]{new File(ext, FILE).getAbsolutePath(), in};
         } catch (RuntimeException e) {
-            Log.e(TAG, "paths failed", e);
+            MwLog.e(TAG, "paths failed", e);
             return null;
         }
     }
@@ -769,7 +768,7 @@ final class BetterInput {
         try {
             Toast.makeText(c, msg, Toast.LENGTH_SHORT).show();
         } catch (RuntimeException e) {
-            Log.e(TAG, "toast failed", e);
+            MwLog.e(TAG, "toast failed", e);
         }
     }
 

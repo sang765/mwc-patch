@@ -44,7 +44,7 @@
         }
     .end annotation
 
-    .line 356
+    .line 355
     iput-object p1, p0, Lmodmenu/LuaEditor$10$1;->this$1:Lmodmenu/LuaEditor$10;
 
     invoke-direct {p0, p2, p3, p4}, Landroid/widget/ArrayAdapter;-><init>(Landroid/content/Context;ILjava/util/List;)V
@@ -57,14 +57,14 @@
 .method public getView(ILandroid/view/View;Landroid/view/ViewGroup;)Landroid/view/View;
     .locals 1
 
-    .line 360
+    .line 359
     invoke-super {p0, p1, p2, p3}, Landroid/widget/ArrayAdapter;->getView(ILandroid/view/View;Landroid/view/ViewGroup;)Landroid/view/View;
 
     move-result-object p2
 
     check-cast p2, Landroid/widget/TextView;
 
-    .line 361
+    .line 360
     iget-object p3, p0, Lmodmenu/LuaEditor$10$1;->this$1:Lmodmenu/LuaEditor$10;
 
     iget-object p3, p3, Lmodmenu/LuaEditor$10;->this$0:Lmodmenu/LuaEditor;
@@ -85,7 +85,7 @@
 
     invoke-virtual {p2, p1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    .line 362
+    .line 361
     iget-object p1, p0, Lmodmenu/LuaEditor$10$1;->this$1:Lmodmenu/LuaEditor$10;
 
     iget-object p1, p1, Lmodmenu/LuaEditor$10;->this$0:Lmodmenu/LuaEditor;
@@ -98,11 +98,11 @@
 
     invoke-virtual {p2, p1}, Landroid/widget/TextView;->setTextColor(I)V
 
-    .line 363
+    .line 362
     const/high16 p1, 0x41500000    # 13.0f
 
     invoke-virtual {p2, p1}, Landroid/widget/TextView;->setTextSize(F)V
 
-    .line 364
+    .line 363
     return-object p2
 .end method

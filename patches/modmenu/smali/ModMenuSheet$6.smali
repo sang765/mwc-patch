@@ -33,7 +33,7 @@
         }
     .end annotation
 
-    .line 306
+    .line 324
     iput-object p1, p0, Lmodmenu/ModMenuSheet$6;->this$0:Lmodmenu/ModMenuSheet;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -46,11 +46,11 @@
 .method public onClick(Landroid/view/View;)V
     .locals 0
 
-    .line 309
+    .line 327
     iget-object p1, p0, Lmodmenu/ModMenuSheet$6;->this$0:Lmodmenu/ModMenuSheet;
 
     invoke-static {p1}, Lmodmenu/ModMenuSheet;->access$1100(Lmodmenu/ModMenuSheet;)V
 
-    .line 310
+    .line 328
     return-void
 .end method

@@ -112,4 +112,14 @@
     <string name="mod_le_i_bad_close">"Line %1$d: mismatched '%2$s'"</string>
     <string name="mod_le_i_extra_close">"Line %1$d: extra '%2$s'"</string>
     <string name="mod_le_i_unknown_api">"Line %1$d: API '%2$s' not in the catalog"</string>
+    <string name="mod_log_label">"Log"</string>
+    <string name="mod_log_empty">"No log yet"</string>
+    <string name="mod_log_refresh">"Refresh"</string>
+    <string name="mod_log_copy">"Copy"</string>
+    <string name="mod_log_copied">"Copied to clipboard"</string>
+    <string name="mod_log_export">"Export"</string>
+    <string name="mod_log_exported">"Exported: %1$s"</string>
+    <string name="mod_log_status">"%1$d lines · %2$s"</string>
+    <string name="mod_tapagain">"Tap the notification again to open the menu"</string>
+    <string name="mod_menufail">"Menu failed: %1$s"</string>
 </resources>

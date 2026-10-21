@@ -38,14 +38,14 @@
         }
     .end annotation
 
-    .line 449
+    .line 448
     iput-object p1, p0, Lmodmenu/BetterInput$17;->this$0:Lmodmenu/BetterInput;
 
     iput-object p4, p0, Lmodmenu/BetterInput$17;->val$rows:[Ljava/lang/String;
 
     invoke-direct {p0, p2, p3}, Landroid/app/Dialog;-><init>(Landroid/content/Context;I)V
 
-    .line 451
+    .line 450
     new-instance p1, Landroid/widget/LinearLayout;
 
     iget-object p2, p0, Lmodmenu/BetterInput$17;->this$0:Lmodmenu/BetterInput;
@@ -56,12 +56,12 @@
 
     invoke-direct {p1, p2}, Landroid/widget/LinearLayout;-><init>(Landroid/content/Context;)V
 
-    .line 452
+    .line 451
     const/4 p2, 0x1
 
     invoke-virtual {p1, p2}, Landroid/widget/LinearLayout;->setOrientation(I)V
 
-    .line 453
+    .line 452
     iget-object p2, p0, Lmodmenu/BetterInput$17;->this$0:Lmodmenu/BetterInput;
 
     const/16 p3, 0xe
@@ -90,7 +90,7 @@
 
     invoke-virtual {p1, p2, p4, v0, p3}, Landroid/widget/LinearLayout;->setPadding(IIII)V
 
-    .line 454
+    .line 453
     iget-object p2, p0, Lmodmenu/BetterInput$17;->this$0:Lmodmenu/BetterInput;
 
     iget-object p3, p0, Lmodmenu/BetterInput$17;->this$0:Lmodmenu/BetterInput;
@@ -115,7 +115,7 @@
 
     invoke-virtual {p1, p2}, Landroid/widget/LinearLayout;->setBackground(Landroid/graphics/drawable/Drawable;)V
 
-    .line 455
+    .line 454
     new-instance p2, Landroid/widget/TextView;
 
     iget-object p3, p0, Lmodmenu/BetterInput$17;->this$0:Lmodmenu/BetterInput;
@@ -126,7 +126,7 @@
 
     invoke-direct {p2, p3}, Landroid/widget/TextView;-><init>(Landroid/content/Context;)V
 
-    .line 456
+    .line 455
     iget-object p3, p0, Lmodmenu/BetterInput$17;->this$0:Lmodmenu/BetterInput;
 
     invoke-static {p3}, Lmodmenu/BetterInput;->access$1200(Lmodmenu/BetterInput;)Landroid/app/Activity;
@@ -141,7 +141,7 @@
 
     invoke-virtual {p2, p3}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    .line 457
+    .line 456
     iget-object p3, p0, Lmodmenu/BetterInput$17;->this$0:Lmodmenu/BetterInput;
 
     invoke-static {p3}, Lmodmenu/BetterInput;->access$1400(Lmodmenu/BetterInput;)Lmodmenu/Palette;
@@ -152,12 +152,12 @@
 
     invoke-virtual {p2, p3}, Landroid/widget/TextView;->setTextColor(I)V
 
-    .line 458
+    .line 457
     const/high16 p3, 0x41800000    # 16.0f
 
     invoke-virtual {p2, p3}, Landroid/widget/TextView;->setTextSize(F)V
 
-    .line 459
+    .line 458
     iget-object p3, p0, Lmodmenu/BetterInput$17;->this$0:Lmodmenu/BetterInput;
 
     iget-object p4, p0, Lmodmenu/BetterInput$17;->this$0:Lmodmenu/BetterInput;
@@ -172,7 +172,7 @@
 
     invoke-virtual {p1, p2, p3}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 460
+    .line 459
     new-instance p2, Landroid/widget/ListView;
 
     iget-object p3, p0, Lmodmenu/BetterInput$17;->this$0:Lmodmenu/BetterInput;
@@ -183,7 +183,7 @@
 
     invoke-direct {p2, p3}, Landroid/widget/ListView;-><init>(Landroid/content/Context;)V
 
-    .line 461
+    .line 460
     new-instance p3, Lmodmenu/BetterInput$17$1;
 
     iget-object p4, p0, Lmodmenu/BetterInput$17;->this$0:Lmodmenu/BetterInput;
@@ -200,19 +200,19 @@
 
     invoke-virtual {p2, p3}, Landroid/widget/ListView;->setAdapter(Landroid/widget/ListAdapter;)V
 
-    .line 472
+    .line 471
     new-instance p3, Lmodmenu/BetterInput$17$2;
 
     invoke-direct {p3, p0}, Lmodmenu/BetterInput$17$2;-><init>(Lmodmenu/BetterInput$17;)V
 
     invoke-virtual {p2, p3}, Landroid/widget/ListView;->setOnItemClickListener(Landroid/widget/AdapterView$OnItemClickListener;)V
 
-    .line 480
+    .line 479
     new-instance p3, Landroid/widget/LinearLayout$LayoutParams;
 
     iget-object p4, p0, Lmodmenu/BetterInput$17;->this$0:Lmodmenu/BetterInput;
 
-    .line 481
+    .line 480
     const/16 v0, 0x118
 
     invoke-static {p4, v0}, Lmodmenu/BetterInput;->access$1300(Lmodmenu/BetterInput;I)I
@@ -223,12 +223,12 @@
 
     invoke-direct {p3, v0, p4}, Landroid/widget/LinearLayout$LayoutParams;-><init>(II)V
 
-    .line 480
+    .line 479
     invoke-virtual {p1, p2, p3}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 482
+    .line 481
     invoke-virtual {p0, p1}, Lmodmenu/BetterInput$17;->setContentView(Landroid/view/View;)V
 
-    .line 483
+    .line 482
     return-void
 .end method

@@ -33,7 +33,7 @@
         }
     .end annotation
 
-    .line 368
+    .line 367
     iput-object p1, p0, Lmodmenu/LuaEditor$10$2;->this$1:Lmodmenu/LuaEditor$10;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -55,7 +55,7 @@
         }
     .end annotation
 
-    .line 372
+    .line 371
     iget-object p1, p0, Lmodmenu/LuaEditor$10$2;->this$1:Lmodmenu/LuaEditor$10;
 
     iget-object p1, p1, Lmodmenu/LuaEditor$10;->this$0:Lmodmenu/LuaEditor;
@@ -74,11 +74,11 @@
 
     invoke-static {p1, p2}, Lmodmenu/LuaEditor;->access$1600(Lmodmenu/LuaEditor;I)V
 
-    .line 373
+    .line 372
     iget-object p1, p0, Lmodmenu/LuaEditor$10$2;->this$1:Lmodmenu/LuaEditor$10;
 
     invoke-virtual {p1}, Lmodmenu/LuaEditor$10;->dismiss()V
 
-    .line 374
+    .line 373
     return-void
 .end method

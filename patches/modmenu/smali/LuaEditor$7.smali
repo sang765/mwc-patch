@@ -33,7 +33,7 @@
         }
     .end annotation
 
-    .line 210
+    .line 209
     iput-object p1, p0, Lmodmenu/LuaEditor$7;->this$0:Lmodmenu/LuaEditor;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -46,12 +46,12 @@
 .method public afterTextChanged(Landroid/text/Editable;)V
     .locals 0
 
-    .line 221
+    .line 220
     iget-object p1, p0, Lmodmenu/LuaEditor$7;->this$0:Lmodmenu/LuaEditor;
 
     invoke-static {p1}, Lmodmenu/LuaEditor;->access$500(Lmodmenu/LuaEditor;)V
 
-    .line 222
+    .line 221
     iget-object p1, p0, Lmodmenu/LuaEditor$7;->this$0:Lmodmenu/LuaEditor;
 
     invoke-static {p1}, Lmodmenu/LuaEditor;->access$600(Lmodmenu/LuaEditor;)Lmodmenu/LuaEditor$LineGutter;
@@ -60,30 +60,30 @@
 
     invoke-virtual {p1}, Lmodmenu/LuaEditor$LineGutter;->invalidate()V
 
-    .line 223
+    .line 222
     iget-object p1, p0, Lmodmenu/LuaEditor$7;->this$0:Lmodmenu/LuaEditor;
 
     invoke-static {p1}, Lmodmenu/LuaEditor;->access$700(Lmodmenu/LuaEditor;)V
 
-    .line 224
+    .line 223
     iget-object p1, p0, Lmodmenu/LuaEditor$7;->this$0:Lmodmenu/LuaEditor;
 
     invoke-static {p1}, Lmodmenu/LuaEditor;->access$800(Lmodmenu/LuaEditor;)V
 
-    .line 225
+    .line 224
     return-void
 .end method
 
 .method public beforeTextChanged(Ljava/lang/CharSequence;III)V
     .locals 0
 
-    .line 213
+    .line 212
     return-void
 .end method
 
 .method public onTextChanged(Ljava/lang/CharSequence;III)V
     .locals 0
 
-    .line 217
+    .line 216
     return-void
 .end method

@@ -33,7 +33,7 @@
         }
     .end annotation
 
-    .line 377
+    .line 376
     iput-object p1, p0, Lmodmenu/BetterInput$16;->this$0:Lmodmenu/BetterInput;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -46,7 +46,7 @@
 .method public onDismiss(Landroid/content/DialogInterface;)V
     .locals 1
 
-    .line 380
+    .line 379
     iget-object p1, p0, Lmodmenu/BetterInput$16;->this$0:Lmodmenu/BetterInput;
 
     invoke-static {p1}, Lmodmenu/BetterInput;->access$1100(Lmodmenu/BetterInput;)Landroid/animation/ValueAnimator;
@@ -55,7 +55,7 @@
 
     if-eqz p1, :cond_0
 
-    .line 381
+    .line 380
     iget-object p1, p0, Lmodmenu/BetterInput$16;->this$0:Lmodmenu/BetterInput;
 
     invoke-static {p1}, Lmodmenu/BetterInput;->access$1100(Lmodmenu/BetterInput;)Landroid/animation/ValueAnimator;
@@ -64,14 +64,14 @@
 
     invoke-virtual {p1}, Landroid/animation/ValueAnimator;->cancel()V
 
-    .line 382
+    .line 381
     iget-object p1, p0, Lmodmenu/BetterInput$16;->this$0:Lmodmenu/BetterInput;
 
     const/4 v0, 0x0
 
     invoke-static {p1, v0}, Lmodmenu/BetterInput;->access$1102(Lmodmenu/BetterInput;Landroid/animation/ValueAnimator;)Landroid/animation/ValueAnimator;
 
-    .line 384
+    .line 383
     :cond_0
     return-void
 .end method

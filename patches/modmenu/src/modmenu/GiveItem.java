@@ -3,7 +3,6 @@ package modmenu;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.widget.Toast;
 
 import org.appplay.lib.CommonNatives;
@@ -77,7 +76,7 @@ public final class GiveItem {
             final long uid, final Runnable done) {
         final String[] p = paths(ctx);
         if (p == null) {
-            Log.d(TAG, "no writable files dir");
+            MwLog.d(TAG, "no writable files dir");
             toast(ctx, "fail");
             done.run();
             return;
@@ -113,13 +112,13 @@ public final class GiveItem {
                     } catch (RuntimeException e) {
                         // never leave the flag up: a stuck `polling` would
                         // silently drop every later give
-                        Log.d(TAG, "poll failed: " + e);
+                        MwLog.d(TAG, "poll failed: " + e);
                         state = "fail";
                     }
                     polling = false;
                     final String out = "timeout".equals(state) ? "fail" : state;
                     final String code = why;
-                    Log.d(TAG, "give done: " + out + " " + code);
+                    MwLog.d(TAG, "give done: " + out + " " + code);
                     MAIN.post(new Runnable() {
                         @Override
                         public void run() {
@@ -129,10 +128,10 @@ public final class GiveItem {
                     });
                 }
             }, "mw-giveitem").start();
-            Log.d(TAG, "give shipped");
+            MwLog.d(TAG, "give shipped");
         } catch (RuntimeException e) {
             polling = false;
-            Log.d(TAG, "dispatch failed: " + e);
+            MwLog.d(TAG, "dispatch failed: " + e);
             toast(ctx, "fail");
             done.run();
         }
@@ -168,7 +167,7 @@ public final class GiveItem {
                                 check(p[0], p[1], item, want, uid),
                                 new Object[0]);
                     } catch (RuntimeException e) {
-                        Log.d(TAG, "check dispatch failed: " + e);
+                        MwLog.d(TAG, "check dispatch failed: " + e);
                     }
                 }
             });
@@ -189,7 +188,7 @@ public final class GiveItem {
             Toast.makeText(c, message(c, state, code), Toast.LENGTH_SHORT)
                     .show();
         } catch (RuntimeException e) {
-            Log.d(TAG, "toast failed: " + e);
+            MwLog.d(TAG, "toast failed: " + e);
         }
     }
 
@@ -259,7 +258,7 @@ public final class GiveItem {
             }
             return new String[]{new File(ext, FILE).getAbsolutePath(), in};
         } catch (RuntimeException e) {
-            Log.d(TAG, "paths failed: " + e);
+            MwLog.d(TAG, "paths failed: " + e);
             return null;
         }
     }

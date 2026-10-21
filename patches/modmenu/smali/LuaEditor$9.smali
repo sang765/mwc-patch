@@ -33,7 +33,7 @@
         }
     .end annotation
 
-    .line 267
+    .line 266
     iput-object p1, p0, Lmodmenu/LuaEditor$9;->this$0:Lmodmenu/LuaEditor;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -46,7 +46,7 @@
 .method public onScrollChanged()V
     .locals 1
 
-    .line 270
+    .line 269
     iget-object v0, p0, Lmodmenu/LuaEditor$9;->this$0:Lmodmenu/LuaEditor;
 
     invoke-static {v0}, Lmodmenu/LuaEditor;->access$600(Lmodmenu/LuaEditor;)Lmodmenu/LuaEditor$LineGutter;
@@ -55,6 +55,6 @@
 
     invoke-virtual {v0}, Lmodmenu/LuaEditor$LineGutter;->invalidate()V
 
-    .line 271
+    .line 270
     return-void
 .end method

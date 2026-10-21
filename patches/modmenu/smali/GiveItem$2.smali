@@ -36,7 +36,7 @@
         }
     .end annotation
 
-    .line 163
+    .line 162
     iput-object p1, p0, Lmodmenu/GiveItem$2;->val$p:[Ljava/lang/String;
 
     iput p2, p0, Lmodmenu/GiveItem$2;->val$item:I
@@ -55,7 +55,7 @@
 .method public run()V
     .locals 9
 
-    .line 167
+    .line 166
     :try_start_0
     iget-object v0, p0, Lmodmenu/GiveItem$2;->val$p:[Ljava/lang/String;
 
@@ -75,26 +75,26 @@
 
     iget-wide v7, p0, Lmodmenu/GiveItem$2;->val$uid:J
 
-    .line 168
+    .line 167
     invoke-static/range {v2 .. v8}, Lmodmenu/GiveItem;->check(Ljava/lang/String;Ljava/lang/String;IJJ)Ljava/lang/String;
 
     move-result-object v0
 
     new-array v1, v1, [Ljava/lang/Object;
 
-    .line 167
+    .line 166
     invoke-static {v0, v1}, Lorg/appplay/lib/CommonNatives;->javaCallLuaEvent(Ljava/lang/String;[Ljava/lang/Object;)V
     :try_end_0
     .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 172
+    .line 171
     goto :goto_0
 
-    .line 170
+    .line 169
     :catch_0
     move-exception v0
 
-    .line 171
+    .line 170
     new-instance v1, Ljava/lang/StringBuilder;
 
     invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
@@ -115,9 +115,9 @@
 
     const-string v1, "MWGiveItem"
 
-    invoke-static {v1, v0}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+    invoke-static {v1, v0}, Lmodmenu/MwLog;->d(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 173
+    .line 172
     :goto_0
     return-void
 .end method

@@ -44,7 +44,7 @@
         }
     .end annotation
 
-    .line 462
+    .line 461
     iput-object p1, p0, Lmodmenu/BetterInput$17$1;->this$1:Lmodmenu/BetterInput$17;
 
     invoke-direct {p0, p2, p3, p4}, Landroid/widget/ArrayAdapter;-><init>(Landroid/content/Context;I[Ljava/lang/Object;)V
@@ -57,14 +57,14 @@
 .method public getView(ILandroid/view/View;Landroid/view/ViewGroup;)Landroid/view/View;
     .locals 0
 
-    .line 466
+    .line 465
     invoke-super {p0, p1, p2, p3}, Landroid/widget/ArrayAdapter;->getView(ILandroid/view/View;Landroid/view/ViewGroup;)Landroid/view/View;
 
     move-result-object p1
 
     check-cast p1, Landroid/widget/TextView;
 
-    .line 467
+    .line 466
     iget-object p2, p0, Lmodmenu/BetterInput$17$1;->this$1:Lmodmenu/BetterInput$17;
 
     iget-object p2, p2, Lmodmenu/BetterInput$17;->this$0:Lmodmenu/BetterInput;
@@ -77,11 +77,11 @@
 
     invoke-virtual {p1, p2}, Landroid/widget/TextView;->setTextColor(I)V
 
-    .line 468
+    .line 467
     const/high16 p2, 0x41600000    # 14.0f
 
     invoke-virtual {p1, p2}, Landroid/widget/TextView;->setTextSize(F)V
 
-    .line 469
+    .line 468
     return-object p1
 .end method

@@ -51,7 +51,7 @@
         }
     .end annotation
 
-    .line 672
+    .line 671
     iput-object p1, p0, Lmodmenu/LuaEditor$11;->this$0:Lmodmenu/LuaEditor;
 
     iput-object p2, p0, Lmodmenu/LuaEditor$11;->val$paths:[Ljava/lang/String;
@@ -70,14 +70,14 @@
 .method public run()V
     .locals 3
 
-    .line 675
+    .line 674
     iget-object v0, p0, Lmodmenu/LuaEditor$11;->val$paths:[Ljava/lang/String;
 
     invoke-static {v0}, Lmodmenu/LuaEditor;->access$1700([Ljava/lang/String;)Lorg/json/JSONObject;
 
     move-result-object v0
 
-    .line 676
+    .line 675
     new-instance v1, Landroid/os/Handler;
 
     invoke-static {}, Landroid/os/Looper;->getMainLooper()Landroid/os/Looper;
@@ -92,6 +92,6 @@
 
     invoke-virtual {v1, v2}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
 
-    .line 683
+    .line 682
     return-void
 .end method

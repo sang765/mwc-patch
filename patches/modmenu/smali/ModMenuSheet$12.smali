@@ -8,7 +8,7 @@
 
 # annotations
 .annotation system Ldalvik/annotation/EnclosingMethod;
-    value = Lmodmenu/ModMenuSheet;->openBrowser()V
+    value = Lmodmenu/ModMenuSheet;->requestGive()V
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
@@ -33,7 +33,7 @@
         }
     .end annotation
 
-    .line 877
+    .line 838
     iput-object p1, p0, Lmodmenu/ModMenuSheet$12;->this$0:Lmodmenu/ModMenuSheet;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -44,17 +44,29 @@
 
 # virtual methods
 .method public run()V
-    .locals 1
+    .locals 2
 
-    .line 882
+    .line 841
     iget-object v0, p0, Lmodmenu/ModMenuSheet$12;->this$0:Lmodmenu/ModMenuSheet;
 
-    invoke-static {v0}, Lmodmenu/ModMenuSheet;->access$800(Lmodmenu/ModMenuSheet;)Landroid/app/Dialog;
+    invoke-static {v0}, Lmodmenu/ModMenuSheet;->access$1600(Lmodmenu/ModMenuSheet;)Landroid/widget/Button;
 
     move-result-object v0
 
-    invoke-virtual {v0}, Landroid/app/Dialog;->cancel()V
+    if-eqz v0, :cond_0
 
-    .line 883
+    .line 842
+    iget-object v0, p0, Lmodmenu/ModMenuSheet$12;->this$0:Lmodmenu/ModMenuSheet;
+
+    invoke-static {v0}, Lmodmenu/ModMenuSheet;->access$1600(Lmodmenu/ModMenuSheet;)Landroid/widget/Button;
+
+    move-result-object v0
+
+    const/4 v1, 0x1
+
+    invoke-virtual {v0, v1}, Landroid/widget/Button;->setEnabled(Z)V
+
+    .line 844
+    :cond_0
     return-void
 .end method

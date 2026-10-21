@@ -19,7 +19,6 @@ import android.os.Build;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.HapticFeedbackConstants;
 import android.view.View;
@@ -104,6 +103,8 @@ public final class ModMenuSheet implements View.OnClickListener,
         }
         try {
             ModMenuSheet s = new ModMenuSheet(host);
+            MwLog.i("ModMenu", "sheet shown on "
+                    + host.getClass().getSimpleName());
             // the scan-completion notification lands here: the scan already
             // ran, so go straight to the list instead of sitting on the menu
             if (openIds) {
@@ -111,12 +112,29 @@ public final class ModMenuSheet implements View.OnClickListener,
             }
             return s;
         } catch (RuntimeException e) {
-            Log.e("ModMenu", "menu UI failed", e);
+            MwLog.e("ModMenu", "menu UI failed", e);
+            // a toast is the only channel the tap still has if the sheet
+            // itself cannot build - the log needs someone to open it first
+            try {
+                Toast.makeText(host.getApplicationContext(),
+                        String.format(java.util.Locale.getDefault(),
+                                I18n.t(host, "mod_menufail"),
+                                String.valueOf(e.getMessage())),
+                        Toast.LENGTH_LONG).show();
+            } catch (RuntimeException ignored) {
+                // the log line above already has the stack
+            }
             if (host instanceof ModMenuActivity) {
                 host.finish();
             }
             return null;
         }
+    }
+
+    /** Is a sheet up right now? The notification tap and the standalone
+     *  activity ask before stacking a second one over a live menu. */
+    static boolean showing() {
+        return current != null && current.dialog.isShowing();
     }
 
     private ModMenuSheet(Activity host) {
@@ -313,6 +331,21 @@ public final class ModMenuSheet implements View.OnClickListener,
                 LinearLayout.LayoutParams.MATCH_PARENT, dp(40));
         leLp.topMargin = dp(6);
         sheet.addView(leBtn, leLp);
+
+        Button logBtn = makeButton(I18n.t(host, "mod_log_label"), 0, p.primary,
+                (p.primary & 0x00FFFFFF) | 0x14000000);
+        // its own listener: makeButton wires every pill to onClick, whose
+        // default action is closing the menu
+        logBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openLog();
+            }
+        });
+        LinearLayout.LayoutParams logLp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, dp(40));
+        logLp.topMargin = dp(6);
+        sheet.addView(logBtn, logLp);
 
         Button close = makeButton(I18n.t(host, "mod_close"), 0, p.primary,
                 (p.primary & 0x00FFFFFF) | 0x14000000);
@@ -864,7 +897,7 @@ public final class ModMenuSheet implements View.OnClickListener,
         try {
             name = IdNames.get(host, "item", id);
         } catch (RuntimeException e) {
-            Log.d("ModMenu", "item name lookup failed: " + e);
+            MwLog.d("ModMenu", "item name lookup failed: " + e);
         }
         givePreview.setText(name == null || name.length() == 0
                 ? "#" + id : "#" + id + "  " + name);
@@ -885,7 +918,7 @@ public final class ModMenuSheet implements View.OnClickListener,
             }
             browser.open();
         } catch (RuntimeException e) {
-            Log.e("ModMenu", "id browser failed, closing", e);
+            MwLog.e("ModMenu", "id browser failed, closing", e);
             dialog.cancel();
         }
     }
@@ -896,7 +929,7 @@ public final class ModMenuSheet implements View.OnClickListener,
             // not a replacement for it
             BetterInput.show(host, p);
         } catch (RuntimeException e) {
-            Log.e("ModMenu", "better input failed, closing", e);
+            MwLog.e("ModMenu", "better input failed, closing", e);
             dialog.cancel();
         }
     }
@@ -907,7 +940,16 @@ public final class ModMenuSheet implements View.OnClickListener,
             // detour from the menu, not a replacement for it
             LuaEditor.show(host, p);
         } catch (RuntimeException e) {
-            Log.e("ModMenu", "lua editor failed, closing", e);
+            MwLog.e("ModMenu", "lua editor failed, closing", e);
+            dialog.cancel();
+        }
+    }
+
+    private void openLog() {
+        try {
+            LogView.show(host, p);
+        } catch (RuntimeException e) {
+            MwLog.e("ModMenu", "log viewer failed, closing", e);
             dialog.cancel();
         }
     }

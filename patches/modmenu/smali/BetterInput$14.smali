@@ -33,7 +33,7 @@
         }
     .end annotation
 
-    .line 340
+    .line 339
     iput-object p1, p0, Lmodmenu/BetterInput$14;->this$0:Lmodmenu/BetterInput;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -46,25 +46,25 @@
 .method public afterTextChanged(Landroid/text/Editable;)V
     .locals 0
 
-    .line 351
+    .line 350
     iget-object p1, p0, Lmodmenu/BetterInput$14;->this$0:Lmodmenu/BetterInput;
 
     invoke-static {p1}, Lmodmenu/BetterInput;->access$1000(Lmodmenu/BetterInput;)V
 
-    .line 352
+    .line 351
     return-void
 .end method
 
 .method public beforeTextChanged(Ljava/lang/CharSequence;III)V
     .locals 0
 
-    .line 343
+    .line 342
     return-void
 .end method
 
 .method public onTextChanged(Ljava/lang/CharSequence;III)V
     .locals 0
 
-    .line 347
+    .line 346
     return-void
 .end method

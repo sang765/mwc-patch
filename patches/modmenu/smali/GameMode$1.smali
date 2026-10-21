@@ -34,7 +34,7 @@
         }
     .end annotation
 
-    .line 78
+    .line 77
     iput-object p1, p0, Lmodmenu/GameMode$1;->val$p:[Ljava/lang/String;
 
     iput-object p2, p0, Lmodmenu/GameMode$1;->val$app:Landroid/content/Context;
@@ -51,14 +51,14 @@
 .method public run()V
     .locals 3
 
-    .line 81
+    .line 80
     iget-object v0, p0, Lmodmenu/GameMode$1;->val$p:[Ljava/lang/String;
 
     invoke-static {v0}, Lmodmenu/GameMode;->access$000([Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v0
 
-    .line 82
+    .line 81
     const-string v1, "timeout"
 
     invoke-virtual {v1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
@@ -67,12 +67,12 @@
 
     if-nez v1, :cond_0
 
-    .line 83
+    .line 82
     const/4 v1, 0x0
 
     invoke-static {v1}, Lmodmenu/GameMode;->access$102(Z)Z
 
-    .line 85
+    .line 84
     :cond_0
     new-instance v1, Ljava/lang/StringBuilder;
 
@@ -94,9 +94,9 @@
 
     const-string v2, "MWGameMode"
 
-    invoke-static {v2, v1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+    invoke-static {v2, v1}, Lmodmenu/MwLog;->d(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 86
+    .line 85
     invoke-static {}, Lmodmenu/GameMode;->access$300()Landroid/os/Handler;
 
     move-result-object v1
@@ -107,6 +107,6 @@
 
     invoke-virtual {v1, v2}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
 
-    .line 93
+    .line 92
     return-void
 .end method

@@ -33,7 +33,7 @@
         }
     .end annotation
 
-    .line 472
+    .line 471
     iput-object p1, p0, Lmodmenu/BetterInput$17$2;->this$1:Lmodmenu/BetterInput$17;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -55,7 +55,7 @@
         }
     .end annotation
 
-    .line 476
+    .line 475
     iget-object p1, p0, Lmodmenu/BetterInput$17$2;->this$1:Lmodmenu/BetterInput$17;
 
     iget-object p1, p1, Lmodmenu/BetterInput$17;->this$0:Lmodmenu/BetterInput;
@@ -90,11 +90,11 @@
 
     invoke-static {p1, p2}, Lmodmenu/BetterInput;->access$000(Lmodmenu/BetterInput;Ljava/lang/String;)V
 
-    .line 477
+    .line 476
     iget-object p1, p0, Lmodmenu/BetterInput$17$2;->this$1:Lmodmenu/BetterInput$17;
 
     invoke-virtual {p1}, Lmodmenu/BetterInput$17;->dismiss()V
 
-    .line 478
+    .line 477
     return-void
 .end method

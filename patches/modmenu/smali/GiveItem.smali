@@ -25,7 +25,7 @@
 .method static constructor <clinit>()V
     .locals 2
 
-    .line 64
+    .line 63
     new-instance v0, Landroid/os/Handler;
 
     invoke-static {}, Landroid/os/Looper;->getMainLooper()Landroid/os/Looper;
@@ -42,7 +42,7 @@
 .method private constructor <init>()V
     .locals 0
 
-    .line 71
+    .line 70
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     return-void
@@ -51,7 +51,7 @@
 .method static synthetic access$000([Ljava/lang/String;J)Ljava/lang/String;
     .locals 0
 
-    .line 54
+    .line 53
     invoke-static {p0, p1, p2}, Lmodmenu/GiveItem;->awaitGuarded([Ljava/lang/String;J)Ljava/lang/String;
 
     move-result-object p0
@@ -62,7 +62,7 @@
 .method static synthetic access$100([Ljava/lang/String;)Ljava/lang/String;
     .locals 0
 
-    .line 54
+    .line 53
     invoke-static {p0}, Lmodmenu/GiveItem;->reason([Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object p0
@@ -73,7 +73,7 @@
 .method static synthetic access$200([Ljava/lang/String;IJ)Ljava/lang/String;
     .locals 0
 
-    .line 54
+    .line 53
     invoke-static {p0, p1, p2, p3}, Lmodmenu/GiveItem;->verify([Ljava/lang/String;IJ)Ljava/lang/String;
 
     move-result-object p0
@@ -84,7 +84,7 @@
 .method static synthetic access$302(Z)Z
     .locals 0
 
-    .line 54
+    .line 53
     sput-boolean p0, Lmodmenu/GiveItem;->polling:Z
 
     return p0
@@ -93,7 +93,7 @@
 .method static synthetic access$400(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)V
     .locals 0
 
-    .line 54
+    .line 53
     invoke-static {p0, p1, p2}, Lmodmenu/GiveItem;->toast(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)V
 
     return-void
@@ -102,7 +102,7 @@
 .method static synthetic access$500()Landroid/os/Handler;
     .locals 1
 
-    .line 54
+    .line 53
     sget-object v0, Lmodmenu/GiveItem;->MAIN:Landroid/os/Handler;
 
     return-object v0
@@ -111,7 +111,7 @@
 .method static act(Ljava/lang/String;Ljava/lang/String;IIJ)Ljava/lang/String;
     .locals 2
 
-    .line 376
+    .line 375
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -122,7 +122,7 @@
 
     move-result-object v0
 
-    .line 377
+    .line 376
     invoke-static {p0}, Lmodmenu/GiveItem;->luaStr(Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object p0
@@ -137,7 +137,7 @@
 
     move-result-object p0
 
-    .line 378
+    .line 377
     invoke-static {p1}, Lmodmenu/GiveItem;->luaStr(Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object p1
@@ -172,7 +172,7 @@
 
     move-result-object p0
 
-    .line 381
+    .line 380
     invoke-static {p4, p5}, Lmodmenu/GiveItem;->luaNum(J)Ljava/lang/String;
 
     move-result-object p1
@@ -191,21 +191,21 @@
 
     move-result-object p0
 
-    .line 376
+    .line 375
     return-object p0
 .end method
 
 .method private static await([Ljava/lang/String;J)Ljava/lang/String;
     .locals 3
 
-    .line 278
+    .line 277
     invoke-static {}, Ljava/lang/System;->currentTimeMillis()J
 
     move-result-wide v0
 
     add-long/2addr v0, p1
 
-    .line 279
+    .line 278
     :goto_0
     invoke-static {}, Ljava/lang/System;->currentTimeMillis()J
 
@@ -215,7 +215,7 @@
 
     if-gez v2, :cond_2
 
-    .line 280
+    .line 279
     const/4 p1, 0x0
 
     :goto_1
@@ -223,26 +223,26 @@
 
     if-ge p1, p2, :cond_1
 
-    .line 281
+    .line 280
     aget-object p2, p0, p1
 
     invoke-static {p2}, Lmodmenu/GiveItem;->state(Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object p2
 
-    .line 282
+    .line 281
     if-eqz p2, :cond_0
 
-    .line 283
+    .line 282
     return-object p2
 
-    .line 280
+    .line 279
     :cond_0
     add-int/lit8 p1, p1, 0x1
 
     goto :goto_1
 
-    .line 287
+    .line 286
     :cond_1
     const-wide/16 p1, 0xfa
 
@@ -251,17 +251,17 @@
     :try_end_0
     .catch Ljava/lang/InterruptedException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 290
+    .line 289
     goto :goto_0
 
-    .line 288
+    .line 287
     :catch_0
     move-exception p0
 
-    .line 289
+    .line 288
     nop
 
-    .line 292
+    .line 291
     :cond_2
     const-string p0, "timeout"
 
@@ -271,7 +271,7 @@
 .method private static awaitGuarded([Ljava/lang/String;J)Ljava/lang/String;
     .locals 0
 
-    .line 271
+    .line 270
     :try_start_0
     invoke-static {p0, p1, p2}, Lmodmenu/GiveItem;->await([Ljava/lang/String;J)Ljava/lang/String;
 
@@ -281,11 +281,11 @@
 
     return-object p0
 
-    .line 272
+    .line 271
     :catch_0
     move-exception p0
 
-    .line 273
+    .line 272
     const-string p0, "timeout"
 
     return-object p0
@@ -294,7 +294,7 @@
 .method static check(Ljava/lang/String;Ljava/lang/String;IJJ)Ljava/lang/String;
     .locals 2
 
-    .line 494
+    .line 493
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -305,7 +305,7 @@
 
     move-result-object v0
 
-    .line 495
+    .line 494
     invoke-static {p0}, Lmodmenu/GiveItem;->luaStr(Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object p0
@@ -320,7 +320,7 @@
 
     move-result-object p0
 
-    .line 496
+    .line 495
     invoke-static {p1}, Lmodmenu/GiveItem;->luaStr(Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object p1
@@ -345,7 +345,7 @@
 
     move-result-object p0
 
-    .line 498
+    .line 497
     invoke-static {p3, p4}, Lmodmenu/GiveItem;->luaNum(J)Ljava/lang/String;
 
     move-result-object p1
@@ -360,7 +360,7 @@
 
     move-result-object p0
 
-    .line 499
+    .line 498
     invoke-static {p5, p6}, Lmodmenu/GiveItem;->luaNum(J)Ljava/lang/String;
 
     move-result-object p1
@@ -379,14 +379,14 @@
 
     move-result-object p0
 
-    .line 494
+    .line 493
     return-object p0
 .end method
 
 .method private static luaNum(J)Ljava/lang/String;
     .locals 0
 
-    .line 359
+    .line 358
     invoke-static {p0, p1}, Ljava/lang/Long;->toString(J)Ljava/lang/String;
 
     move-result-object p0
@@ -397,7 +397,7 @@
 .method private static luaStr(Ljava/lang/String;)Ljava/lang/String;
     .locals 2
 
-    .line 354
+    .line 353
     if-nez p0, :cond_0
 
     const-string p0, ""
@@ -428,7 +428,7 @@
 .method private static message(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
     .locals 1
 
-    .line 197
+    .line 196
     const-string v0, "ok"
 
     invoke-virtual {v0, p1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
@@ -437,7 +437,7 @@
 
     if-eqz v0, :cond_0
 
-    .line 198
+    .line 197
     const-string p1, "mod_give_ok"
 
     invoke-static {p0, p1}, Lmodmenu/I18n;->t(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;
@@ -446,7 +446,7 @@
 
     return-object p0
 
-    .line 200
+    .line 199
     :cond_0
     const-string v0, "nomap"
 
@@ -456,7 +456,7 @@
 
     if-eqz v0, :cond_1
 
-    .line 201
+    .line 200
     const-string p1, "mod_give_nomap"
 
     invoke-static {p0, p1}, Lmodmenu/I18n;->t(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;
@@ -465,7 +465,7 @@
 
     return-object p0
 
-    .line 203
+    .line 202
     :cond_1
     const-string v0, "notarget"
 
@@ -475,7 +475,7 @@
 
     if-eqz v0, :cond_2
 
-    .line 204
+    .line 203
     const-string p1, "mod_give_notarget"
 
     invoke-static {p0, p1}, Lmodmenu/I18n;->t(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;
@@ -484,7 +484,7 @@
 
     return-object p0
 
-    .line 206
+    .line 205
     :cond_2
     const-string v0, "noclient"
 
@@ -494,7 +494,7 @@
 
     if-eqz v0, :cond_3
 
-    .line 207
+    .line 206
     const-string p1, "mod_give_noclient"
 
     invoke-static {p0, p1}, Lmodmenu/I18n;->t(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;
@@ -503,7 +503,7 @@
 
     return-object p0
 
-    .line 209
+    .line 208
     :cond_3
     const-string v0, "full"
 
@@ -513,7 +513,7 @@
 
     if-eqz v0, :cond_4
 
-    .line 210
+    .line 209
     const-string p1, "mod_give_full"
 
     invoke-static {p0, p1}, Lmodmenu/I18n;->t(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;
@@ -522,7 +522,7 @@
 
     return-object p0
 
-    .line 212
+    .line 211
     :cond_4
     const-string v0, "bad"
 
@@ -532,7 +532,7 @@
 
     if-eqz p1, :cond_5
 
-    .line 213
+    .line 212
     const-string p1, "mod_give_bad"
 
     invoke-static {p0, p1}, Lmodmenu/I18n;->t(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;
@@ -541,7 +541,7 @@
 
     return-object p0
 
-    .line 215
+    .line 214
     :cond_5
     const-string p1, "mod_give_fail"
 
@@ -549,7 +549,7 @@
 
     move-result-object p0
 
-    .line 220
+    .line 219
     if-eqz p2, :cond_7
 
     invoke-virtual {p2}, Ljava/lang/String;->length()I
@@ -560,7 +560,7 @@
 
     goto :goto_0
 
-    .line 221
+    .line 220
     :cond_6
     new-instance p1, Ljava/lang/StringBuilder;
 
@@ -590,7 +590,7 @@
 
     move-result-object p0
 
-    .line 220
+    .line 219
     :cond_7
     :goto_0
     return-object p0
@@ -599,12 +599,12 @@
 .method private static obj(Ljava/lang/String;)Lorg/json/JSONObject;
     .locals 3
 
-    .line 319
+    .line 318
     invoke-static {p0}, Lmodmenu/GiveItem;->read(Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object p0
 
-    .line 320
+    .line 319
     const/4 v0, 0x0
 
     if-eqz p0, :cond_1
@@ -619,7 +619,7 @@
 
     goto :goto_0
 
-    .line 324
+    .line 323
     :cond_0
     :try_start_0
     new-instance v1, Lorg/json/JSONObject;
@@ -630,14 +630,14 @@
 
     return-object v1
 
-    .line 325
+    .line 324
     :catch_0
     move-exception p0
 
-    .line 326
+    .line 325
     return-object v0
 
-    .line 321
+    .line 320
     :cond_1
     :goto_0
     return-object v0
@@ -646,7 +646,7 @@
 .method private static paths(Landroid/content/Context;)[Ljava/lang/String;
     .locals 4
 
-    .line 251
+    .line 250
     const-string v0, "mw_give.json"
 
     const/4 v1, 0x0
@@ -656,13 +656,13 @@
 
     move-result-object v2
 
-    .line 252
+    .line 251
     if-nez v2, :cond_0
 
-    .line 253
+    .line 252
     return-object v1
 
-    .line 255
+    .line 254
     :cond_0
     new-instance v3, Ljava/io/File;
 
@@ -672,22 +672,22 @@
 
     move-result-object v2
 
-    .line 256
+    .line 255
     invoke-virtual {p0, v1}, Landroid/content/Context;->getExternalFilesDir(Ljava/lang/String;)Ljava/io/File;
 
     move-result-object p0
 
-    .line 257
+    .line 256
     if-nez p0, :cond_1
 
-    .line 258
+    .line 257
     filled-new-array {v2, v2}, [Ljava/lang/String;
 
     move-result-object p0
 
     return-object p0
 
-    .line 260
+    .line 259
     :cond_1
     new-instance v3, Ljava/io/File;
 
@@ -705,11 +705,11 @@
 
     return-object p0
 
-    .line 261
+    .line 260
     :catch_0
     move-exception p0
 
-    .line 262
+    .line 261
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -730,19 +730,19 @@
 
     const-string v0, "MWGiveItem"
 
-    invoke-static {v0, p0}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+    invoke-static {v0, p0}, Lmodmenu/MwLog;->d(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 263
+    .line 262
     return-object v1
 .end method
 
 .method private static read(Ljava/lang/String;)Ljava/lang/String;
     .locals 5
 
-    .line 331
+    .line 330
     nop
 
-    .line 333
+    .line 332
     const/4 v0, 0x0
 
     :try_start_0
@@ -753,18 +753,18 @@
     .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_3
     .catchall {:try_start_0 .. :try_end_0} :catchall_1
 
-    .line 334
+    .line 333
     :try_start_1
     new-instance p0, Ljava/io/ByteArrayOutputStream;
 
     invoke-direct {p0}, Ljava/io/ByteArrayOutputStream;-><init>()V
 
-    .line 335
+    .line 334
     const/16 v2, 0x2000
 
     new-array v2, v2, [B
 
-    .line 337
+    .line 336
     :goto_0
     invoke-virtual {v1, v2}, Ljava/io/FileInputStream;->read([B)I
 
@@ -772,14 +772,14 @@
 
     if-lez v3, :cond_0
 
-    .line 338
+    .line 337
     const/4 v4, 0x0
 
     invoke-virtual {p0, v2, v4, v3}, Ljava/io/ByteArrayOutputStream;->write([BII)V
 
     goto :goto_0
 
-    .line 340
+    .line 339
     :cond_0
     const-string v2, "UTF-8"
 
@@ -790,27 +790,27 @@
     .catch Ljava/lang/Exception; {:try_start_1 .. :try_end_1} :catch_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
-    .line 344
+    .line 343
     nop
 
-    .line 346
+    .line 345
     :try_start_2
     invoke-virtual {v1}, Ljava/io/FileInputStream;->close()V
     :try_end_2
     .catch Ljava/lang/Exception; {:try_start_2 .. :try_end_2} :catch_0
 
-    .line 348
+    .line 347
     goto :goto_1
 
-    .line 347
+    .line 346
     :catch_0
     move-exception v0
 
-    .line 340
+    .line 339
     :goto_1
     return-object p0
 
-    .line 344
+    .line 343
     :catchall_0
     move-exception p0
 
@@ -818,64 +818,64 @@
 
     goto :goto_2
 
-    .line 341
+    .line 340
     :catch_1
     move-exception p0
 
     goto :goto_4
 
-    .line 344
+    .line 343
     :catchall_1
     move-exception p0
 
     :goto_2
     if-eqz v0, :cond_1
 
-    .line 346
+    .line 345
     :try_start_3
     invoke-virtual {v0}, Ljava/io/FileInputStream;->close()V
     :try_end_3
     .catch Ljava/lang/Exception; {:try_start_3 .. :try_end_3} :catch_2
 
-    .line 348
+    .line 347
     goto :goto_3
 
-    .line 347
+    .line 346
     :catch_2
     move-exception v0
 
-    .line 350
+    .line 349
     :cond_1
     :goto_3
     throw p0
 
-    .line 341
+    .line 340
     :catch_3
     move-exception p0
 
     move-object v1, v0
 
-    .line 342
+    .line 341
     :goto_4
     nop
 
-    .line 344
+    .line 343
     if-eqz v1, :cond_2
 
-    .line 346
+    .line 345
     :try_start_4
     invoke-virtual {v1}, Ljava/io/FileInputStream;->close()V
     :try_end_4
     .catch Ljava/lang/Exception; {:try_start_4 .. :try_end_4} :catch_4
 
-    .line 348
+    .line 347
     goto :goto_5
 
-    .line 347
+    .line 346
     :catch_4
     move-exception p0
 
-    .line 342
+    .line 341
     :cond_2
     :goto_5
     return-object v0
@@ -884,7 +884,7 @@
 .method private static reason([Ljava/lang/String;)Ljava/lang/String;
     .locals 7
 
-    .line 228
+    .line 227
     const/4 v0, 0x0
 
     const/4 v1, 0x0
@@ -896,14 +896,14 @@
 
     if-ge v1, v2, :cond_4
 
-    .line 229
+    .line 228
     aget-object v2, p0, v1
 
     invoke-static {v2}, Lmodmenu/GiveItem;->obj(Ljava/lang/String;)Lorg/json/JSONObject;
 
     move-result-object v2
 
-    .line 230
+    .line 229
     if-eqz v2, :cond_3
 
     const-string v4, "started"
@@ -914,10 +914,10 @@
 
     if-eqz v4, :cond_0
 
-    .line 231
+    .line 230
     goto :goto_1
 
-    .line 233
+    .line 232
     :cond_0
     const-string v4, "why"
 
@@ -927,7 +927,7 @@
 
     move-result-object v4
 
-    .line 234
+    .line 233
     if-eqz v4, :cond_1
 
     invoke-virtual {v4}, Ljava/lang/String;->length()I
@@ -936,10 +936,10 @@
 
     if-lez v6, :cond_1
 
-    .line 235
+    .line 234
     return-object v4
 
-    .line 237
+    .line 236
     :cond_1
     const-string v4, "r"
 
@@ -947,7 +947,7 @@
 
     move-result-object v2
 
-    .line 238
+    .line 237
     const-string v4, "wait"
 
     invoke-virtual {v4, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
@@ -956,10 +956,10 @@
 
     if-eqz v4, :cond_2
 
-    .line 239
+    .line 238
     return-object v3
 
-    .line 241
+    .line 240
     :cond_2
     if-eqz v2, :cond_3
 
@@ -969,17 +969,17 @@
 
     if-lez v3, :cond_3
 
-    .line 242
+    .line 241
     return-object v2
 
-    .line 228
+    .line 227
     :cond_3
     :goto_1
     add-int/lit8 v1, v1, 0x1
 
     goto :goto_0
 
-    .line 245
+    .line 244
     :cond_4
     return-object v3
 .end method
@@ -987,50 +987,50 @@
 .method public static request(Landroid/content/Context;IIJLjava/lang/Runnable;)V
     .locals 18
 
-    .line 78
+    .line 77
     move-object/from16 v1, p0
 
     invoke-static {v1}, Lmodmenu/GiveItem;->paths(Landroid/content/Context;)[Ljava/lang/String;
 
     move-result-object v3
 
-    .line 79
+    .line 78
     const-string v9, "fail"
 
     const-string v10, "MWGiveItem"
 
     if-nez v3, :cond_0
 
-    .line 80
+    .line 79
     const-string v0, "no writable files dir"
 
-    invoke-static {v10, v0}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+    invoke-static {v10, v0}, Lmodmenu/MwLog;->d(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 81
+    .line 80
     invoke-static {v1, v9}, Lmodmenu/GiveItem;->toast(Landroid/content/Context;Ljava/lang/String;)V
 
-    .line 82
+    .line 81
     invoke-interface/range {p5 .. p5}, Ljava/lang/Runnable;->run()V
 
-    .line 83
+    .line 82
     return-void
 
-    .line 87
+    .line 86
     :cond_0
     sget-boolean v0, Lmodmenu/GiveItem;->polling:Z
 
     if-eqz v0, :cond_1
 
-    .line 88
+    .line 87
     return-void
 
-    .line 90
+    .line 89
     :cond_1
     invoke-virtual {v1}, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
 
     move-result-object v7
 
-    .line 95
+    .line 94
     const/4 v11, 0x0
 
     const/4 v0, 0x0
@@ -1041,7 +1041,7 @@
 
     if-ge v0, v2, :cond_2
 
-    .line 96
+    .line 95
     new-instance v2, Ljava/io/File;
 
     aget-object v4, v3, v0
@@ -1050,23 +1050,23 @@
 
     invoke-virtual {v2}, Ljava/io/File;->delete()Z
 
-    .line 95
+    .line 94
     add-int/lit8 v0, v0, 0x1
 
     goto :goto_0
 
-    .line 98
+    .line 97
     :cond_2
     const/4 v0, 0x1
 
     sput-boolean v0, Lmodmenu/GiveItem;->polling:Z
 
-    .line 99
+    .line 98
     aget-object v12, v3, v11
 
     aget-object v13, v3, v0
 
-    .line 100
+    .line 99
     move/from16 v14, p1
 
     move/from16 v15, p2
@@ -1079,10 +1079,10 @@
 
     new-array v2, v11, [Ljava/lang/Object;
 
-    .line 99
+    .line 98
     invoke-static {v0, v2}, Lorg/appplay/lib/CommonNatives;->javaCallLuaEvent(Ljava/lang/String;[Ljava/lang/Object;)V
 
-    .line 101
+    .line 100
     new-instance v0, Ljava/lang/Thread;
 
     new-instance v2, Lmodmenu/GiveItem$1;
@@ -1099,27 +1099,27 @@
 
     invoke-direct {v0, v2, v3}, Ljava/lang/Thread;-><init>(Ljava/lang/Runnable;Ljava/lang/String;)V
 
-    .line 131
+    .line 130
     invoke-virtual {v0}, Ljava/lang/Thread;->start()V
 
-    .line 132
+    .line 131
     const-string v0, "give shipped"
 
-    invoke-static {v10, v0}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+    invoke-static {v10, v0}, Lmodmenu/MwLog;->d(Ljava/lang/String;Ljava/lang/String;)V
     :try_end_0
     .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 138
+    .line 137
     goto :goto_1
 
-    .line 133
+    .line 132
     :catch_0
     move-exception v0
 
-    .line 134
+    .line 133
     sput-boolean v11, Lmodmenu/GiveItem;->polling:Z
 
-    .line 135
+    .line 134
     new-instance v2, Ljava/lang/StringBuilder;
 
     invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
@@ -1138,15 +1138,15 @@
 
     move-result-object v0
 
-    invoke-static {v10, v0}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+    invoke-static {v10, v0}, Lmodmenu/MwLog;->d(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 136
+    .line 135
     invoke-static {v1, v9}, Lmodmenu/GiveItem;->toast(Landroid/content/Context;Ljava/lang/String;)V
 
-    .line 137
+    .line 136
     invoke-interface/range {p5 .. p5}, Ljava/lang/Runnable;->run()V
 
-    .line 139
+    .line 138
     :goto_1
     return-void
 .end method
@@ -1154,12 +1154,12 @@
 .method private static state(Ljava/lang/String;)Ljava/lang/String;
     .locals 3
 
-    .line 299
+    .line 298
     invoke-static {p0}, Lmodmenu/GiveItem;->obj(Ljava/lang/String;)Lorg/json/JSONObject;
 
     move-result-object p0
 
-    .line 300
+    .line 299
     const/4 v0, 0x0
 
     if-eqz p0, :cond_3
@@ -1176,7 +1176,7 @@
 
     goto :goto_1
 
-    .line 303
+    .line 302
     :cond_0
     const-string v1, "r"
 
@@ -1184,7 +1184,7 @@
 
     move-result-object p0
 
-    .line 304
+    .line 303
     if-eqz p0, :cond_2
 
     invoke-virtual {p0}, Ljava/lang/String;->length()I
@@ -1202,7 +1202,7 @@
     :goto_0
     return-object v0
 
-    .line 301
+    .line 300
     :cond_3
     :goto_1
     return-object v0
@@ -1211,19 +1211,19 @@
 .method private static toast(Landroid/content/Context;Ljava/lang/String;)V
     .locals 1
 
-    .line 184
+    .line 183
     const/4 v0, 0x0
 
     invoke-static {p0, p1, v0}, Lmodmenu/GiveItem;->toast(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 185
+    .line 184
     return-void
 .end method
 
 .method private static toast(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)V
     .locals 0
 
-    .line 189
+    .line 188
     :try_start_0
     invoke-static {p0, p1, p2}, Lmodmenu/GiveItem;->message(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 
@@ -1235,19 +1235,19 @@
 
     move-result-object p0
 
-    .line 190
+    .line 189
     invoke-virtual {p0}, Landroid/widget/Toast;->show()V
     :try_end_0
     .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 193
+    .line 192
     goto :goto_0
 
-    .line 191
+    .line 190
     :catch_0
     move-exception p0
 
-    .line 192
+    .line 191
     new-instance p1, Ljava/lang/StringBuilder;
 
     invoke-direct {p1}, Ljava/lang/StringBuilder;-><init>()V
@@ -1268,9 +1268,9 @@
 
     const-string p1, "MWGiveItem"
 
-    invoke-static {p1, p0}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+    invoke-static {p1, p0}, Lmodmenu/MwLog;->d(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 194
+    .line 193
     :goto_0
     return-void
 .end method
@@ -1278,12 +1278,12 @@
 .method private static verify([Ljava/lang/String;IJ)Ljava/lang/String;
     .locals 11
 
-    .line 148
+    .line 147
     invoke-static {p0}, Lmodmenu/GiveItem;->want([Ljava/lang/String;)J
 
     move-result-wide v3
 
-    .line 149
+    .line 148
     const-wide/16 v0, 0x0
 
     const-string v7, "fail"
@@ -1292,10 +1292,10 @@
 
     if-gtz v2, :cond_0
 
-    .line 150
+    .line 149
     return-object v7
 
-    .line 152
+    .line 151
     :cond_0
     const/4 v8, 0x0
 
@@ -1306,7 +1306,7 @@
 
     if-ge v9, v0, :cond_3
 
-    .line 154
+    .line 153
     const-wide/16 v0, 0x1c2
 
     :try_start_0
@@ -1314,10 +1314,10 @@
     :try_end_0
     .catch Ljava/lang/InterruptedException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 157
+    .line 156
     nop
 
-    .line 158
+    .line 157
     const/4 v0, 0x0
 
     :goto_1
@@ -1325,7 +1325,7 @@
 
     if-ge v0, v1, :cond_1
 
-    .line 159
+    .line 158
     new-instance v1, Ljava/io/File;
 
     aget-object v2, p0, v0
@@ -1334,12 +1334,12 @@
 
     invoke-virtual {v1}, Ljava/io/File;->delete()Z
 
-    .line 158
+    .line 157
     add-int/lit8 v0, v0, 0x1
 
     goto :goto_1
 
-    .line 163
+    .line 162
     :cond_1
     sget-object v10, Lmodmenu/GiveItem;->MAIN:Landroid/os/Handler;
 
@@ -1355,14 +1355,14 @@
 
     invoke-virtual {v10, v0}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
 
-    .line 175
+    .line 174
     const-wide/16 p0, 0x708
 
     invoke-static {v1, p0, p1}, Lmodmenu/GiveItem;->awaitGuarded([Ljava/lang/String;J)Ljava/lang/String;
 
     move-result-object p0
 
-    .line 176
+    .line 175
     const-string p1, "wait"
 
     invoke-virtual {p1, p0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
@@ -1379,10 +1379,10 @@
 
     if-nez p1, :cond_2
 
-    .line 177
+    .line 176
     return-object p0
 
-    .line 152
+    .line 151
     :cond_2
     add-int/lit8 v9, v9, 0x1
 
@@ -1394,14 +1394,14 @@
 
     goto :goto_0
 
-    .line 155
+    .line 154
     :catch_0
     move-exception v0
 
-    .line 156
+    .line 155
     return-object v7
 
-    .line 180
+    .line 179
     :cond_3
     return-object v7
 .end method
@@ -1409,7 +1409,7 @@
 .method private static want([Ljava/lang/String;)J
     .locals 10
 
-    .line 309
+    .line 308
     const/4 v0, 0x0
 
     :goto_0
@@ -1419,14 +1419,14 @@
 
     if-ge v0, v1, :cond_1
 
-    .line 310
+    .line 309
     aget-object v1, p0, v0
 
     invoke-static {v1}, Lmodmenu/GiveItem;->obj(Ljava/lang/String;)Lorg/json/JSONObject;
 
     move-result-object v1
 
-    .line 311
+    .line 310
     if-eqz v1, :cond_0
 
     const-string v4, "want"
@@ -1441,20 +1441,20 @@
 
     if-lez v9, :cond_0
 
-    .line 312
+    .line 311
     invoke-virtual {v1, v4, v2, v3}, Lorg/json/JSONObject;->optLong(Ljava/lang/String;J)J
 
     move-result-wide v0
 
     return-wide v0
 
-    .line 309
+    .line 308
     :cond_0
     add-int/lit8 v0, v0, 0x1
 
     goto :goto_0
 
-    .line 315
+    .line 314
     :cond_1
     return-wide v2
 .end method

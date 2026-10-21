@@ -20,7 +20,7 @@ built APK; and each of the 25 patches is confirmed by content, not merely by
 |---|--------|-------|
 | 1 | In-game browser / WebView opening is blocked | `ClientMethodCommonApi` (5 JNI/Lua entries) and `MiniUniverseHelper` (3 loadUrl convergence points), plus `android:exported="false"` on `BrowserActivity` |
 | 2 | Device identifiers and descriptors the client reports about itself are spoofed | `IdDevice`, `cn/mini1/utils/b`, `ClientMethodCommonApi.GetFlyerUID`, and `cn/mini1/utils/devices/b` for the model / OS version every report node and the `getMobilePhoneInfo` JSON upload - what third-party UID checkers echo back as Model / OS |
-| 3 | Notification-based mod menu with an on/off switch per mod, plus HWID rotation | `ModMenu` + `ModMenuSheet`, committed smali in `smali_classes8/modmenu/`, started by hooks at the head of `GoogleApplication.onCreate` and `AppPlayBaseActivity.onCreate`; the notification tap is a broadcast into `ModMenuReceiver`, which shows the sheet as a dialog attached to the live game window, so `AppPlayBaseActivity` stays resumed behind it - script loop, rendering and in-game voice chat keep running while the menu is up. `ModMenuActivity` (`Theme.Translucent.NoTitleBar.Fullscreen`) remains only as the fallback entry when there is no live window to attach to |
+| 3 | Notification-based mod menu with an on/off switch per mod, plus HWID rotation | `ModMenu` + `ModMenuSheet`, committed smali in `smali_classes8/modmenu/`, started by hooks at the head of `GoogleApplication.onCreate` and `AppPlayBaseActivity.onCreate`; the notification tap is a broadcast into `ModMenuReceiver`, which shows the sheet as a dialog attached to the live game window *only when that window has focus* - a backgrounded or dead window gets the notification re-posted aimed straight at `ModMenuActivity` (a direct `PendingIntent.getActivity`, which the system fires itself; a tap bounced from a broadcast into `startActivity` is a trampoline Android 12+ blocks silently, and a sheet on an unfocused window would show where nobody looks) plus a toast asking for one more tap - so `AppPlayBaseActivity` stays resumed behind the menu: script loop, rendering and in-game voice chat keep running while it is up. `ModMenuActivity` (`Theme.Translucent.NoTitleBar.Fullscreen`) is that direct entry and the entry when there is no live window to attach to |
 | 4 | Rewarded-ad reward without watching the ad | head of `ClientMethodUniverseSubject.reqSdkAD`: the stub fires `onWatchAD(1001)` + the `DeliverAdEvent` Lua event through `AdReward`, the same pair a real rewarded video ends in |
 | 5 | Google login under MicroG/GmsCore | forces `GooglePlayServicesUtilLight.isGooglePlayServicesAvailable` past the certificate/version gate and retries One-Tap failures through the legacy `GoogleSignInApi` (`legacySignIn`/`onResult` in `modmenu.GmsCompat`) |
 | 6 | A crash becomes a report the player can copy, save and share | `modmenu.CrashHandler`, installed at the head of `GoogleApplication.onCreate`, takes over the uncaught-exception handler: it stores a report (app, device, thread, exception, logcat) under `files/mwcrash/`, requests `modmenu.CrashActivity` and posts a notification pointing at the same screen, since a background crash may not be allowed to start an activity. It never swallows the throwable - it hands on to whatever was installed before it, so the process still dies as it always did |
@@ -178,6 +178,18 @@ a tap. The game's editor must be open - the dialog says so otherwise.
 The source travels through a payload file rather than the dispatch event
 string, so script size is no bridge limit; the script answers through
 `files/mw_le.json` and failures breadcrumb `MWLE|` into logcat.
+
+The **Log** button opens the mod's own log - **Làm mới** re-reads it, the
+text itself is selectable, **Sao chép** puts it on the clipboard and
+**Xuất file** writes it to
+`Android/data/com.playmini.miniworld/files/mw_log_<timestamp>.txt`, where a
+file manager or a bug report can take it. Every log call the mod makes goes
+through `modmenu.MwLog`, which writes to logcat *and* appends to
+`files/mwlog.txt` (rotated past 256 KB, dropped on any file failure so the
+caller never pays for it), because a third-party app cannot be granted
+`READ_LOGS` on a modern device - that is why LogFox sits on "Waiting for
+logs" while the trail is already on disk. The viewer shows the last 200 KB
+cut at a line boundary, so even a full log cannot stall the dialog.
 
 A crash ends in something sendable instead of a silent restart.
 `modmenu.CrashHandler` is installed at the head of `GoogleApplication.onCreate`

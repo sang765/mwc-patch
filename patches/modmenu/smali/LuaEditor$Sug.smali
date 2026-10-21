@@ -24,15 +24,15 @@
 .method constructor <init>(Ljava/lang/String;Ljava/lang/String;)V
     .locals 0
 
-    .line 441
+    .line 440
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    .line 442
+    .line 441
     iput-object p1, p0, Lmodmenu/LuaEditor$Sug;->insert:Ljava/lang/String;
 
-    .line 443
+    .line 442
     iput-object p2, p0, Lmodmenu/LuaEditor$Sug;->label:Ljava/lang/String;
 
-    .line 444
+    .line 443
     return-void
 .end method

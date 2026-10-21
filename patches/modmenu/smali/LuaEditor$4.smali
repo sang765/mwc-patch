@@ -33,7 +33,7 @@
         }
     .end annotation
 
-    .line 179
+    .line 178
     iput-object p1, p0, Lmodmenu/LuaEditor$4;->this$0:Lmodmenu/LuaEditor;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -46,13 +46,13 @@
 .method public onClick(Landroid/view/View;)V
     .locals 1
 
-    .line 182
+    .line 181
     iget-object p1, p0, Lmodmenu/LuaEditor$4;->this$0:Lmodmenu/LuaEditor;
 
     const-string v0, "save"
 
     invoke-static {p1, v0}, Lmodmenu/LuaEditor;->access$200(Lmodmenu/LuaEditor;Ljava/lang/String;)V
 
-    .line 183
+    .line 182
     return-void
 .end method

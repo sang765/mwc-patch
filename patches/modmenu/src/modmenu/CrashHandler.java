@@ -6,7 +6,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.util.Log;
 
 /**
  * Turns the uncaught exception that is about to kill the process into
@@ -54,10 +53,10 @@ final class CrashHandler implements Thread.UncaughtExceptionHandler {
             previous = Thread.getDefaultUncaughtExceptionHandler();
             Thread.setDefaultUncaughtExceptionHandler(new CrashHandler());
             installed = true;
-            Log.d(TAG, "crash handler installed");
+            MwLog.d(TAG, "crash handler installed");
         } catch (Throwable t) {
             // leave installed false: the next hook (onGameStart) retries
-            Log.w(TAG, "crash handler not installed", t);
+            MwLog.w(TAG, "crash handler not installed", t);
         }
     }
 
@@ -72,7 +71,7 @@ final class CrashHandler implements Thread.UncaughtExceptionHandler {
         try {
             collect(thread, error);
         } catch (Throwable t) {
-            Log.e(TAG, "crash collection failed", t);
+            MwLog.e(TAG, "crash collection failed", t);
         }
         passThrough(thread, error);
     }
@@ -80,7 +79,7 @@ final class CrashHandler implements Thread.UncaughtExceptionHandler {
     private void collect(Thread thread, Throwable error) {
         Context c = ctx;
         if (c == null) {
-            Log.w(TAG, "no context, crash not reported");
+            MwLog.w(TAG, "no context, crash not reported");
             return;
         }
         long now = System.currentTimeMillis();
@@ -93,7 +92,7 @@ final class CrashHandler implements Thread.UncaughtExceptionHandler {
         path = CrashReport.save(c, now, text);
 
         if (loop) {
-            Log.w(TAG, "crash within " + LOOP_WINDOW_MS + "ms of the last one, "
+            MwLog.w(TAG, "crash within " + LOOP_WINDOW_MS + "ms of the last one, "
                     + "report saved, screen skipped: " + path);
             return;
         }
@@ -120,9 +119,9 @@ final class CrashHandler implements Thread.UncaughtExceptionHandler {
     private static void startScreen(Context c, Intent intent) {
         try {
             c.startActivity(intent);
-            Log.d(TAG, "crash screen requested");
+            MwLog.d(TAG, "crash screen requested");
         } catch (Throwable t) {
-            Log.w(TAG, "crash screen not started", t);
+            MwLog.w(TAG, "crash screen not started", t);
         }
     }
 
@@ -148,9 +147,9 @@ final class CrashHandler implements Thread.UncaughtExceptionHandler {
                     : legacy(c, title, text, pi);
             // not cancelled on tap: the report outlives the tap on it
             nm.notify(NOTIF_ID, n);
-            Log.d(TAG, "crash notification posted");
+            MwLog.d(TAG, "crash notification posted");
         } catch (Throwable t) {
-            Log.w(TAG, "crash notification failed", t);
+            MwLog.w(TAG, "crash notification failed", t);
         }
     }
 
@@ -173,16 +172,16 @@ final class CrashHandler implements Thread.UncaughtExceptionHandler {
                 handler.uncaughtException(thread, error);
                 return;
             } catch (Throwable t) {
-                Log.w(TAG, "previous handler failed", t);
+                MwLog.w(TAG, "previous handler failed", t);
             }
         }
         // no handler to hand to: reproduce what the platform would have done
         try {
-            Log.e(TAG, "FATAL", error);
+            MwLog.e(TAG, "FATAL", error);
             android.os.Process.killProcess(android.os.Process.myPid());
             System.exit(10);
         } catch (Throwable t) {
-            Log.w(TAG, "cannot terminate", t);
+            MwLog.w(TAG, "cannot terminate", t);
         }
     }
 }

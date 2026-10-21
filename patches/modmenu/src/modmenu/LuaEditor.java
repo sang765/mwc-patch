@@ -14,7 +14,6 @@ import android.text.Layout;
 import android.text.Spannable;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -649,7 +648,7 @@ final class LuaEditor {
                     out.close();
                 }
             } catch (Exception e) {
-                Log.e(TAG, "payload write failed", e);
+                MwLog.e(TAG, "payload write failed", e);
                 toast(host, I18n.t(host, "mod_le_fail"));
                 return;
             }
@@ -663,7 +662,7 @@ final class LuaEditor {
                     script(op, paths[0], paths[1], paths[2]),
                     new Object[0]);
         } catch (RuntimeException e) {
-            Log.e(TAG, "lua editor dispatch failed", e);
+            MwLog.e(TAG, "lua editor dispatch failed", e);
             setBusy(false);
             toast(host, I18n.t(host, "mod_le_fail"));
             return;
@@ -701,7 +700,7 @@ final class LuaEditor {
             return;
         }
         String e = o == null ? "timeout" : o.optString("e", "");
-        Log.w(TAG, "lua editor bridge failed: " + e);
+        MwLog.w(TAG, "lua editor bridge failed: " + e);
         if ("read".equals(op)) {
             status.setText(e.contains("notopen")
                     ? I18n.t(app, "mod_le_notopen")
@@ -804,7 +803,7 @@ final class LuaEditor {
             return new String[]{new File(ext, FILE).getAbsolutePath(), in,
                     new File(ext, PAYLOAD).getAbsolutePath()};
         } catch (RuntimeException e) {
-            Log.e(TAG, "paths failed", e);
+            MwLog.e(TAG, "paths failed", e);
             return null;
         }
     }
@@ -899,7 +898,7 @@ final class LuaEditor {
         try {
             Toast.makeText(c, msg, Toast.LENGTH_SHORT).show();
         } catch (RuntimeException e) {
-            Log.e(TAG, "toast failed", e);
+            MwLog.e(TAG, "toast failed", e);
         }
     }
 

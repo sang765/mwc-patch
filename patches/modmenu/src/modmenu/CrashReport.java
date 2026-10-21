@@ -50,7 +50,7 @@ final class CrashReport {
                 return d;
             }
         } catch (Throwable t) {
-            Log.w(TAG, "report dir unavailable", t);
+            MwLog.w(TAG, "report dir unavailable", t);
         }
         return null;
     }
@@ -148,7 +148,7 @@ final class CrashReport {
             prune(dir(ctx));
             return path;
         } catch (Throwable t) {
-            Log.w(TAG, "report not written to " + path, t);
+            MwLog.w(TAG, "report not written to " + path, t);
             return null;
         }
     }
@@ -179,7 +179,7 @@ final class CrashReport {
                 in.close();
             }
         } catch (Throwable t) {
-            Log.w(TAG, "report not readable: " + path, t);
+            MwLog.w(TAG, "report not readable: " + path, t);
             return null;
         }
     }
@@ -285,7 +285,7 @@ final class CrashReport {
                 out.close();
             }
         } catch (Throwable t) {
-            Log.w(TAG, "launch marker not written", t);
+            MwLog.w(TAG, "launch marker not written", t);
         }
     }
 
