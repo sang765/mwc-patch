@@ -252,6 +252,15 @@ if grep -qE 'Lmodmenu/MwLog;->(d|i|w|e)\(' "$PATCHES/modmenu/smali/MwLog.smali";
 else
   echo "  MwLog self-recursion: none"
 fi
+# The build line names the commit that produced this APK; a report still
+# carrying the placeholder means build.sh never stamped it.
+if grep -aqF -- 'MW_COMMIT_PLACEHOLDER' "$WORK/dexcheck"/*.dex 2>/dev/null; then
+  echo "  FAIL: commit placeholder still in the APK"; fail=1
+elif grep -aqF -- 'https://github.com/sang765/mwc-patch/commit/' "$WORK/dexcheck"/*.dex 2>/dev/null; then
+  echo "  build: commit link stamped"
+else
+  echo "  MISSING: build commit link"; fail=1
+fi
 
 # The menu strings are resources now, not dex literals: the build copies one
 # modmenu_strings.xml per locale and I18n resolves them by name at runtime.

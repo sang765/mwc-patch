@@ -66,6 +66,9 @@ final class CrashReport {
                         String path, String logcat) {
         StringBuilder sb = new StringBuilder(8192);
         sb.append("=== Mini World mod - crash report ===\n");
+        // scripts/build.sh swaps the placeholder for the real commit: the smali
+        // is committed before the commit that ships it exists.
+        sb.append("build: https://github.com/sang765/mwc-patch/commit/MW_COMMIT_PLACEHOLDER\n");
         sb.append("time: ").append(clock()).append('\n');
         sb.append("elapsed: ").append(SystemClock.elapsedRealtime()).append(" ms\n");
         // android.os.Process, spelled out: java.lang.Process below is the logcat

@@ -78,6 +78,18 @@ python3 "$TOOLS/fixdollar.py" --res "$WORK/decoded/res"
 rm -rf "$WORK/decoded/smali_classes8/modmenu"
 mkdir -p "$WORK/decoded/smali_classes8/modmenu"
 cp "$PATCHES/modmenu/smali/"*.smali "$WORK/decoded/smali_classes8/modmenu/"
+# CrashReport carries the commit that produced the APK, but the smali is
+# committed before that commit exists, so the SHA is stamped here - CI's
+# GITHUB_SHA, or HEAD for a local build. The placeholder must be gone after
+# this: a report naming MW_COMMIT_PLACEHOLDER is a build that skipped it.
+mw_sha="${GITHUB_SHA:-$(git -C "$ROOT" rev-parse HEAD 2>/dev/null || echo unknown)}"
+sed -i "s/MW_COMMIT_PLACEHOLDER/$mw_sha/" \
+  "$WORK/decoded/smali_classes8/modmenu/CrashReport.smali"
+if grep -q "MW_COMMIT_PLACEHOLDER" "$WORK/decoded/smali_classes8/modmenu/CrashReport.smali"; then
+  echo "FAIL: commit placeholder not stamped into CrashReport.smali" >&2
+  exit 1
+fi
+echo "build commit: $mw_sha"
 # Menu strings ship as Android resources: one modmenu_strings.xml per locale,
 # linked into resources.arsc by the rebuild. Stale copies go first so a locale
 # dropped from the patch cannot linger in a reused decode.
