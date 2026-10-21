@@ -52,37 +52,37 @@ public final class MwLog {
         } catch (Exception e) {
             file = null;
             out = null;
-            MwLog.w("ModLog", "log file unavailable", e);
+            Log.w("ModLog", "log file unavailable", e);
         }
     }
 
     public static void d(String tag, String msg) {
-        MwLog.d(tag, msg);
+        Log.d(tag, msg);
         append('D', tag, msg, null);
     }
 
     public static void i(String tag, String msg) {
-        MwLog.i(tag, msg);
+        Log.i(tag, msg);
         append('I', tag, msg, null);
     }
 
     public static void w(String tag, String msg) {
-        MwLog.w(tag, msg);
+        Log.w(tag, msg);
         append('W', tag, msg, null);
     }
 
     public static void w(String tag, String msg, Throwable tr) {
-        MwLog.w(tag, msg, tr);
+        Log.w(tag, msg, tr);
         append('W', tag, msg, tr);
     }
 
     public static void e(String tag, String msg) {
-        MwLog.e(tag, msg);
+        Log.e(tag, msg);
         append('E', tag, msg, null);
     }
 
     public static void e(String tag, String msg, Throwable tr) {
-        MwLog.e(tag, msg, tr);
+        Log.e(tag, msg, tr);
         append('E', tag, msg, tr);
     }
 

@@ -285,7 +285,7 @@
     .locals 2
 
     .line 60
-    invoke-static {p0, p1}, Lmodmenu/MwLog;->d(Ljava/lang/String;Ljava/lang/String;)V
+    invoke-static {p0, p1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
     .line 61
     const/16 v0, 0x44
@@ -302,7 +302,7 @@
     .locals 2
 
     .line 80
-    invoke-static {p0, p1}, Lmodmenu/MwLog;->e(Ljava/lang/String;Ljava/lang/String;)V
+    invoke-static {p0, p1}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;)I
 
     .line 81
     const/16 v0, 0x45
@@ -319,7 +319,7 @@
     .locals 1
 
     .line 85
-    invoke-static {p0, p1, p2}, Lmodmenu/MwLog;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V
+    invoke-static {p0, p1, p2}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
 
     .line 86
     const/16 v0, 0x45
@@ -334,7 +334,7 @@
     .locals 2
 
     .line 65
-    invoke-static {p0, p1}, Lmodmenu/MwLog;->i(Ljava/lang/String;Ljava/lang/String;)V
+    invoke-static {p0, p1}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
 
     .line 66
     const/16 v0, 0x49
@@ -449,7 +449,7 @@
 
     const-string v2, "log file unavailable"
 
-    invoke-static {v1, v2, p0}, Lmodmenu/MwLog;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V
+    invoke-static {v1, v2, p0}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
     :try_end_2
     .catchall {:try_start_2 .. :try_end_2} :catchall_0
 
@@ -475,7 +475,7 @@
     .locals 2
 
     .line 70
-    invoke-static {p0, p1}, Lmodmenu/MwLog;->w(Ljava/lang/String;Ljava/lang/String;)V
+    invoke-static {p0, p1}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I
 
     .line 71
     const/16 v0, 0x57
@@ -492,7 +492,7 @@
     .locals 1
 
     .line 75
-    invoke-static {p0, p1, p2}, Lmodmenu/MwLog;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V
+    invoke-static {p0, p1, p2}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
 
     .line 76
     const/16 v0, 0x57

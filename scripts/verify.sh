@@ -243,6 +243,16 @@ for pat in 'Lmodmenu/ModMenu;' 'Lmodmenu/ModMenuActivity;' \
   fi
 done
 
+# MwLog's level helpers go to android.util.Log; a call to MwLog from inside
+# MwLog recurses until the main thread overflows at the first mod log line.
+# The APK's dex keeps a method's class and name in separate pools, so this
+# reads the committed smali that build.sh copies straight into classes8.
+if grep -qE 'Lmodmenu/MwLog;->(d|i|w|e)\(' "$PATCHES/modmenu/smali/MwLog.smali"; then
+  echo "  FAIL: MwLog logs by calling itself (infinite recursion)"; fail=1
+else
+  echo "  MwLog self-recursion: none"
+fi
+
 # The menu strings are resources now, not dex literals: the build copies one
 # modmenu_strings.xml per locale and I18n resolves them by name at runtime.
 # aapt2 links UTF-8 pools; an older link would be UTF-16 - accept either.
