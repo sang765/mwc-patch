@@ -241,6 +241,7 @@ for pat in 'Lmodmenu/ModMenu;' 'Lmodmenu/ModMenuActivity;' \
            'Lmodmenu/GiveItem;' 'mw_give.json' \
            '{"r":"wait","want":' 'mod_give_noclient' 'mod_give_full' \
            'Lmodmenu/BetterInput;' 'mw_bi.json' \
+           'onChatOpened' '__bi_chat' 'auto better input failed' \
            'Lmodmenu/LuaEditor;' 'mw_le.json' 'Lmodmenu/MwApi;' \
            'Lmodmenu/MwLog;' 'mwlog.txt' \
            'Lmodmenu/LogView;'; do

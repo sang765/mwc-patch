@@ -8,7 +8,7 @@
 
 # annotations
 .annotation system Ldalvik/annotation/EnclosingMethod;
-    value = Lmodmenu/ModMenu;->scheduleRetry()V
+    value = Lmodmenu/ModMenu;->noteLuaAlive()V
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
@@ -21,7 +21,7 @@
 .method constructor <init>()V
     .locals 0
 
-    .line 361
+    .line 278
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     return-void
@@ -32,12 +32,12 @@
 .method public run()V
     .locals 0
 
-    .line 364
+    .line 281
     invoke-static {}, Lmodmenu/ModMenu;->access$100()V
 
-    .line 365
+    .line 282
     invoke-static {}, Lmodmenu/ModMenu;->access$200()V
 
-    .line 366
+    .line 283
     return-void
 .end method

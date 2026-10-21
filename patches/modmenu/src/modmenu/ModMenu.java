@@ -17,6 +17,8 @@ import android.os.Looper;
 import android.os.Process;
 import android.os.SystemClock;
 
+import org.appplay.lib.CommonNatives;
+
 import java.lang.ref.WeakReference;
 
 /**
@@ -48,6 +50,43 @@ public final class ModMenu {
     /** Lua silence, in a focused window, that counts as a freeze. */
     private static final long STUCK_MS = 60000;
 
+    /**
+     * The lua that wraps ChatHelper.OpenChatView so the composer opens the
+     * moment the game's chat does. It runs the original first, so the chat
+     * view is already up when onChatOpened raises BetterInput over it (Fill
+     * and Send dispatch into that open view). Idempotent via _G.__bi_chat, so
+     * it is safe to re-send until the helper has loaded; onChatOpened is
+     * reached through InvocationBuilder, the game's own lua->java bridge.
+     */
+    private static final String CHAT_HOOK_SCRIPT =
+            "(function()"
+            + " if _G.__bi_chat then return end"
+            + " pcall(function()"
+            + " local h=GetInst('ChatHelper')"
+            + " if h==nil then return end"
+            + " local owner=h"
+            + " local mt=getmetatable(h)"
+            + " if mt~=nil and type(mt.__index)=='table'"
+            + " and type(mt.__index.OpenChatView)=='function' then owner=mt.__index end"
+            + " if owner.__bi_chat then return end"
+            + " local orig=owner.OpenChatView"
+            + " if type(orig)~='function' then return end"
+            + " owner.OpenChatView=function(self,...)"
+            + " local r=orig(self,...)"
+            + " pcall(function()"
+            + " InvocationBuilder():setClassName('modmenu/ModMenu')"
+            + " :setMethodName('onChatOpened'):setSignature('()V')"
+            + " :build():invokeStatic()"
+            + " end)"
+            + " return r"
+            + " end"
+            + " owner.__bi_chat=true"
+            + " _G.__bi_chat=true"
+            + " end)"
+            + " end)";
+    /** Hook deliveries after the first; the lua side no-ops once installed. */
+    private static final int CHAT_HOOK_TRIES = 6;
+
     private static final Handler MAIN = new Handler(Looper.getMainLooper());
 
     private static volatile boolean webBlocked = true;
@@ -67,6 +106,11 @@ public final class ModMenu {
     private static boolean posted;
     private static boolean deniedLogged;
     private static int retryIdx;
+
+    /** Debounce for the auto composer: one chat open can bounce the hook. */
+    private static volatile long lastBetterInputMs;
+    private static boolean chatHookRequested;
+    private static int chatHookTries;
 
     /** Last lua->java crossing (ad polls / script heartbeat); 0 = none yet. */
     private static volatile long lastLuaMs;
@@ -226,6 +270,71 @@ public final class ModMenu {
      */
     public static void noteLuaAlive() {
         lastLuaMs = SystemClock.elapsedRealtime();
+        // first crossing is the earliest the lua VM is provably up; deliver
+        // the chat hook from here, then re-send a few times in case the
+        // ChatHelper class itself has not loaded yet
+        if (!chatHookRequested) {
+            chatHookRequested = true;
+            MAIN.post(new Runnable() {
+                @Override
+                public void run() {
+                    installChatHook();
+                    scheduleChatHookRetry();
+                }
+            });
+        }
+    }
+
+    /**
+     * Called from lua (the injected OpenChatView hook) the instant the chat
+     * opens, on the lua thread. Hops to main and raises the composer over the
+     * freshly opened chat view, whose own input the Fill/Send dispatch fills.
+     */
+    public static void onChatOpened() {
+        MAIN.post(new Runnable() {
+            @Override
+            public void run() {
+                long now = SystemClock.elapsedRealtime();
+                if (now - lastBetterInputMs < 600) {
+                    return; // a single open can bounce the hook more than once
+                }
+                lastBetterInputMs = now;
+                Activity host = gameActivity();
+                if (host == null) {
+                    return;
+                }
+                try {
+                    BetterInput.show(host, Palette.of(host));
+                } catch (RuntimeException e) {
+                    MwLog.e("ModMenu", "auto better input failed", e);
+                }
+            }
+        });
+    }
+
+    /** Deliver the lua hook; the lua side no-ops once it is installed. */
+    private static void installChatHook() {
+        if (gameActivity() == null) {
+            return; // no window yet; the retry below keeps trying
+        }
+        try {
+            CommonNatives.javaCallLuaEvent(CHAT_HOOK_SCRIPT, new Object[0]);
+        } catch (RuntimeException e) {
+            MwLog.e("ModMenu", "chat hook install failed", e);
+        }
+    }
+
+    private static void scheduleChatHookRetry() {
+        if (chatHookTries++ >= CHAT_HOOK_TRIES) {
+            return;
+        }
+        MAIN.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                installChatHook();
+                scheduleChatHookRetry();
+            }
+        }, 3000);
     }
 
     // commit, not apply: restartGame SIGKILLs the process right after a

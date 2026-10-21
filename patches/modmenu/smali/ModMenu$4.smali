@@ -3,12 +3,12 @@
 .source "ModMenu.java"
 
 # interfaces
-.implements Landroid/content/DialogInterface$OnClickListener;
+.implements Ljava/lang/Runnable;
 
 
 # annotations
 .annotation system Ldalvik/annotation/EnclosingMethod;
-    value = Lmodmenu/ModMenu;->showStuckDialog()V
+    value = Lmodmenu/ModMenu;->scheduleChatHookRetry()V
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
@@ -17,22 +17,11 @@
 .end annotation
 
 
-# instance fields
-.field final synthetic val$a:Landroid/app/Activity;
-
-
 # direct methods
-.method constructor <init>(Landroid/app/Activity;)V
+.method constructor <init>()V
     .locals 0
-    .annotation system Ldalvik/annotation/Signature;
-        value = {
-            "()V"
-        }
-    .end annotation
 
-    .line 411
-    iput-object p1, p0, Lmodmenu/ModMenu$4;->val$a:Landroid/app/Activity;
-
+    .line 331
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     return-void
@@ -40,28 +29,15 @@
 
 
 # virtual methods
-.method public onClick(Landroid/content/DialogInterface;I)V
+.method public run()V
     .locals 0
 
-    .line 414
-    invoke-static {}, Lmodmenu/ModMenu;->access$800()Landroid/content/Context;
+    .line 334
+    invoke-static {}, Lmodmenu/ModMenu;->access$100()V
 
-    move-result-object p1
+    .line 335
+    invoke-static {}, Lmodmenu/ModMenu;->access$200()V
 
-    if-eqz p1, :cond_0
-
-    invoke-static {}, Lmodmenu/ModMenu;->access$800()Landroid/content/Context;
-
-    move-result-object p1
-
-    goto :goto_0
-
-    :cond_0
-    iget-object p1, p0, Lmodmenu/ModMenu$4;->val$a:Landroid/app/Activity;
-
-    :goto_0
-    invoke-static {p1}, Lmodmenu/ModMenu;->restartGame(Landroid/content/Context;)V
-
-    .line 415
+    .line 336
     return-void
 .end method
