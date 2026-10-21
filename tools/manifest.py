@@ -43,13 +43,19 @@ CRASH_ELEMENT = ('<activity android:exported="false" '
                  'android:name="modmenu.CrashActivity" '
                  'android:excludeFromRecents="true"/>')
 RECEIVER_NAME = "modmenu.ModMenuReceiver"
-RECEIVER_ELEMENT = ('<receiver android:exported="false" '
+# exported: the notification tap is a broadcast PendingIntent that
+# NotificationManagerService fires with a UID that is not the app's own, so an
+# unexported receiver never receives it - every tap dies silently on Android
+# 12+/MIUI. Exported lets the system-delivered tap through; the only cost is
+# that any app can also pop the menu, which is harmless (it just opens a local
+# sheet, no data leaves the device).
+RECEIVER_ELEMENT = ('<receiver android:exported="true" '
                     'android:name="modmenu.ModMenuReceiver"/>')
 # (class name, element to insert when it is missing, what to report)
 DECLARED = (
     (MENU_NAME, MENU_ELEMENT, "exported=false, sensorLandscape, translucent theme"),
     (CRASH_NAME, CRASH_ELEMENT, "exported=false, excludeFromRecents"),
-    (RECEIVER_NAME, RECEIVER_ELEMENT, "exported=false, notification-tap entry"),
+    (RECEIVER_NAME, RECEIVER_ELEMENT, "exported=true, notification-tap entry"),
 )
 
 

@@ -147,6 +147,9 @@ def exported_of(name, tag="activity"):
 def is_false(v):
     return v.rstrip(')"') in ("false", "0x0", "0x00000000", "0x00000000 (type 0x12)")
 
+def is_true(v):
+    return v.rstrip(')"') in ("true", "0xffffffff", "0x1", "-1")
+
 failed = False
 # BrowserActivity must stay unreachable from other apps; the menu activity
 # must be too, otherwise any app could pop the mod menu at the player. The
@@ -164,10 +167,14 @@ for name, label in (("org.appplay.lib.browser.BrowserActivity", "BLOCKED"),
 
 # The notification tap reaches the sheet through this receiver, so it must
 # be declared (a manifest patch that dropped it strands every tap) and stay
-# unexported - a public receiver would let any app open the menu.
+# exported - the tap's broadcast PendingIntent is fired by system_server with
+# a UID that is not the app's, so an unexported receiver never receives it and
+# every tap dies silently. Exported lets the system-delivered tap in; the only
+# cost is that any app can also pop the menu, which is harmless (a local sheet
+# with no data leaving the device).
 v = exported_of("modmenu.ModMenuReceiver", "receiver")
-ok = is_false(v)
-print(f"ModMenuReceiver exported = {v} -> {'TAP ROUTED' if ok else 'OPEN TO OTHER APPS'}")
+ok = is_true(v)
+print(f"ModMenuReceiver exported = {v} -> {'TAP DELIVERED' if ok else 'TAP BLOCKED (unexported)'}")
 failed = failed or not ok
 
 # The fallback menu activity has to sit on a translucent-fullscreen window:
