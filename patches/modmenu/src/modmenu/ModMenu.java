@@ -93,6 +93,9 @@ public final class ModMenu {
         // freeze watchdog tick; the lua thread can die while these java
         // threads keep running, which is exactly the lobby-freeze case
         MAIN.postDelayed(freezeTick, 5000);
+        // shake backup entry: the notification tap is dropped on some ROMs,
+        // and the accelerometer needs no inter-process hop to reach the window
+        ShakeOpen.start(ctx);
     }
 
     /** Injected at the head of AppPlayBaseActivity.onCreate. */

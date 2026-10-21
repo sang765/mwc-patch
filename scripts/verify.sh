@@ -220,6 +220,7 @@ done
 # "IdScan;->menuClosed" is never one contiguous string to grep for.
 for pat in 'Lmodmenu/ModMenu;' 'Lmodmenu/ModMenuActivity;' \
            'Lmodmenu/ModMenuSheet;' 'Lmodmenu/ModMenuReceiver;' \
+           'Lmodmenu/ShakeOpen;' 'shake-to-open armed' \
            'Lmodmenu/Api26;' 'Lmodmenu/Api33;' \
            'Lmodmenu/Hwid;' 'Lmodmenu/Palette;' 'Lmodmenu/AdReward;' \
            'Lmodmenu/CrashHandler;' 'Lmodmenu/CrashReport;' \

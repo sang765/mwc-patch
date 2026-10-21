@@ -120,7 +120,7 @@
 
     sput-object v0, Lmodmenu/ModMenu;->game:Ljava/lang/ref/WeakReference;
 
-    .line 374
+    .line 377
     new-instance v0, Lmodmenu/ModMenu$3;
 
     invoke-direct {v0}, Lmodmenu/ModMenu$3;-><init>()V
@@ -252,31 +252,31 @@
 .method private static activityIntent(Landroid/content/Context;IZ)Landroid/app/PendingIntent;
     .locals 2
 
-    .line 146
+    .line 149
     new-instance v0, Landroid/content/Intent;
 
     const-class v1, Lmodmenu/ModMenuActivity;
 
     invoke-direct {v0, p0, v1}, Landroid/content/Intent;-><init>(Landroid/content/Context;Ljava/lang/Class;)V
 
-    .line 147
+    .line 150
     const/high16 v1, 0x30000000
 
     invoke-virtual {v0, v1}, Landroid/content/Intent;->addFlags(I)Landroid/content/Intent;
 
     move-result-object v0
 
-    .line 148
+    .line 151
     const-string v1, "open_ids"
 
     invoke-virtual {v0, v1, p2}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Z)Landroid/content/Intent;
 
     move-result-object p2
 
-    .line 149
+    .line 152
     nop
 
-    .line 150
+    .line 153
     const/high16 v0, 0xc000000
 
     invoke-static {p0, p1, p2, v0}, Landroid/app/PendingIntent;->getActivity(Landroid/content/Context;ILandroid/content/Intent;I)Landroid/app/PendingIntent;
@@ -289,7 +289,7 @@
 .method private static beginNotify(Landroid/app/Activity;)V
     .locals 2
 
-    .line 319
+    .line 322
     sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
 
     const/16 v1, 0x21
@@ -302,24 +302,24 @@
 
     if-nez v0, :cond_0
 
-    .line 320
+    .line 323
     invoke-static {p0}, Lmodmenu/Api33;->request(Landroid/app/Activity;)V
 
-    .line 322
+    .line 325
     :cond_0
     invoke-static {}, Lmodmenu/ModMenu;->tryPost()V
 
-    .line 323
+    .line 326
     invoke-static {}, Lmodmenu/ModMenu;->scheduleRetry()V
 
-    .line 324
+    .line 327
     return-void
 .end method
 
 .method static gameActivity()Landroid/app/Activity;
     .locals 2
 
-    .line 118
+    .line 121
     sget-object v0, Lmodmenu/ModMenu;->game:Ljava/lang/ref/WeakReference;
 
     invoke-virtual {v0}, Ljava/lang/ref/WeakReference;->get()Ljava/lang/Object;
@@ -328,7 +328,7 @@
 
     check-cast v0, Landroid/app/Activity;
 
-    .line 119
+    .line 122
     if-eqz v0, :cond_1
 
     invoke-virtual {v0}, Landroid/app/Activity;->isFinishing()Z
@@ -345,11 +345,11 @@
 
     goto :goto_0
 
-    .line 122
+    .line 125
     :cond_0
     return-object v0
 
-    .line 120
+    .line 123
     :cond_1
     :goto_0
     const/4 v0, 0x0
@@ -360,7 +360,7 @@
 .method public static isAntiTrack()Z
     .locals 1
 
-    .line 203
+    .line 206
     sget-boolean v0, Lmodmenu/ModMenu;->antiTrack:Z
 
     return v0
@@ -369,7 +369,7 @@
 .method public static isHwidAutoRotate()Z
     .locals 1
 
-    .line 207
+    .line 210
     sget-boolean v0, Lmodmenu/ModMenu;->hwidAutoRotate:Z
 
     return v0
@@ -378,7 +378,7 @@
 .method public static isRewardBypass()Z
     .locals 1
 
-    .line 199
+    .line 202
     sget-boolean v0, Lmodmenu/ModMenu;->rewardBypass:Z
 
     return v0
@@ -387,7 +387,7 @@
 .method public static isSpoofOn()Z
     .locals 1
 
-    .line 195
+    .line 198
     sget-boolean v0, Lmodmenu/ModMenu;->hwidSpoof:Z
 
     return v0
@@ -396,7 +396,7 @@
 .method public static isUnsafe()Z
     .locals 1
 
-    .line 215
+    .line 218
     sget-boolean v0, Lmodmenu/ModMenu;->unsafe:Z
 
     return v0
@@ -405,7 +405,7 @@
 .method public static isWebBlocked()Z
     .locals 1
 
-    .line 191
+    .line 194
     sget-boolean v0, Lmodmenu/ModMenu;->webBlocked:Z
 
     return v0
@@ -414,26 +414,26 @@
 .method private static legacyBuild(Ljava/lang/String;Ljava/lang/String;Landroid/app/PendingIntent;)Landroid/app/Notification;
     .locals 2
 
-    .line 346
+    .line 349
     new-instance v0, Landroid/app/Notification$Builder;
 
     sget-object v1, Lmodmenu/ModMenu;->appCtx:Landroid/content/Context;
 
     invoke-direct {v0, v1}, Landroid/app/Notification$Builder;-><init>(Landroid/content/Context;)V
 
-    .line 347
+    .line 350
     invoke-virtual {v0, p0}, Landroid/app/Notification$Builder;->setContentTitle(Ljava/lang/CharSequence;)Landroid/app/Notification$Builder;
 
     move-result-object p0
 
-    .line 348
+    .line 351
     invoke-virtual {p0, p1}, Landroid/app/Notification$Builder;->setContentText(Ljava/lang/CharSequence;)Landroid/app/Notification$Builder;
 
     move-result-object p0
 
     sget-object p1, Lmodmenu/ModMenu;->appCtx:Landroid/content/Context;
 
-    .line 349
+    .line 352
     invoke-virtual {p1}, Landroid/content/Context;->getApplicationInfo()Landroid/content/pm/ApplicationInfo;
 
     move-result-object p1
@@ -444,32 +444,32 @@
 
     move-result-object p0
 
-    .line 350
+    .line 353
     invoke-virtual {p0, p2}, Landroid/app/Notification$Builder;->setContentIntent(Landroid/app/PendingIntent;)Landroid/app/Notification$Builder;
 
     move-result-object p0
 
-    .line 351
+    .line 354
     invoke-virtual {p0}, Landroid/app/Notification$Builder;->build()Landroid/app/Notification;
 
     move-result-object p0
 
-    .line 346
+    .line 349
     return-object p0
 .end method
 
 .method public static loadPrefs(Landroid/content/Context;)V
     .locals 3
 
-    .line 300
+    .line 303
     sget-boolean v0, Lmodmenu/ModMenu;->loaded:Z
 
     if-eqz v0, :cond_0
 
-    .line 301
+    .line 304
     return-void
 
-    .line 303
+    .line 306
     :cond_0
     invoke-virtual {p0}, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
 
@@ -477,14 +477,14 @@
 
     sput-object p0, Lmodmenu/ModMenu;->appCtx:Landroid/content/Context;
 
-    .line 304
+    .line 307
     sget-object p0, Lmodmenu/ModMenu;->appCtx:Landroid/content/Context;
 
     invoke-static {p0}, Lmodmenu/ModMenu;->prefs(Landroid/content/Context;)Landroid/content/SharedPreferences;
 
     move-result-object p0
 
-    .line 305
+    .line 308
     const-string v0, "webview"
 
     const/4 v1, 0x1
@@ -495,7 +495,7 @@
 
     sput-boolean v0, Lmodmenu/ModMenu;->webBlocked:Z
 
-    .line 306
+    .line 309
     const-string v0, "hwid"
 
     invoke-interface {p0, v0, v1}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
@@ -504,7 +504,7 @@
 
     sput-boolean v0, Lmodmenu/ModMenu;->hwidSpoof:Z
 
-    .line 307
+    .line 310
     const-string v0, "reward"
 
     invoke-interface {p0, v0, v1}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
@@ -513,7 +513,7 @@
 
     sput-boolean v0, Lmodmenu/ModMenu;->rewardBypass:Z
 
-    .line 308
+    .line 311
     const-string v0, "antitrack"
 
     invoke-interface {p0, v0, v1}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
@@ -522,7 +522,7 @@
 
     sput-boolean v0, Lmodmenu/ModMenu;->antiTrack:Z
 
-    .line 309
+    .line 312
     const-string v0, "hwid_auto"
 
     const/4 v2, 0x0
@@ -533,7 +533,7 @@
 
     sput-boolean v0, Lmodmenu/ModMenu;->hwidAutoRotate:Z
 
-    .line 310
+    .line 313
     const-string v0, "unsafe"
 
     invoke-interface {p0, v0, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
@@ -542,41 +542,41 @@
 
     sput-boolean p0, Lmodmenu/ModMenu;->unsafe:Z
 
-    .line 311
+    .line 314
     sput-boolean v1, Lmodmenu/ModMenu;->loaded:Z
 
-    .line 312
+    .line 315
     return-void
 .end method
 
 .method static menuIntent(Landroid/content/Context;IZ)Landroid/app/PendingIntent;
     .locals 2
 
-    .line 133
+    .line 136
     invoke-static {}, Lmodmenu/ModMenu;->gameActivity()Landroid/app/Activity;
 
     move-result-object v0
 
     if-eqz v0, :cond_0
 
-    .line 134
+    .line 137
     new-instance v0, Landroid/content/Intent;
 
     const-class v1, Lmodmenu/ModMenuReceiver;
 
     invoke-direct {v0, p0, v1}, Landroid/content/Intent;-><init>(Landroid/content/Context;Ljava/lang/Class;)V
 
-    .line 135
+    .line 138
     const-string v1, "open_ids"
 
     invoke-virtual {v0, v1, p2}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Z)Landroid/content/Intent;
 
     move-result-object p2
 
-    .line 136
+    .line 139
     nop
 
-    .line 137
+    .line 140
     const/high16 v0, 0xc000000
 
     invoke-static {p0, p1, p2, v0}, Landroid/app/PendingIntent;->getBroadcast(Landroid/content/Context;ILandroid/content/Intent;I)Landroid/app/PendingIntent;
@@ -585,7 +585,7 @@
 
     return-object p0
 
-    .line 139
+    .line 142
     :cond_0
     invoke-static {p0, p1, p2}, Lmodmenu/ModMenu;->activityIntent(Landroid/content/Context;IZ)Landroid/app/PendingIntent;
 
@@ -597,21 +597,21 @@
 .method public static noteLuaAlive()V
     .locals 2
 
-    .line 225
+    .line 228
     invoke-static {}, Landroid/os/SystemClock;->elapsedRealtime()J
 
     move-result-wide v0
 
     sput-wide v0, Lmodmenu/ModMenu;->lastLuaMs:J
 
-    .line 226
+    .line 229
     return-void
 .end method
 
 .method private static notif(Landroid/app/PendingIntent;)Landroid/app/Notification;
     .locals 5
 
-    .line 157
+    .line 160
     sget-object v0, Lmodmenu/ModMenu;->appCtx:Landroid/content/Context;
 
     const-string v1, "mod_notif_title"
@@ -620,7 +620,7 @@
 
     move-result-object v0
 
-    .line 158
+    .line 161
     sget-object v1, Lmodmenu/ModMenu;->appCtx:Landroid/content/Context;
 
     const-string v2, "mod_notif_text"
@@ -629,10 +629,10 @@
 
     move-result-object v1
 
-    .line 159
+    .line 162
     sget-object v2, Lmodmenu/ModMenu;->appCtx:Landroid/content/Context;
 
-    .line 160
+    .line 163
     const-string v3, "notification"
 
     invoke-virtual {v2, v3}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
@@ -641,14 +641,14 @@
 
     check-cast v2, Landroid/app/NotificationManager;
 
-    .line 161
+    .line 164
     sget v3, Landroid/os/Build$VERSION;->SDK_INT:I
 
     const/16 v4, 0x1a
 
     if-lt v3, v4, :cond_0
 
-    .line 162
+    .line 165
     sget-object v3, Lmodmenu/ModMenu;->appCtx:Landroid/content/Context;
 
     invoke-static {v3, v2, v0, v1, p0}, Lmodmenu/Api26;->build(Landroid/content/Context;Landroid/app/NotificationManager;Ljava/lang/String;Ljava/lang/String;Landroid/app/PendingIntent;)Landroid/app/Notification;
@@ -657,19 +657,19 @@
 
     goto :goto_0
 
-    .line 163
+    .line 166
     :cond_0
     invoke-static {v0, v1, p0}, Lmodmenu/ModMenu;->legacyBuild(Ljava/lang/String;Ljava/lang/String;Landroid/app/PendingIntent;)Landroid/app/Notification;
 
     move-result-object p0
 
-    .line 161
+    .line 164
     :goto_0
     return-object p0
 .end method
 
 .method public static onAppCreate(Landroid/content/Context;)V
-    .locals 3
+    .locals 4
 
     .line 83
     invoke-static {p0}, Lmodmenu/MwLog;->init(Landroid/content/Context;)V
@@ -699,46 +699,49 @@
     invoke-static {p0}, Lmodmenu/CrashHandler;->install(Landroid/content/Context;)V
 
     .line 95
-    sget-object p0, Lmodmenu/ModMenu;->MAIN:Landroid/os/Handler;
+    sget-object v0, Lmodmenu/ModMenu;->MAIN:Landroid/os/Handler;
 
-    sget-object v0, Lmodmenu/ModMenu;->freezeTick:Ljava/lang/Runnable;
+    sget-object v1, Lmodmenu/ModMenu;->freezeTick:Ljava/lang/Runnable;
 
-    const-wide/16 v1, 0x1388
+    const-wide/16 v2, 0x1388
 
-    invoke-virtual {p0, v0, v1, v2}, Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable;J)Z
+    invoke-virtual {v0, v1, v2, v3}, Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable;J)Z
 
-    .line 96
+    .line 98
+    invoke-static {p0}, Lmodmenu/ShakeOpen;->start(Landroid/content/Context;)V
+
+    .line 99
     return-void
 .end method
 
 .method public static onGameStart(Landroid/app/Activity;)V
     .locals 2
 
-    .line 100
+    .line 103
     invoke-static {p0}, Lmodmenu/ModMenu;->loadPrefs(Landroid/content/Context;)V
 
-    .line 103
+    .line 106
     new-instance v0, Ljava/lang/ref/WeakReference;
 
     invoke-direct {v0, p0}, Ljava/lang/ref/WeakReference;-><init>(Ljava/lang/Object;)V
 
     sput-object v0, Lmodmenu/ModMenu;->game:Ljava/lang/ref/WeakReference;
 
-    .line 104
+    .line 107
     sget-boolean v0, Lmodmenu/ModMenu;->notifyStarted:Z
 
     if-eqz v0, :cond_0
 
-    .line 105
+    .line 108
     return-void
 
-    .line 107
+    .line 110
     :cond_0
     const/4 v0, 0x1
 
     sput-boolean v0, Lmodmenu/ModMenu;->notifyStarted:Z
 
-    .line 108
+    .line 111
     sget-object v0, Lmodmenu/ModMenu;->MAIN:Landroid/os/Handler;
 
     new-instance v1, Lmodmenu/ModMenu$1;
@@ -747,14 +750,14 @@
 
     invoke-virtual {v0, v1}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
 
-    .line 114
+    .line 117
     return-void
 .end method
 
 .method private static prefs(Landroid/content/Context;)Landroid/content/SharedPreferences;
     .locals 2
 
-    .line 315
+    .line 318
     const-string v0, "mw_mod_menu"
 
     const/4 v1, 0x0
@@ -769,31 +772,31 @@
 .method static repostForActivity(Z)V
     .locals 4
 
-    .line 176
+    .line 179
     const-string v0, "ModMenu"
 
     sget-object v1, Lmodmenu/ModMenu;->appCtx:Landroid/content/Context;
 
     if-nez v1, :cond_0
 
-    .line 177
+    .line 180
     return-void
 
-    .line 180
+    .line 183
     :cond_0
     :try_start_0
     sget-object v1, Lmodmenu/ModMenu;->appCtx:Landroid/content/Context;
 
     const-string v2, "notification"
 
-    .line 181
+    .line 184
     invoke-virtual {v1, v2}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
 
     move-result-object v1
 
     check-cast v1, Landroid/app/NotificationManager;
 
-    .line 182
+    .line 185
     sget-object v2, Lmodmenu/ModMenu;->appCtx:Landroid/content/Context;
 
     const/4 v3, 0x0
@@ -810,26 +813,26 @@
 
     invoke-virtual {v1, v2, p0}, Landroid/app/NotificationManager;->notify(ILandroid/app/Notification;)V
 
-    .line 183
+    .line 186
     const-string p0, "notification re-posted for a direct activity tap"
 
     invoke-static {v0, p0}, Lmodmenu/MwLog;->i(Ljava/lang/String;Ljava/lang/String;)V
     :try_end_0
     .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 186
+    .line 189
     goto :goto_0
 
-    .line 184
+    .line 187
     :catch_0
     move-exception p0
 
-    .line 185
+    .line 188
     const-string v1, "notification re-post failed"
 
     invoke-static {v0, v1, p0}, Lmodmenu/MwLog;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V
 
-    .line 187
+    .line 190
     :goto_0
     return-void
 .end method
@@ -837,12 +840,12 @@
 .method public static restartGame(Landroid/content/Context;)V
     .locals 6
 
-    .line 286
+    .line 289
     invoke-virtual {p0}, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
 
     move-result-object p0
 
-    .line 287
+    .line 290
     invoke-virtual {p0}, Landroid/content/Context;->getPackageManager()Landroid/content/pm/PackageManager;
 
     move-result-object v0
@@ -855,7 +858,7 @@
 
     move-result-object v0
 
-    .line 288
+    .line 291
     const-string v1, "alarm"
 
     invoke-virtual {p0, v1}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
@@ -864,20 +867,20 @@
 
     check-cast v1, Landroid/app/AlarmManager;
 
-    .line 289
+    .line 292
     if-eqz v0, :cond_1
 
     if-nez v1, :cond_0
 
     goto :goto_0
 
-    .line 292
+    .line 295
     :cond_0
     const v2, 0x10008000
 
     invoke-virtual {v0, v2}, Landroid/content/Intent;->addFlags(I)Landroid/content/Intent;
 
-    .line 293
+    .line 296
     invoke-static {}, Ljava/lang/System;->currentTimeMillis()J
 
     move-result-wide v2
@@ -894,7 +897,7 @@
 
     move-result-object p0
 
-    .line 295
+    .line 298
     invoke-static {}, Ljava/lang/System;->currentTimeMillis()J
 
     move-result-wide v2
@@ -907,17 +910,17 @@
 
     invoke-virtual {v1, v0, v2, v3, p0}, Landroid/app/AlarmManager;->set(IJLandroid/app/PendingIntent;)V
 
-    .line 296
+    .line 299
     invoke-static {}, Landroid/os/Process;->myPid()I
 
     move-result p0
 
     invoke-static {p0}, Landroid/os/Process;->killProcess(I)V
 
-    .line 297
+    .line 300
     return-void
 
-    .line 290
+    .line 293
     :cond_1
     :goto_0
     return-void
@@ -926,12 +929,12 @@
 .method public static rotateHwid(Landroid/content/Context;)V
     .locals 3
 
-    .line 275
+    .line 278
     invoke-static {p0}, Lmodmenu/ModMenu;->prefs(Landroid/content/Context;)Landroid/content/SharedPreferences;
 
     move-result-object p0
 
-    .line 276
+    .line 279
     invoke-interface {p0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
 
     move-result-object v0
@@ -952,14 +955,14 @@
 
     invoke-interface {p0}, Landroid/content/SharedPreferences$Editor;->commit()Z
 
-    .line 277
+    .line 280
     return-void
 .end method
 
 .method private static scheduleRetry()V
     .locals 5
 
-    .line 355
+    .line 358
     sget-boolean v0, Lmodmenu/ModMenu;->posted:Z
 
     if-nez v0, :cond_1
@@ -974,7 +977,7 @@
 
     goto :goto_0
 
-    .line 358
+    .line 361
     :cond_0
     sget-object v0, Lmodmenu/ModMenu;->MAIN:Landroid/os/Handler;
 
@@ -994,10 +997,10 @@
 
     invoke-virtual {v0, v1, v3, v4}, Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable;J)Z
 
-    .line 365
+    .line 368
     return-void
 
-    .line 356
+    .line 359
     :cond_1
     :goto_0
     return-void
@@ -1006,7 +1009,7 @@
 .method public static setAntiTrack(Landroid/content/Context;Z)V
     .locals 1
 
-    .line 246
+    .line 249
     invoke-static {p0}, Lmodmenu/ModMenu;->prefs(Landroid/content/Context;)Landroid/content/SharedPreferences;
 
     move-result-object p0
@@ -1023,17 +1026,17 @@
 
     invoke-interface {p0}, Landroid/content/SharedPreferences$Editor;->commit()Z
 
-    .line 247
+    .line 250
     sput-boolean p1, Lmodmenu/ModMenu;->antiTrack:Z
 
-    .line 248
+    .line 251
     return-void
 .end method
 
 .method public static setHwidAutoRotate(Landroid/content/Context;Z)V
     .locals 1
 
-    .line 251
+    .line 254
     invoke-static {p0}, Lmodmenu/ModMenu;->prefs(Landroid/content/Context;)Landroid/content/SharedPreferences;
 
     move-result-object p0
@@ -1050,17 +1053,17 @@
 
     invoke-interface {p0}, Landroid/content/SharedPreferences$Editor;->commit()Z
 
-    .line 252
+    .line 255
     sput-boolean p1, Lmodmenu/ModMenu;->hwidAutoRotate:Z
 
-    .line 253
+    .line 256
     return-void
 .end method
 
 .method public static setHwidSpoof(Landroid/content/Context;Z)V
     .locals 1
 
-    .line 236
+    .line 239
     invoke-static {p0}, Lmodmenu/ModMenu;->prefs(Landroid/content/Context;)Landroid/content/SharedPreferences;
 
     move-result-object p0
@@ -1077,17 +1080,17 @@
 
     invoke-interface {p0}, Landroid/content/SharedPreferences$Editor;->commit()Z
 
-    .line 237
+    .line 240
     sput-boolean p1, Lmodmenu/ModMenu;->hwidSpoof:Z
 
-    .line 238
+    .line 241
     return-void
 .end method
 
 .method public static setRewardBypass(Landroid/content/Context;Z)V
     .locals 1
 
-    .line 241
+    .line 244
     invoke-static {p0}, Lmodmenu/ModMenu;->prefs(Landroid/content/Context;)Landroid/content/SharedPreferences;
 
     move-result-object p0
@@ -1104,17 +1107,17 @@
 
     invoke-interface {p0}, Landroid/content/SharedPreferences$Editor;->commit()Z
 
-    .line 242
+    .line 245
     sput-boolean p1, Lmodmenu/ModMenu;->rewardBypass:Z
 
-    .line 243
+    .line 246
     return-void
 .end method
 
 .method public static setUnsafe(Landroid/content/Context;Z)V
     .locals 1
 
-    .line 256
+    .line 259
     invoke-static {p0}, Lmodmenu/ModMenu;->prefs(Landroid/content/Context;)Landroid/content/SharedPreferences;
 
     move-result-object p0
@@ -1131,17 +1134,17 @@
 
     invoke-interface {p0}, Landroid/content/SharedPreferences$Editor;->commit()Z
 
-    .line 257
+    .line 260
     sput-boolean p1, Lmodmenu/ModMenu;->unsafe:Z
 
-    .line 258
+    .line 261
     return-void
 .end method
 
 .method public static setWebBlocked(Landroid/content/Context;Z)V
     .locals 1
 
-    .line 231
+    .line 234
     invoke-static {p0}, Lmodmenu/ModMenu;->prefs(Landroid/content/Context;)Landroid/content/SharedPreferences;
 
     move-result-object p0
@@ -1158,35 +1161,35 @@
 
     invoke-interface {p0}, Landroid/content/SharedPreferences$Editor;->commit()Z
 
-    .line 232
+    .line 235
     sput-boolean p1, Lmodmenu/ModMenu;->webBlocked:Z
 
-    .line 233
+    .line 236
     return-void
 .end method
 
 .method private static showStuckDialog()V
     .locals 5
 
-    .line 398
+    .line 401
     invoke-static {}, Lmodmenu/ModMenu;->gameActivity()Landroid/app/Activity;
 
     move-result-object v0
 
-    .line 399
+    .line 402
     const-string v1, "ModMenu"
 
     if-nez v0, :cond_0
 
-    .line 400
+    .line 403
     const-string v0, "msr|java_wd no window for dialog"
 
     invoke-static {v1, v0}, Lmodmenu/MwLog;->d(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 401
+    .line 404
     return-void
 
-    .line 404
+    .line 407
     :cond_0
     :try_start_0
     new-instance v2, Landroid/app/AlertDialog$Builder;
@@ -1195,7 +1198,7 @@
 
     const-string v3, "mod_stuck_title"
 
-    .line 405
+    .line 408
     invoke-static {v0, v3}, Lmodmenu/I18n;->t(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v3
@@ -1206,7 +1209,7 @@
 
     const-string v3, "mod_stuck_body"
 
-    .line 406
+    .line 409
     invoke-static {v0, v3}, Lmodmenu/I18n;->t(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v3
@@ -1217,7 +1220,7 @@
 
     const-string v3, "mod_restart_now"
 
-    .line 407
+    .line 410
     invoke-static {v0, v3}, Lmodmenu/I18n;->t(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v3
@@ -1232,7 +1235,7 @@
 
     const-string v3, "mod_restart_later"
 
-    .line 414
+    .line 417
     invoke-static {v0, v3}, Lmodmenu/I18n;->t(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v0
@@ -1243,19 +1246,19 @@
 
     move-result-object v0
 
-    .line 415
+    .line 418
     invoke-virtual {v0}, Landroid/app/AlertDialog$Builder;->show()Landroid/app/AlertDialog;
     :try_end_0
     .catch Ljava/lang/RuntimeException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 418
+    .line 421
     goto :goto_0
 
-    .line 416
+    .line 419
     :catch_0
     move-exception v0
 
-    .line 417
+    .line 420
     new-instance v2, Ljava/lang/StringBuilder;
 
     invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
@@ -1276,7 +1279,7 @@
 
     invoke-static {v1, v0}, Lmodmenu/MwLog;->d(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 419
+    .line 422
     :goto_0
     return-void
 .end method
@@ -1284,16 +1287,16 @@
 .method public static spoofValue(Ljava/lang/String;)Ljava/lang/String;
     .locals 3
 
-    .line 266
+    .line 269
     sget-object v0, Lmodmenu/ModMenu;->appCtx:Landroid/content/Context;
 
-    .line 267
+    .line 270
     if-nez v0, :cond_0
 
-    .line 268
+    .line 271
     return-object p0
 
-    .line 270
+    .line 273
     :cond_0
     invoke-static {v0}, Lmodmenu/ModMenu;->prefs(Landroid/content/Context;)Landroid/content/SharedPreferences;
 
@@ -1317,15 +1320,15 @@
 .method private static tryPost()V
     .locals 5
 
-    .line 327
+    .line 330
     sget-boolean v0, Lmodmenu/ModMenu;->posted:Z
 
     if-eqz v0, :cond_0
 
-    .line 328
+    .line 331
     return-void
 
-    .line 330
+    .line 333
     :cond_0
     sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
 
@@ -1345,28 +1348,28 @@
 
     if-nez v0, :cond_2
 
-    .line 331
+    .line 334
     sget-boolean v0, Lmodmenu/ModMenu;->deniedLogged:Z
 
     if-nez v0, :cond_1
 
-    .line 332
+    .line 335
     sput-boolean v3, Lmodmenu/ModMenu;->deniedLogged:Z
 
-    .line 333
+    .line 336
     const-string v0, "notification not posted: POST_NOTIFICATIONS denied"
 
     invoke-static {v2, v0}, Lmodmenu/MwLog;->w(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 335
+    .line 338
     :cond_1
     return-void
 
-    .line 337
+    .line 340
     :cond_2
     sget-object v0, Lmodmenu/ModMenu;->appCtx:Landroid/content/Context;
 
-    .line 338
+    .line 341
     const-string v1, "notification"
 
     invoke-virtual {v0, v1}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
@@ -1375,7 +1378,7 @@
 
     check-cast v0, Landroid/app/NotificationManager;
 
-    .line 339
+    .line 342
     sget-object v1, Lmodmenu/ModMenu;->appCtx:Landroid/content/Context;
 
     const/4 v4, 0x0
@@ -1392,14 +1395,14 @@
 
     invoke-virtual {v0, v4, v1}, Landroid/app/NotificationManager;->notify(ILandroid/app/Notification;)V
 
-    .line 340
+    .line 343
     sput-boolean v3, Lmodmenu/ModMenu;->posted:Z
 
-    .line 341
+    .line 344
     const-string v0, "menu notification posted"
 
     invoke-static {v2, v0}, Lmodmenu/MwLog;->i(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 342
+    .line 345
     return-void
 .end method
